@@ -1,6 +1,51 @@
 import React from "react";
 import { Navbar } from "../components/Navbar";
-export const Dashboard = () => {
+import { useState, useEffect } from "react";
+import axios from 'axios';
+
+
+
+export const Dashboard = ()=> {
+
+
+
+
+
+  const [bookings, setBookings] = useState([]);
+
+  const apiUrl = 'http://localhost:5000/api/bookings';
+
+const getAllBook = async () => {
+  try {
+    const response = await axios.get(apiUrl, {
+      params: {
+        status: 'confirmed'
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+useEffect(() => {
+  getAllBook().then(response => {
+    setBookings(response.data);
+  });
+}, []);
+  
+
+  // counts all Db entries
+  const countEntries = bookings => {
+    return bookings.length;
+  };
+
+
+
+  //simplify tailwind styles below- backloged item
+const tdStyle = "py-4 px-6"
+
+
   return (
     <div class="grid grid-cols-6 ">
       <div className="col-span-1 row-span-2">
@@ -8,9 +53,11 @@ export const Dashboard = () => {
       </div>
       <div className="col-span-5">
         <div>
+        
           <h1 class="ml-20 p-6 font-extrabold text-transparent text-5xl py-10 bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
             Welcome,User_From_DataBase
           </h1>
+          
         </div>
         <div class="grid grid-cols-4">
           <div>
@@ -82,61 +129,22 @@ export const Dashboard = () => {
                           </th>
                         </tr>
                       </thead>
+            
                       <tbody>
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 ">
+                     
+
+                      
+                      {bookings && bookings.map(booking => (
+                        <tr key={booking.id} class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                           <th
                             scope="row"
                             class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                          >
-                            Apple MacBook Pro 17"
-                          </th>
-                          <td class="py-4 px-6">Sliver</td>
-                          <td class="py-4 px-6">Laptop</td>
-                          <td class="py-4 px-6">$2999</td>
-                        </tr>
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                          <th
-                            scope="row"
-                            class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                          >
-                            Microsoft Surface Pro
-                          </th>
-                          <td class="py-4 px-6">White</td>
-                          <td class="py-4 px-6">Laptop PC</td>
+                          >{booking.fulll_name} </th>
+                          <td class="py-4 px-6">{booking.park}</td>
+                          <td class="py-4 px-6">{booking.piad}</td>
                           <td class="py-4 px-6">$1999</td>
-                        </tr>
-                        <tr class="bg-white dark:bg-gray-800">
-                          <th
-                            scope="row"
-                            class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                          >
-                            Magic Mouse 2
-                          </th>
-                          <td class="py-4 px-6">Black</td>
-                          <td class="py-4 px-6">Accessories</td>
-                          <td class="py-4 px-6">$99</td>
-                        </tr>
-                        <tr class="bg-white dark:bg-gray-800">
-                          <th
-                            scope="row"
-                            class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                          >
-                            Magic Mouse 2
-                          </th>
-                          <td class="py-4 px-6">Black</td>
-                          <td class="py-4 px-6">Accessories</td>
-                          <td class="py-4 px-6">$99</td>
-                        </tr><tr class="bg-white dark:bg-gray-800">
-                          <th
-                            scope="row"
-                            class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                          >
-                            Magic Mouse 2
-                          </th>
-                          <td class="py-4 px-6">Black</td>
-                          <td class="py-4 px-6">Accessories</td>
-                          <td class="py-4 px-6">$99</td>
-                        </tr>
+                        </tr>      ))}
+
                       </tbody>
                     </table>
                     </div>

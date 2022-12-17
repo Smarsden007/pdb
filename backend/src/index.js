@@ -20,19 +20,6 @@ const authRoutes = require('./routes/auth')
 //initialize routes
 app.use('/api', authRoutes)
 
-// app.post('/bookings', async (req, res) => {
-//   try {
-//     const { fulll_name, email, phone, delivery_ad, bouncer, rent_date, rental_time, generator, balloons, half_arch, full_arch, vinyl, vinyl_theme, park, cust_nt, int_nt, paid, deposit, contract_sign } = req.body;
-//     const newBooking = await pool.query(
-//       "INSERT INTO bookings(fulll_name, email, phone, delivery_ad, bouncer, rent_date, rental_time, generator, balloons, half_arch, full_arch, vinyl, vinyl_theme, park, cust_nt, int_nt, paid, deposit, contract_sign) VALUES ($1) RETUNRING *",
-//       [fulll_name, email, phone, delivery_ad, bouncer, rent_date, rental_time, generator, balloons, half_arch, full_arch, vinyl, vinyl_theme, park, cust_nt, int_nt, paid, deposit, contract_sign]
-//     );
-//     res.json(newBooking)
-//   } catch (err) {
-//     console.error(err.message)
-//   }
-// })
-
 
 //app start
 const appStart = () => {
