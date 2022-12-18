@@ -14,6 +14,8 @@ const { registerValidation, loginValidation } = require('../validators/auth')
 const { userAuth } = require('../middlewares/auth-middleware')
 const router = Router()
 
+
+
 router.get('/get-users', getUsers)
 router.get('/protected', userAuth, protected)
 router.post('/register', registerValidation, validationMiddleware, register)
@@ -22,4 +24,6 @@ router.get('/logout', logout)
 router.post('/bookings', createBooking)
 router.get('/bookings', getBookings)
 router.get('bookings/:id', getById)
+
+
 module.exports = router

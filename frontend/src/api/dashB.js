@@ -1,29 +1,17 @@
-import React from 'react'
+import axios from 'axios';
 
-export const dashB = () => {
-const [bookings, setBookings] = useState([]);
+import { useState, useEffect } from "react";
+export const useFetchData = () => {
+  const [data, setData] = useState([]);
 
-const getAllBook = async () => {
-   try {
-         const response = await axios.get('/api/bookings', {
-             params: {
-                 status: 'confirmed'
-             }
-         });
-         console.log(response.data);
-     } catch (error) {
-         console.log(error);
-     }
- }
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios('http://localhost:5000/api/bookings');
+      setData(result.data);
+    };
 
+    fetchData();
+  }, []);
 
- useEffect(() => {
-   getAllBook().then(data => {
-     setBookings(data);
-   });
- }, []); 
- 
- return (
-    <div>dashB</div>
-  )
+  return data;
 }
