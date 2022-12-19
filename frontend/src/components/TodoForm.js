@@ -1,9 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import axios from 'axios';
 
 const TodoForm = () => {
   const [description, setDescription] = useState('');
   const [postedBy, setPostedBy] = useState('');
+  const [employeeData, setEmployeeData] = useState(null);
+
+  useEffect(() => {
+    async function fetchEmployeeData() {
+      const res = await axios.get('/api/employees');
+      console.log(res.data)
+      setEmployeeData(res.data);
+    }
+    fetchEmployeeData();
+  }, []);
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -33,11 +44,13 @@ const TodoForm = () => {
       <br />
       <label>
         Posted By:
-        <input
-          type="text"
-          value={postedBy}
-          onChange={event => setPostedBy(event.target.value)}
-        />
+         {employeeData && (
+        <select>
+          {employeeData.map(employee => (
+            <option value={employee.id}>{employee.name}</option>
+          ))}
+        </select>
+      )}
       </label>
       <br />
       <button type="submit">Add Todo</button>

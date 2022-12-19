@@ -14,6 +14,7 @@ const { registerValidation, loginValidation } = require('../validators/auth')
 const { userAuth } = require('../middlewares/auth-middleware')
 const { excelReceipts, createReceipt } = require('../controllers/finance')
 const { createTask } = require('../controllers/tasks')
+const { getEmployees } = require('../controllers/employees')
 const router = Router()
 
 router.get('/get-users', getUsers)
@@ -28,4 +29,5 @@ router.put('/bookings', editBooking)
 router.post('/receipts', createReceipt)
 router.get('/receipts/export', excelReceipts)
 router.post('/tasks', createTask)
+router.get('/employees', getEmployees)
 module.exports = router

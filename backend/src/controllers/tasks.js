@@ -5,7 +5,7 @@ const db = require('../db')
 exports.createTask = async (req, res) => {
     try {
       const { description, posted_by } = req.body;
-      const result = await pool.query(
+      const result = await db.query(
         'INSERT INTO tasks (description, posted_by) VALUES ($1, $2) RETURNING *',
         [description, posted_by]
       );
