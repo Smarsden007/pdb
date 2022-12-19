@@ -7,12 +7,12 @@ import { DashView } from "../components/DashView";
 export const Dashboard = ()=> {
   
   return (
-    <div class="grid grid-cols-10 grid-rows-2">
+    <div class="grid grid-cols-10 grid-rows-2 overflow-hidden	">
 
       <div class="col-span-2 row-span-2">
         <Navbar />
       </div>
-      <div class='col-span-8 row-span-2'>
+      <div class='col-span-8 row-span-2 overflow-hidden	' >
         <DashView />
            </div>
     </div>
