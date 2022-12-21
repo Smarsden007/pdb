@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import { Navbar } from "./components/Navbar";
 import { Dashboard } from "./pages/Dashboard";
+import { Bookings } from "./pages/Bookings";
 
 
 
@@ -32,7 +33,7 @@ function App() {
       
       <Route element={<PrivateRoutes />}>
         <Route path="/dashboard" element={<Dashboard  />} />
-        <Route path="/bookings" element={<Navbar />} />
+        <Route path="/bookings" element={<Bookings />} />
       </Route>
       <Route element={<RestrictedRoutes />}>
         <Route path="/register" element={<Navbar />} />
