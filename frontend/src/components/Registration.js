@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const Register = () => {
+const Registration = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -23,7 +23,7 @@ const Register = () => {
         }
       };
       const body = JSON.stringify(newUser);
-      const res = await axios.post('/api/users', body, config);
+      const res = await axios.post('http://localhost:5000/api/users', body, config);
       console.log(res.data);
     } catch (err) {
       console.error(err.response.data);
@@ -58,4 +58,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Registration;

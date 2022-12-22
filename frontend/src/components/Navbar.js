@@ -109,7 +109,7 @@ export const Navbar = () => {
             </a>
           </li>
           <li>
-            <a
+            <Link to='/register-user'
               href="#"
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
@@ -128,7 +128,8 @@ export const Navbar = () => {
                 ></path>
               </svg>
               <span className="flex-1 ml-3 whitespace-nowrap">New User</span>
-            </a>
+            
+            </Link>
           </li>
           <li>
             <a
