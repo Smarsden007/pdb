@@ -17,13 +17,14 @@ exports.getUsers = async (req, res) => {
 }
 
 exports.register = async (req, res) => {
-  const { email, password } = req.body
+  const { email, password, full_name } = req.body
   try {
     const hashedPassword = await hash(password, 10)
 
-    await db.query('insert into users(email,password) values ($1 , $2)', [
+    await db.query('insert into users(email,password,full_name) values ($1 , $2, $3)', [
       email,
       hashedPassword,
+      full_name,
     ])
 
     return res.status(201).json({
@@ -37,6 +38,7 @@ exports.register = async (req, res) => {
     })
   }
 }
+
 
 exports.login = async (req, res) => {
   let user = req.user
