@@ -6,6 +6,9 @@ CREATE TABLE users (
   full_name varchar(255) not null
   created_at date default current_date
 );
+ALTER TABLE tasks
+DROP COLUMN full_name;
+
 CREATE TABLE bookings (
   id SERIAL PRIMARY KEY,
   fulll_name VARCHAR(25) NOT NULL,
