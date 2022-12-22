@@ -39,7 +39,6 @@ exports.createBooking = async (req, res) => {
     });
   }
 };
-
 exports.editBooking = async (req, res) => {
   try {
     const {
@@ -100,7 +99,6 @@ exports.editBooking = async (req, res) => {
     res.status(500).json({ message: "An error occurred" });
   }
 };
-
 exports.getBookings = async (req, res) => {
   try {
     const { rows } = await db.query("select * FROM bookings");
@@ -113,7 +111,6 @@ exports.getBookings = async (req, res) => {
     console.log(error.message);
   }
 };
-
 exports.getById = async (req, res) => {
   const { idd } = req.params;
   try {
@@ -125,9 +122,6 @@ exports.getById = async (req, res) => {
     console.error(err.message);
   }
 };
-
-// To return the most recent 3 entries in the bookings table, you can modify the SQL query to include a LIMIT 3 clause at the end, like this:
-
 exports.getRecentBookings = async (req, res) => {
   try {
     const { rows } = await db.query("SELECT * FROM bookings ORDER BY id DESC LIMIT 3");
@@ -140,6 +134,88 @@ exports.getRecentBookings = async (req, res) => {
     console.log(error.message);
   }
 };
+exports.getTotalCost = async (req, res) => {
+  try {
+    // Use the SUM() function to add up all the values in the total_cost column
+    const { rows } = await db.query(`
+      SELECT SUM(total_cost) as total_cost_sum FROM bookings 
+      WHERE rent_date >= '2022-01-01' AND rent_date <= '2022-12-31'
+    `);
+
+    return res.status(200).json({
+      success: true,
+      total_cost: rows[0].total_cost_sum
+    });
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).json({
+      success: false,
+      message: 'An error occurred while retrieving the total cost'
+    });
+  }
+};
+exports.getTotalCostForCurrentMonth = async (req, res) => {
+  try {
+    // get the current year and month
+    const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth() + 1; // getMonth returns a 0-based month (0 for January, 11 for December)
+
+    // build the query to select all bookings in the current month
+    const query = `
+      SELECT SUM(total_cost) as total_cost
+      FROM bookings
+      WHERE EXTRACT(YEAR FROM created_at) = $1 AND EXTRACT(MONTH FROM created_at) = $2
+    `;
+
+    // execute the query and retrieve the sum of the total cost for all bookings in the current month
+    const { rows } = await db.query(query, [currentYear, currentMonth]);
+
+    return res.status(200).json({
+      success: true,
+      totalCost: rows[0].total_cost,
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+exports.countBookingsWithin7Days = async (req, res) => {
+  try {
+    const currentDate = new Date();
+    const sevenDaysFromNow = new Date(currentDate.getTime() + 7 * 24 * 60 * 60 * 1000);
+
+    const { rows } = await db.query(
+      "SELECT COUNT(*) FROM bookings WHERE rent_date BETWEEN $1 AND $2",
+      [currentDate, sevenDaysFromNow]
+    );
+
+    return res.status(200).json({
+      success: true,
+      count: rows[0].count,
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+exports.countBookingsWithin14Days = async (req, res) => {
+  try {
+    const currentDate = new Date();
+    const upcomingDate = new Date(currentDate.getTime() + 14 * 24 * 60 * 60 * 1000);
+
+    const { rows } = await db.query(
+      "SELECT COUNT(*) FROM bookings WHERE rental_date BETWEEN $1 AND $2",
+      [currentDate, upcomingDate]
+    );
+
+    return res.status(200).json({
+      success: true,
+      count: rows[0].count,
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+
 // exports.getRecentBookings = async (req, res) => {
 //   try {
 //     const page = req.query.page || 1;

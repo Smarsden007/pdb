@@ -6,7 +6,7 @@ const {
   protected,
   logout,
 } = require('../controllers/auth')
-const { createBooking, getBookings, getById, editBooking, getRecentBookings, getMostRecent } = require('../controllers/bookings')
+const { createBooking, getBookings, getById, editBooking, getRecentBookings, getMostRecent, getTotalCost, getTotalCostForCurrentMonth, countBookingsWithin7Days, countBookingsWithin14Days } = require('../controllers/bookings')
 const {
   validationMiddleware,
 } = require('../middlewares/validations-middleware')
@@ -27,6 +27,10 @@ router.post('/bookings', createBooking)
 router.get('/bookings', getBookings)
 router.get('bookings/:id', getById)
 router.put('/bookings', editBooking)
+router.get('/ytd-income', getTotalCost)
+router.get('mtd-income', getTotalCostForCurrentMonth)
+router.get('weekly-bookings', countBookingsWithin7Days)
+router.get('biweekly-bookings', countBookingsWithin14Days)
 router.post('/receipts', createReceipt)
 router.get('/receipts/export', excelReceipts)
 router.post('/tasks', createTask)
