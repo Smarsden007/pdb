@@ -15,6 +15,7 @@ const { userAuth } = require('../middlewares/auth-middleware')
 const { excelReceipts, createReceipt } = require('../controllers/finance')
 const { createTask } = require('../controllers/tasks')
 const { getEmployees } = require('../controllers/employees')
+const { searchTable } = require('../controllers/bookingDbSearch')
 const router = Router()
 
 router.get('/get-users', getUsers)
@@ -30,4 +31,6 @@ router.post('/receipts', createReceipt)
 router.get('/receipts/export', excelReceipts)
 router.post('/tasks', createTask)
 router.get('/employees', getEmployees)
+router.get("/search/:table", searchTable);
+
 module.exports = router

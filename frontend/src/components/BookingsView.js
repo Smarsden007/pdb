@@ -6,6 +6,17 @@ import axios from "axios";
 import { Spinner } from "./Spinner";
 export const BookingsView = () => {
   const [bookings, setBookings] = useState();
+  const [searchTerm, setSearchTerm] = useState('');
+  const [results, setResults] = useState([]);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+        const response = await fetch(`http://localhost:5000/api/search/${bookings}?term=${searchTerm}`);
+      setResults(response.data.results);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const { data, error, isLoading } = useQuery("bookings", async () => {
     const response = await axios.get("http://localhost:5000/api/bookings");
@@ -170,9 +181,16 @@ export const BookingsView = () => {
               </ul>
             </div>
           </div>
-          <label for="table-search" class="sr-only">
+          <form onSubmit={handleSubmit}>
+          <label 
+          type="text"
+          value={searchTerm}
+          onChange={(event) => setSearchTerm(event.target.value)}
+          for="table-search" class="sr-only">
             Search
           </label>
+          <button type="submit">Search</button>
+          </form>
           <div class="relative">
             <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
               <svg
@@ -197,6 +215,7 @@ export const BookingsView = () => {
             />
           </div>
         </div>
+        {results && results.length > 0 && (
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           
@@ -238,7 +257,9 @@ export const BookingsView = () => {
           <tbody>
           {bookings &&
                 bookings.map((booking) => (
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <tr 
+            key={booking.id}
+             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
               <td class="p-4 w-4">
                 <div class="flex items-center">
                   <input
@@ -272,7 +293,43 @@ export const BookingsView = () => {
                 ))};
           </tbody>
         </table>
+              )}
+
       </div>
     </div>
   );
 };
+
+
+
+
+
+
+// import React, { useState, useEffect } from 'react';
+
+// function SearchResultsTable() {
+//   const [results, setResults] = useState([]);
+
+//   useEffect(() => {
+//     const fetchResults = async () => {
+//       const response = await fetch(`/search?term=${searchTerm}`);
+//       const data = await response.json();
+//       setResults(data);
+//     }
+//     fetchResults();
+//   }, [searchTerm]);
+
+//   return (
+//     <table>
+//       <thead>
+//         <tr>
+//           <th>Name</th>
+//           <th>Email</th>
+//         </tr>
+//       </thead>
+//       <tbody>
+//         {results.map((result) => (
+//           <tr key={result.id}>
+//             <td>{result.name}</td>
+//             <td>{result.email}</td>
+//           </tr>
