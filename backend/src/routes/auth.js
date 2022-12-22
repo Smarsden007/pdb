@@ -6,7 +6,7 @@ const {
   protected,
   logout,
 } = require('../controllers/auth')
-const { createBooking, getBookings, getById, editBooking } = require('../controllers/bookings')
+const { createBooking, getBookings, getById, editBooking, getRecentBookings, getMostRecent } = require('../controllers/bookings')
 const {
   validationMiddleware,
 } = require('../middlewares/validations-middleware')
@@ -31,6 +31,6 @@ router.post('/receipts', createReceipt)
 router.get('/receipts/export', excelReceipts)
 router.post('/tasks', createTask)
 router.get('/employees', getEmployees)
-router.get("/search/:table", searchTable);
-
+// router.get("/search", searchTable);
+router.get('/recent-bookings', getRecentBookings)
 module.exports = router

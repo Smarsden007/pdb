@@ -125,3 +125,42 @@ exports.getById = async (req, res) => {
     console.error(err.message);
   }
 };
+
+// To return the most recent 3 entries in the bookings table, you can modify the SQL query to include a LIMIT 3 clause at the end, like this:
+
+exports.getRecentBookings = async (req, res) => {
+  try {
+    const { rows } = await db.query("SELECT * FROM bookings ORDER BY id DESC LIMIT 3");
+
+    return res.status(200).json({
+      success: true,
+      bookings: rows,
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+// exports.getRecentBookings = async (req, res) => {
+//   try {
+//     const page = req.query.page || 1;
+//     const itemsPerPage = req.query.itemsPerPage || 5;
+
+//     const offset = (page - 1) * itemsPerPage;
+
+//     const { rows } = await db.query(`
+//       SELECT * FROM bookings ORDER BY id DESC LIMIT $1 OFFSET $2`,
+//       [itemsPerPage, offset]
+//     );
+
+//     return res.status(200).json({
+//       success: true,
+//       bookings: rows,
+//     });
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// };
+
+
+
+

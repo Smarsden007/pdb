@@ -5,6 +5,7 @@ import axios from "axios";
 import { TodoModal } from "./TodoModal";
 // import { useMutation } from "react-query";
 import { Spinner } from "./Spinner";
+import { Link } from "react-router-dom";
 
 export const DashView = () => {
   const [bookings, setBookings] = useState();
@@ -26,7 +27,7 @@ export const DashView = () => {
   // }, [bookings]);
 
   const { data, error, isLoading } = useQuery("bookings", async () => {
-    const response = await axios.get("http://localhost:5000/api/bookings");
+    const response = await axios.get("http://localhost:5000/api/recent-bookings");
     // convert the data from an object to an array
     const bookingsArray = Object.values(response.data.bookings);
     console.log(bookings);
@@ -152,26 +153,8 @@ export const DashView = () => {
             Recent Bookings
           </h5>
           <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-              <tr>
-                <th scope="col" class="py-3 px-6">
-                  Name
-                </th>
-                <th scope="col" class="py-3 px-6">
-                  Address
-                </th>
-                <th scope="col" class="py-3 px-6">
-                  Phone#
-                </th>
-                <th scope="col" class="py-3 px-6">
-                  Bouncer
-                </th>
-                <th scope="col" class="py-3 px-6">
-                  Action
-                </th>
-              </tr>
-            </thead>
-            <tbody>
+           <Link to='/bookings'>
+            <tbody >
               {bookings &&
                 bookings.map((booking) => (
                   <tr
@@ -180,19 +163,19 @@ export const DashView = () => {
                   >
                     <th
                       scope="row"
-                      class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white "
                     >
                       {booking.fulll_name}
                     </th>
-                    <td class="py-4 px-6">{booking.delivery_ad}</td>
-                    <td class="py-4 px-6">{booking.phone}</td>
-                    <td class="py-4 px-6">{booking.name}</td>
-                    <td class="py-4 px-6">
-                      <TodoModal text="edit" />
+                    <td class="py-1 px-1">{booking.delivery_ad}</td>
+                    <td class="py-1 px-1">{booking.phone}</td>
+                    <td class="py-1 px-1">{booking.name}</td>
+                    <td class="py-1 px-1">
                     </td>
                   </tr>
                 ))}
             </tbody>
+            </Link>
           </table>
         </div>
       </div>

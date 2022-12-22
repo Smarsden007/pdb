@@ -5,27 +5,27 @@ import axios from "axios";
 // import { useMutation } from "react-query";
 import { Spinner } from "./Spinner";
 export const BookingsView = () => {
-  const [bookings, setBookings] = useState();
-  const [searchTerm, setSearchTerm] = useState('');
-  const [results, setResults] = useState([]);
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-        const response = await fetch(`http://localhost:5000/api/search/${bookings}?term=${searchTerm}`);
-      setResults(response.data.results);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const [bookings, setBookings] = useState([]);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
 
-  const { data, error, isLoading } = useQuery("bookings", async () => {
-    const response = await axios.get("http://localhost:5000/api/bookings");
-    // convert the data from an object to an array
-    const bookingsArray = Object.values(response.data.bookings);
-    console.log(bookings);
-    setBookings(bookingsArray);
-    return bookingsArray;
-  });
+  const { data, error, isLoading } = useQuery(
+    ["bookings", pageNumber, itemsPerPage],
+    async () => {
+      const response = await axios.get(
+        `http://localhost:5000/api/bookings?page=${pageNumber}&itemsPerPage=${itemsPerPage}`
+      );
+      // convert the data from an object to an array
+      const bookingsArray = Object.values(response.data.bookings);
+      console.log(bookings);
+      setBookings(response.data.bookings);
+      return bookingsArray;
+    },
+    { refetchOnWindowFocus: false, refetchOnMount: true }
+    // dependencies should include pageNumber and itemsPerPage
+    [pageNumber, itemsPerPage]
+  );
+  
 
   if (isLoading) {
     return <Spinner />;
@@ -33,10 +33,20 @@ export const BookingsView = () => {
   if (error) {
     return <p>An error occurred: {error.message}</p>;
   }
+  const handlePreviousPage = () => {
+    setPageNumber((pageNumber) => pageNumber - 1);
+  };
 
+  const handleNextPage = () => {
+    setPageNumber((pageNumber) => pageNumber + 1);
+  };
   return (
     <div>
-      <div class="overflow-x-hidden p-16  relative shadow-md sm:rounded-lg w-fit">
+      <div class="overflow-x-hidden pl-10 p-10  relative shadow-md sm:rounded-lg w-11/12">
+        <h3 class="text-6xl  p-1 font-extrabold text-transparent  py-2 bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
+          Bookings
+        </h3>
+
         <div class="flex justify-between items-center pb-4">
           <div>
             <button
@@ -181,16 +191,9 @@ export const BookingsView = () => {
               </ul>
             </div>
           </div>
-          <form onSubmit={handleSubmit}>
-          <label 
-          type="text"
-          value={searchTerm}
-          onChange={(event) => setSearchTerm(event.target.value)}
-          for="table-search" class="sr-only">
+          <label for="table-search" class="sr-only">
             Search
           </label>
-          <button type="submit">Search</button>
-          </form>
           <div class="relative">
             <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
               <svg
@@ -215,20 +218,17 @@ export const BookingsView = () => {
             />
           </div>
         </div>
-        {results && results.length > 0 && (
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 rounded-lg overflow-hidden">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          
             <tr>
               <th scope="col" class="p-4">
                 <div class="flex items-center">
-              
                   <input
                     id="checkbox-all-search"
                     type="checkbox"
                     class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
-                  
+
                   <label for="checkbox-all-search" class="sr-only">
                     checkbox
                   </label>
@@ -253,83 +253,110 @@ export const BookingsView = () => {
                 Action
               </th>
             </tr>
-            </thead>
+          </thead>
           <tbody>
-          {bookings &&
-                bookings.map((booking) => (
-            <tr 
-            key={booking.id}
-             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-              <td class="p-4 w-4">
-                <div class="flex items-center">
-                  <input
-                    id="checkbox-table-search-1"
-                    type="checkbox"
-                    class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                  />
-                  <label for="checkbox-table-search-1" class="sr-only">
-                    checkbox
-                  </label>
-                </div>
-              </td>
-              <th
-                scope="row"
-                class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                {booking.fulll_name}
-              </th>
-              <td class="py-4 px-6">Sliver</td>
-              <td class="py-4 px-6">Laptop</td>
-              <td class="py-4 px-6">$2999</td>
-              <td class="py-4 px-6">
-                <a
-                  href="#"
-                  class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                >
-                  Edit
-                </a>
-              </td>
-            </tr>
-                ))};
+            {bookings &&
+              bookings.map((booking) => (
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                  <td class="p-4 w-4">
+                    <div class="flex items-center">
+                      <input
+                        id="checkbox-table-search-1"
+                        type="checkbox"
+                        class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                      />
+                      <label for="checkbox-table-search-1" class="sr-only">
+                        checkbox
+                      </label>
+                    </div>
+                  </td>
+                  <th
+                    scope="row"
+                    class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    {booking.fulll_name}
+                  </th>
+                  <td class="py-4 px-6">Sliver</td>
+                  <td class="py-4 px-6">Laptop</td>
+                  <td class="py-4 px-6">$2999</td>
+                  <td class="py-4 px-6">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                    >
+                      Edit
+                    </a>
+                  </td>
+                  <td class="py-4 px-6">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                    >
+                      Edit
+                    </a>
+                  </td>
+                </tr>
+              ))}
+            ;
           </tbody>
         </table>
-              )}
 
+        <nav aria-label="Page navigation example">
+          <ul class="inline-flex -space-x-px">
+            <li>
+            <a href="#" class="px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" onClick={handlePreviousPage}>
+  Previous
+</a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+              >
+                1
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+              >
+                2
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                aria-current="page"
+                class="px-3 py-2 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
+              >
+                3
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+              >
+                4
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+              >
+                5
+              </a>
+            </li>
+            <li>
+            <a href="#" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" onClick={handleNextPage}>
+  Next
+</a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
   );
 };
-
-
-
-
-
-
-// import React, { useState, useEffect } from 'react';
-
-// function SearchResultsTable() {
-//   const [results, setResults] = useState([]);
-
-//   useEffect(() => {
-//     const fetchResults = async () => {
-//       const response = await fetch(`/search?term=${searchTerm}`);
-//       const data = await response.json();
-//       setResults(data);
-//     }
-//     fetchResults();
-//   }, [searchTerm]);
-
-//   return (
-//     <table>
-//       <thead>
-//         <tr>
-//           <th>Name</th>
-//           <th>Email</th>
-//         </tr>
-//       </thead>
-//       <tbody>
-//         {results.map((result) => (
-//           <tr key={result.id}>
-//             <td>{result.name}</td>
-//             <td>{result.email}</td>
-//           </tr>
