@@ -44,6 +44,7 @@ exports.login = async (req, res) => {
   let payload = {
     id: user.user_id,
     email: user.email,
+    full_name: user.full_name,
   }
 
   try {
@@ -60,6 +61,7 @@ exports.login = async (req, res) => {
     })
   }
 }
+
 
 exports.protected = async (req, res) => {
   try {

@@ -6,9 +6,12 @@ import { TodoModal } from "./TodoModal";
 // import { useMutation } from "react-query";
 import { Spinner } from "./Spinner";
 import { Link } from "react-router-dom";
+import jwtDecode from 'jwt-decode';
 
 export const DashView = () => {
   const [bookings, setBookings] = useState();
+  // const token = localStorage.getItem('token');
+  // const payload = jwtDecode(token);
   // const [formData, setFormData] = useState({ task: '', dueDate: '' })
 
   // const [mutate, { status }] = useMutation(async (input) => {
@@ -53,7 +56,7 @@ export const DashView = () => {
       <div className="grid grid-cols-4">
         <div class="col-span-4">
           <h1 class=" p-6 font-extrabold text-transparent text-5xl py-10 bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
-            Welcome,User_From_DataBase
+            {/* {payload.full_name}! */}
           </h1>
         </div>
       </div>
