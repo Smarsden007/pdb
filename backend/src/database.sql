@@ -1,13 +1,12 @@
 -- users table 
 CREATE TABLE users (
-  user_id serial primary key,
-  email varchar(255) unique not null,
-  password varchar(255) not null,
-  full_name varchar(255) not null
-  created_at date default current_date
+  user_id serial PRIMARY KEY,
+  email varchar(255) NOT NULL,
+  password varchar(255) NOT NULL,
+  created_at date DEFAULT CURRENT_DATE,
+  full_name varchar(255) NOT NULL DEFAULT 'John Doe',
+  UNIQUE(email)
 );
-ALTER TABLE tasks
-DROP COLUMN full_name;
 
 CREATE TABLE bookings (
   id SERIAL PRIMARY KEY,
@@ -52,14 +51,7 @@ CREATE TABLE receipts (
   description VARCHAR(255) NOT NULL,
   created_at DATE DEFAULT CURRENT_DATE
 );
-  CREATE TABLE tasks (
-    id SERIAL PRIMARY KEY,
-    description VARCHAR(255) NOT NULL,
-    completed_by INTEGER REFERENCES employees(id),
-    posted_by INTEGER REFERENCES employees(id),
-    completed_at DATE,
-    created_at DATE DEFAULT CURRENT_DATE
-  );
+
 
 INSERT INTO bookings (fulll_name,email,phone,delivery_ad,bouncer,rent_date,rental_time,generator,balloons,half_arch,full_arch,vinyl,vinyl_theme,park) VALUES ('Teddy Rugger','trugg@email.com','54122222','1111 test west', true, '10/10/23', '04:00:00', true, true, true, true, false, false, false);
 

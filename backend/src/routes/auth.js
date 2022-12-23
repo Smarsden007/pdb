@@ -13,7 +13,7 @@ const {
 const { registerValidation, loginValidation } = require('../validators/auth')
 const { userAuth } = require('../middlewares/auth-middleware')
 const { excelReceipts, createReceipt } = require('../controllers/finance')
-const { createTask, getCompletedTasks, getIncompleteTasks, markTaskAsCompleted } = require('../controllers/tasks')
+const { getAllTask, createTask, editTask, getIncompleteTasks} = require('../controllers/tasks')
 const { getEmployees } = require('../controllers/employees')
 const { searchTable } = require('../controllers/bookingDbSearch')
 const router = Router()
@@ -37,12 +37,9 @@ router.get('/recent-bookings', getRecentBookings)
 router.post('/receipts', createReceipt)
 router.get('/receipts/export', excelReceipts)
 //Task Manager
-router.post('/tasks', createTask)
-router.get('/employees', getEmployees)
-router.get('/completed-tasks', getCompletedTasks)
-router.get('/incompleted-tasks', 
-getIncompleteTasks)
-router.patch('/update-task/:id',markTaskAsCompleted );
-
+router.get('/tasks', getAllTask)
+router.post('/create-task', createTask)
+router.put('/update-task/:id', editTask)
+router.get('/task',getIncompleteTasks)
 // router.get("/search", searchTable);
 module.exports = router
