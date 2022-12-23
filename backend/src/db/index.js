@@ -1,12 +1,11 @@
-const { Pool } = require('pg')
-const pool = new Pool({
-  user: 'postgres',
-  host: 'containers-us-west-89.railway.app',
-  database: 'railway',
-  password: 'DWqN5oDcgd7inGdFgfnN',
-  port: 7194,
-})
+const { Pool } = require("pg");
 
-module.exports = {
-  query: (text, params) => pool.query(text, params),
-}
+// The secret connection string you copied earlier
+const connectionString =
+  "postgresql://postgres:DWqN5oDcgd7inGdFgfnN@containers-us-west-89.railway.app:7194/railway";
+
+const pool = new Pool({
+  connectionString,
+});
+
+module.exports = pool;
