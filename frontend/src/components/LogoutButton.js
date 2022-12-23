@@ -1,7 +1,6 @@
 import React from 'react'
-import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { fetchProtectedInfo, onLogout } from '../api/auth'
+import {  onLogout } from '../api/auth'
 import { unauthenticateUser } from '../redux/slices/authSlice'
 export const LogoutButton = () => {
     const dispatch = useDispatch()

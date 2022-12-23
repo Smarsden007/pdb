@@ -62,7 +62,7 @@ export const Navbar = () => {
               <span className="flex-1 ml-3 whitespace-nowrap" to='/dashboard'>Bookings</span>
             </Link  >
           </li>
-          <li>
+          {/* <li>
             <a
               href="#"
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
@@ -84,9 +84,9 @@ export const Navbar = () => {
 
               <span className="flex-1 ml-3 whitespace-nowrap">Finances</span>
               {/* <span className="inline-flex justify-center items-center p-3 ml-3 w-3 h-3 text-sm font-medium text-blue-600 bg-blue-200 rounded-full dark:bg-blue-900 dark:text-blue-200">3</span>   need to put currentDate() and if its near end of month prompt ! mark */}
-            </a>
-          </li>
-          <li>
+            {/* </a>
+          </li>  */}
+          {/* <li>
             <a
               href="#"
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
@@ -107,7 +107,7 @@ export const Navbar = () => {
               </svg>
               <span className="flex-1 ml-3 whitespace-nowrap">Create Booking</span>
             </a>
-          </li>
+          </li> */}
           <li>
             <Link to='/register-user'
               href="#"
@@ -132,8 +132,7 @@ export const Navbar = () => {
             </Link>
           </li>
           <li>
-            <a
-              href="#"
+            <div
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <svg
@@ -150,7 +149,7 @@ export const Navbar = () => {
                 ></path>
               </svg>
               <LogoutButton />{" "}
-            </a>
+            </div>
           </li>
         </ul>
       </div>

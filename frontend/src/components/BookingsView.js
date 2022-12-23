@@ -279,20 +279,20 @@ export const BookingsView = () => {
                   <td class="py-4 px-6">Laptop</td>
                   <td class="py-4 px-6">$2999</td>
                   <td class="py-4 px-6">
-                    <a
+                    {/* <a
                       href="edit"
                       class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                     >
                       Edit
-                    </a>
+                    </a> */}
                   </td>
                   <td class="py-4 px-6">
-                    <a
+                    {/* <a
                       href="#"
                       class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                     >
                       Edit
-                    </a>
+                    </a> */}
                   </td>
                 </tr>
               ))}
