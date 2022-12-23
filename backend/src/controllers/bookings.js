@@ -202,7 +202,7 @@ exports.countBookingsWithin14Days = async (req, res) => {
     const upcomingDate = new Date(currentDate.getTime() + 14 * 24 * 60 * 60 * 1000);
 
     const { rows } = await db.query(
-      "SELECT COUNT(*) FROM bookings WHERE rental_date BETWEEN $1 AND $2",
+      "SELECT COUNT(*) FROM bookings WHERE rent_date BETWEEN $1 AND $2",
       [currentDate, upcomingDate]
     );
 
@@ -214,29 +214,6 @@ exports.countBookingsWithin14Days = async (req, res) => {
     console.log(error.message);
   }
 };
-
-
-// exports.getRecentBookings = async (req, res) => {
-//   try {
-//     const page = req.query.page || 1;
-//     const itemsPerPage = req.query.itemsPerPage || 5;
-
-//     const offset = (page - 1) * itemsPerPage;
-
-//     const { rows } = await db.query(`
-//       SELECT * FROM bookings ORDER BY id DESC LIMIT $1 OFFSET $2`,
-//       [itemsPerPage, offset]
-//     );
-
-//     return res.status(200).json({
-//       success: true,
-//       bookings: rows,
-//     });
-//   } catch (error) {
-//     console.log(error.message);
-//   }
-// };
-
 
 
 

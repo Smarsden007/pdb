@@ -7,6 +7,7 @@ import { TodoModal } from "./TodoModal";
 import { Spinner } from "./Spinner";
 import { Link } from "react-router-dom";
 import jwtDecode from 'jwt-decode';
+import { FourteenDayBooking, MTDincome, SevenDayBooking, YTDincome } from "./DashboardCards.js/YTDincome";
 
 export const DashView = () => {
   const [bookings, setBookings] = useState();
@@ -61,53 +62,11 @@ export const DashView = () => {
         </div>
       </div>
       <div class="grid  grid-cols-5 my-4">
-        <a
-          href="#"
-          class="hover:scale-110  block w-40 h-40 p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-        >
-          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">
-            CASTLE
-          </h5>
-          <p class="font-normal text-gray-700 dark:text-gray-400 text-center text-4xl">
-            {bastilleCounter}
-          </p>
-        </a>
-
-        <a
-          href="#"
-          class="hover:scale-110  block w-40 h-40 p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-        >
-          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">
-            YTD Bookings
-          </h5>
-          <p class="font-normal text-gray-700 dark:text-gray-400 text-center text-4xl">
-            {bastilleCounter}
-          </p>
-        </a>
-
-        <a
-          href="#"
-          class="hover:scale-110 block w-40 h-40 p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-        >
-          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">
-            CASTLE
-          </h5>
-          <p class="font-normal text-gray-700 dark:text-gray-400 text-center text-4xl">
-            {bastilleCounter}
-          </p>
-        </a>
-
-        <a
-          href="#"
-          class="hover:scale-110 block w-40 h-40 p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-        >
-          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">
-            TODDLER
-          </h5>
-          <p class="font-normal text-gray-700 dark:text-gray-400 text-center text-4xl">
-            {bastilleCounter}
-          </p>
-        </a>
+       <YTDincome />
+       <MTDincome />
+       <SevenDayBooking />
+        <FourteenDayBooking />
+        
 
         <a
           href="#"
