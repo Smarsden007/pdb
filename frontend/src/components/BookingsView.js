@@ -10,7 +10,7 @@ export const BookingsView = () => {
   // const [itemsPerPage, setItemsPerPage] = useState(5);
 
   const { data, error, isLoading } = useQuery(
-    ["bookings", pageNumber, itemsPerPage],
+    ["bookings"],
     async () => {
       const response = await axios.get(
         `http://localhost:5000/api/bookings`
