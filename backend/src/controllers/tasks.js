@@ -1,101 +1,59 @@
-const db = require('../db')
+const db = require("../db");
+
+
+
+exports.editTask = async (req, res) => {
+  try {
+    const { completed } = req.body;
+    const { id } = req.params;
+    const updateTask = await db.query(
+      'UPDATE tasks SET completed = $1 WHERE task_id = $2 RETURNING *',
+      [completed, id]
+    );
+
+    res.json(updateTask.rows[0]);
+  } catch (err) {
+    console.error(err.message);
+  }
+};
+// /:id for above route
 
 exports.createTask = async (req, res) => {
   try {
-    const { description, completed_by, posted_by } = req.body;
+    const { task_description, completed, date_posted } = req.body;
+    const newTask = await db.query(
+      'INSERT INTO tasks (task_description, completed, date_posted) VALUES ($1, $2, $3) RETURNING *',
+      [task_description, completed, date_posted]
+    );
 
-    const [id] = await db("tasks").insert({
-      description,
-      completed_by,
-      posted_by,
-      created_at: new Date().toISOString(),
-    });
-
-    const newTask = await db("tasks").where({ id }).first();
-
-    return res.status(201).json({
-      success: true,
-      task: newTask,
-    });
-  } catch (error) {
-    console.log(error.message);
-    return res.status(500).json({
-      success: false,
-      error: "Server error",
-    });
+    res.json(newTask.rows[0]);
+  } catch (err) {
+    console.error(err.message);
   }
 };
-exports.updateTask = async (req, res) => {
+// /task
+
+
+// Get all tasks
+exports.getAllTask = async (req, res) => {
   try {
-    const { id } = req.params;
-    const { completed_by } = req.body;
-    const completed_at = new Date().toISOString().slice(0, 10);
-
-    const updateTaskQuery = `UPDATE tasks SET completed_by=$1, completed_at=$2 WHERE id=$3 RETURNING *`;
-    const values = [completed_by, completed_at, id];
-
-    const { rows } = await db.query(updateTaskQuery, values);
-
-    if (!rows[0]) {
-      return res.status(404).json({
-        success: false,
-        message: "Task not found",
-      });
-    }
-
-    return res.status(200).json({
-      success: true,
-      message: "Task updated successfully",
-      task: rows[0],
-    });
-  } catch (error) {
-    console.log(error.message);
+    const allTasks = await db.query('SELECT * FROM tasks');
+    res.json(allTasks.rows);
+  } catch (err) {
+    console.error(err.message);
   }
-}
+};
+
 exports.getIncompleteTasks = async (req, res) => {
-    try {
-      const { rows } = await db.query("SELECT * FROM tasks WHERE completed_at IS NULL");
-  
-      return res.status(200).json({
-        success: true,
-        tasks: rows,
-      });
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-exports.getCompletedTasks = async (req, res) => {
-    try {
-      const { rows } = await db.query("SELECT * FROM tasks WHERE completed_at IS NOT NULL");
-  
-      return res.status(200).json({
-        success: true,
-        tasks: rows,
-      });
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-  exports.markTaskAsCompleted = async (req, res) => {
-    try {
-      const { id } = req.params;
-      const query = "UPDATE tasks SET completed_at = $1 WHERE id = $2 RETURNING *";
-      const values = [new Date(), id];
-      const { rows } = await db.query(query, values);
-  
-      if (!rows[0]) {
-        return res.status(404).json({
-          success: false,
-          message: "Task not found",
-        });
-      }
-  
-      return res.status(200).json({
-        success: true,
-        task: rows[0],
-      });
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-  
+  try {
+    const completed = req.query.completed;
+    const allTasks = await db.query(
+      'SELECT * FROM tasks WHERE completed = $1',
+      [completed]
+    );
+    res.json(allTasks.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+};
+

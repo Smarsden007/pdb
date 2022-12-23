@@ -1,12 +1,11 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { TodoModal } from "./TodoModal";
 // import { useMutation } from "react-query";
 import { Spinner } from "./Spinner";
 import { Link } from "react-router-dom";
-import jwtDecode from 'jwt-decode';
 import { FourteenDayBooking, MTDincome, SevenDayBooking, YTDincome } from "./DashboardCards.js/YTDincome";
 import { TaskView } from "./TasksView";
 

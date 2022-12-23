@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
 // import { useMutation } from "react-query";
@@ -7,23 +7,22 @@ import { Spinner } from "./Spinner";
 export const BookingsView = () => {
   const [bookings, setBookings] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+  // const [itemsPerPage, setItemsPerPage] = useState(5);
 
   const { data, error, isLoading } = useQuery(
     ["bookings", pageNumber, itemsPerPage],
     async () => {
       const response = await axios.get(
-        `http://localhost:5000/api/bookings?page=${pageNumber}&itemsPerPage=${itemsPerPage}`
+        `http://localhost:5000/api/bookings`
       );
+      console.log(data)
       // convert the data from an object to an array
       const bookingsArray = Object.values(response.data.bookings);
       console.log(bookings);
       setBookings(response.data.bookings);
       return bookingsArray;
-    },
-    { refetchOnWindowFocus: false, refetchOnMount: true }
-    // dependencies should include pageNumber and itemsPerPage
-    [pageNumber, itemsPerPage]
+    }
+  
   );
   
 
@@ -63,7 +62,7 @@ export const BookingsView = () => {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
                   clip-rule="evenodd"
                 ></path>
@@ -78,9 +77,9 @@ export const BookingsView = () => {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M19 9l-7 7-7-7"
                 ></path>
               </svg>
@@ -204,7 +203,7 @@ export const BookingsView = () => {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
                   clip-rule="evenodd"
                 ></path>
@@ -281,7 +280,7 @@ export const BookingsView = () => {
                   <td class="py-4 px-6">$2999</td>
                   <td class="py-4 px-6">
                     <a
-                      href="#"
+                      href="edit"
                       class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                     >
                       Edit
