@@ -5,9 +5,15 @@ import axios from "axios";
 import { TodoModal } from "./TodoModal";
 // import { useMutation } from "react-query";
 import { Spinner } from "./Spinner";
+import { Link } from "react-router-dom";
+import jwtDecode from 'jwt-decode';
+import { FourteenDayBooking, MTDincome, SevenDayBooking, YTDincome } from "./DashboardCards.js/YTDincome";
+import { TaskView } from "./TasksView";
 
 export const DashView = () => {
   const [bookings, setBookings] = useState();
+  // const token = localStorage.getItem('token');
+  // const payload = jwtDecode(token);
   // const [formData, setFormData] = useState({ task: '', dueDate: '' })
 
   // const [mutate, { status }] = useMutation(async (input) => {
@@ -26,7 +32,7 @@ export const DashView = () => {
   // }, [bookings]);
 
   const { data, error, isLoading } = useQuery("bookings", async () => {
-    const response = await axios.get("http://localhost:5000/api/bookings");
+    const response = await axios.get("http://localhost:5000/api/recent-bookings");
     // convert the data from an object to an array
     const bookingsArray = Object.values(response.data.bookings);
     console.log(bookings);
@@ -52,58 +58,16 @@ export const DashView = () => {
       <div className="grid grid-cols-4">
         <div class="col-span-4">
           <h1 class=" p-6 font-extrabold text-transparent text-5xl py-10 bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
-            Welcome,User_From_DataBase
+            {/* {payload.full_name}! */}
           </h1>
         </div>
       </div>
       <div class="grid  grid-cols-5 my-4">
-        <a
-          href="#"
-          class="hover:scale-110  block w-40 h-40 p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-        >
-          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">
-            CASTLE
-          </h5>
-          <p class="font-normal text-gray-700 dark:text-gray-400 text-center text-4xl">
-            {bastilleCounter}
-          </p>
-        </a>
-
-        <a
-          href="#"
-          class="hover:scale-110  block w-40 h-40 p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-        >
-          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">
-            YTD Bookings
-          </h5>
-          <p class="font-normal text-gray-700 dark:text-gray-400 text-center text-4xl">
-            {bastilleCounter}
-          </p>
-        </a>
-
-        <a
-          href="#"
-          class="hover:scale-110 block w-40 h-40 p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-        >
-          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">
-            CASTLE
-          </h5>
-          <p class="font-normal text-gray-700 dark:text-gray-400 text-center text-4xl">
-            {bastilleCounter}
-          </p>
-        </a>
-
-        <a
-          href="#"
-          class="hover:scale-110 block w-40 h-40 p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-        >
-          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">
-            TODDLER
-          </h5>
-          <p class="font-normal text-gray-700 dark:text-gray-400 text-center text-4xl">
-            {bastilleCounter}
-          </p>
-        </a>
+       <YTDincome />
+       <MTDincome />
+       <SevenDayBooking />
+        <FourteenDayBooking />
+        
 
         <a
           href="#"
@@ -122,28 +86,9 @@ export const DashView = () => {
           <h5 class=" p-1 font-extrabold text-transparent text-2xl py-2 bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
             To-Do
           </h5>
-          <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <tbody>
-              <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th
-                  scope="row"
-                  class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                >
-                  Clean Bouncer
-                </th>
-                <td class="py-4 px-6">Sliver</td>
-
-                <td class="py-4 px-6">
-                  <a
-                    href="#"
-                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                  >
-                    Edit
-                  </a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <TaskView />
+          </div>
           <TodoModal class="m-20" text="Add Task" />
         </div>
 
@@ -152,26 +97,8 @@ export const DashView = () => {
             Recent Bookings
           </h5>
           <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-              <tr>
-                <th scope="col" class="py-3 px-6">
-                  Name
-                </th>
-                <th scope="col" class="py-3 px-6">
-                  Address
-                </th>
-                <th scope="col" class="py-3 px-6">
-                  Phone#
-                </th>
-                <th scope="col" class="py-3 px-6">
-                  Bouncer
-                </th>
-                <th scope="col" class="py-3 px-6">
-                  Action
-                </th>
-              </tr>
-            </thead>
-            <tbody>
+           <Link to='/bookings'>
+            <tbody >
               {bookings &&
                 bookings.map((booking) => (
                   <tr
@@ -180,19 +107,19 @@ export const DashView = () => {
                   >
                     <th
                       scope="row"
-                      class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white "
                     >
                       {booking.fulll_name}
                     </th>
-                    <td class="py-4 px-6">{booking.delivery_ad}</td>
-                    <td class="py-4 px-6">{booking.phone}</td>
-                    <td class="py-4 px-6">{booking.name}</td>
-                    <td class="py-4 px-6">
-                      <TodoModal text="edit" />
+                    <td class="py-1 px-1">{booking.delivery_ad}</td>
+                    <td class="py-1 px-1">{booking.phone}</td>
+                    <td class="py-1 px-1">{booking.name}</td>
+                    <td class="py-1 px-1">
                     </td>
                   </tr>
                 ))}
             </tbody>
+            </Link>
           </table>
         </div>
       </div>
