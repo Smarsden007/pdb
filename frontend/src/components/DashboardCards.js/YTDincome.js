@@ -19,8 +19,8 @@ export const YTDincome = () => {
 
   return (
     <div>
-      <a
-        href="#"
+      <div
+        
         class="hover:scale-110  block w-40 h-40 p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
       >
         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">
@@ -33,7 +33,7 @@ export const YTDincome = () => {
             <p class="text-lg">Loading...</p>
           )}
         </div>
-      </a>
+      </div>
     </div>
   );
 };
@@ -56,8 +56,7 @@ export const MTDincome = () => {
 
   return (
     <div>
-      <a
-        href="#"
+      <div
         class="hover:scale-110  block w-40 h-40 p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
       >
         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">
@@ -70,7 +69,7 @@ export const MTDincome = () => {
             <p class="text-lg">Loading...</p>
           )}{" "}
         </div>
-      </a>
+      </div>
     </div>
   );
 };
@@ -92,8 +91,7 @@ export const SevenDayBooking = () => {
   }, []);
   return (
     <div>
-      <a
-        href="#"
+      <div
         class="hover:scale-110 block w-40 h-40 p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
       >
         <div class="text-lg font-normal text-gray-700 dark:text-gray-400 text-center">
@@ -103,7 +101,7 @@ export const SevenDayBooking = () => {
         <p>Loading bookings within the next 7 days...</p>
       )}
         </div>
-      </a>
+      </div>
     </div>
   );
 };
@@ -124,8 +122,7 @@ export const FourteenDayBooking = () => {
   }, []);
   return (
     <div>
-      <a
-        href="#"
+      <div
         class="hover:scale-110 block w-40 h-40 p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
       >
         <div class="text-lg font-normal text-gray-700 dark:text-gray-400 text-center">
@@ -135,7 +132,7 @@ export const FourteenDayBooking = () => {
         <p>Loading bookings within the next 14 days...</p>
       )}
         </div>
-      </a>
+      </div>
     </div>
   );
 };

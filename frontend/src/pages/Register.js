@@ -1,5 +1,4 @@
 import React from 'react'
-import { BookingsView } from '../components/BookingsView'
 import { Navbar } from '../components/Navbar'
 import Registration from '../components/Registration'
 
