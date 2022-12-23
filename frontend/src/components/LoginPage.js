@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { onLogin } from '../api/auth'
 import { useDispatch } from 'react-redux'
 import { authenticateUser } from '../redux/slices/authSlice'
+import Registration from './Registration';
 
 export const LoginPage = () => {
     const [values, setValues] = useState({
@@ -38,6 +39,7 @@ export const LoginPage = () => {
                             <h2 class="text-4xl font-bold text-white">Pouncy.</h2>
 
                             <p class="max-w-xl mt-3 text-gray-300">Lorem ipsum dolor sit, amet consectetur adipisicing elit. In autem ipsa, nulla laboriosam dolores, repellendus perferendis libero suscipit nam temporibus molestiae</p>
+                            <Registration />
                         </div>
                     </div>
                 </div>
