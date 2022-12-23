@@ -3,8 +3,6 @@ import { useState } from 'react'
 import { onLogin } from '../api/auth'
 import { useDispatch } from 'react-redux'
 import { authenticateUser } from '../redux/slices/authSlice'
-import Registration from './Registration';
-
 export const LoginPage = () => {
     const [values, setValues] = useState({
         email: '',
@@ -15,7 +13,7 @@ export const LoginPage = () => {
     const onChange = (e) => {
         setValues({ ...values, [e.target.name]: e.target.value })
     }
-
+    //onsubmit
     const dispatch = useDispatch()
     const onSubmit = async (e) => {
         e.preventDefault()
