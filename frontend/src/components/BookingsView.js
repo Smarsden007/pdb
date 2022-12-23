@@ -6,23 +6,24 @@ import axios from "axios";
 import { Spinner } from "./Spinner";
 export const BookingsView = () => {
   const [bookings, setBookings] = useState([]);
-
-  // const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
 
   const { data, error, isLoading } = useQuery(
-    ["bookings"],
+    ["bookings", pageNumber, itemsPerPage],
     async () => {
       const response = await axios.get(
-        `http://localhost:5000/api/bookings`
+        `http://localhost:5000/api/bookings?page=${pageNumber}&itemsPerPage=${10}`
       );
-      console.log(data)
       // convert the data from an object to an array
       const bookingsArray = Object.values(response.data.bookings);
       console.log(bookings);
       setBookings(response.data.bookings);
       return bookingsArray;
-    }
-  
+    },
+    { refetchOnWindowFocus: false, refetchOnMount: true }
+    // dependencies should include pageNumber and itemsPerPage
+    [pageNumber, itemsPerPage]
   );
   
 
@@ -32,13 +33,13 @@ export const BookingsView = () => {
   if (error) {
     return <p>An error occurred: {error.message}</p>;
   }
-  // const handlePreviousPage = () => {
-  //   setPageNumber((pageNumber) => pageNumber - 1);
-  // };
+  const handlePreviousPage = () => {
+    setPageNumber((pageNumber) => pageNumber - 1);
+  };
 
-  // const handleNextPage = () => {
-  //   setPageNumber((pageNumber) => pageNumber + 1);
-  // };
+  const handleNextPage = () => {
+    setPageNumber((pageNumber) => pageNumber + 1);
+  };
   return (
     <div>
       <div class="overflow-x-hidden pl-10 p-10  relative shadow-md sm:rounded-lg w-11/12">
@@ -279,20 +280,20 @@ export const BookingsView = () => {
                   <td class="py-4 px-6">Laptop</td>
                   <td class="py-4 px-6">$2999</td>
                   <td class="py-4 px-6">
-                    {/* <a
-                      href="edit"
-                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                    >
-                      Edit
-                    </a> */}
-                  </td>
-                  <td class="py-4 px-6">
-                    {/* <a
+                    <a
                       href="#"
                       class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                     >
                       Edit
-                    </a> */}
+                    </a>
+                  </td>
+                  <td class="py-4 px-6">
+                    <a
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                    >
+                      Edit
+                    </a>
                   </td>
                 </tr>
               ))}
@@ -300,7 +301,7 @@ export const BookingsView = () => {
           </tbody>
         </table>
 
-        {/* <nav aria-label="Page navigation example">
+        <nav aria-label="Page navigation example">
           <ul class="inline-flex -space-x-px">
             <li>
             <a href="#" class="px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" onClick={handlePreviousPage}>
@@ -354,7 +355,7 @@ export const BookingsView = () => {
 </a>
             </li>
           </ul>
-        </nav> */}
+        </nav>
       </div>
     </div>
   );
