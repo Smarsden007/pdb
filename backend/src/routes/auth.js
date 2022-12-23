@@ -13,7 +13,7 @@ const {
 const { registerValidation, loginValidation } = require('../validators/auth')
 const { userAuth } = require('../middlewares/auth-middleware')
 const { excelReceipts, createReceipt } = require('../controllers/finance')
-const { createTask, getCompletedTasks, getIncompleteTasks } = require('../controllers/tasks')
+const { createTask, getCompletedTasks, getIncompleteTasks, markTaskAsCompleted } = require('../controllers/tasks')
 const { getEmployees } = require('../controllers/employees')
 const { searchTable } = require('../controllers/bookingDbSearch')
 const router = Router()
@@ -40,8 +40,9 @@ router.get('/receipts/export', excelReceipts)
 router.post('/tasks', createTask)
 router.get('/employees', getEmployees)
 router.get('/completed-tasks', getCompletedTasks)
-router.get('/incompleted-tasks', getIncompleteTasks)
-
+router.get('/incompleted-tasks', 
+getIncompleteTasks)
+router.patch('/update-task/:id',markTaskAsCompleted );
 
 // router.get("/search", searchTable);
 module.exports = router

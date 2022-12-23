@@ -8,6 +8,7 @@ import { Spinner } from "./Spinner";
 import { Link } from "react-router-dom";
 import jwtDecode from 'jwt-decode';
 import { FourteenDayBooking, MTDincome, SevenDayBooking, YTDincome } from "./DashboardCards.js/YTDincome";
+import { TaskView } from "./TasksView";
 
 export const DashView = () => {
   const [bookings, setBookings] = useState();
@@ -85,28 +86,9 @@ export const DashView = () => {
           <h5 class=" p-1 font-extrabold text-transparent text-2xl py-2 bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
             To-Do
           </h5>
-          <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <tbody>
-              <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th
-                  scope="row"
-                  class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                >
-                  Clean Bouncer
-                </th>
-                <td class="py-4 px-6">Sliver</td>
-
-                <td class="py-4 px-6">
-                  <a
-                    href="#"
-                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                  >
-                    Edit
-                  </a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <TaskView />
+          </div>
           <TodoModal class="m-20" text="Add Task" />
         </div>
 

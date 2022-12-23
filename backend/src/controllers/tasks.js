@@ -76,4 +76,26 @@ exports.getCompletedTasks = async (req, res) => {
       console.log(error.message);
     }
   };
-    
+  exports.markTaskAsCompleted = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const query = "UPDATE tasks SET completed_at = $1 WHERE id = $2 RETURNING *";
+      const values = [new Date(), id];
+      const { rows } = await db.query(query, values);
+  
+      if (!rows[0]) {
+        return res.status(404).json({
+          success: false,
+          message: "Task not found",
+        });
+      }
+  
+      return res.status(200).json({
+        success: true,
+        task: rows[0],
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  
