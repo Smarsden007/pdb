@@ -35,10 +35,12 @@ export const TaskView = () => {
     <div>
       {tasks ? (
         tasks.map((task) => (
-          <div key={task.task_id}>
-            <p>{task.task_description}</p>
-            <button onClick={() => updateTask(task.task_id)}>Mark as Completed</button>
+          
+          <div class='flex flex-row' key={task.task_id}>
+            <p class='p-1'>{task.task_description}</p>
+            <button class='outline rounded p-2 ml-3 mb-3' onClick={() => updateTask(task.task_id)}>Mark as Completed</button>
           </div>
+         
         ))
       ) : (
         <p>Loading tasks...</p>
