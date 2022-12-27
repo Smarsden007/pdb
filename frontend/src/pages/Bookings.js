@@ -1,4 +1,5 @@
 import React from 'react'
+import { BookingsTable } from '../components/BookingPagination'
 import { BookingsView } from '../components/BookingsView'
 import { Navbar } from '../components/Navbar'
 
@@ -10,7 +11,7 @@ export const Bookings = () => {
       <Navbar />
     </div>
     <div class='col-span-8 row-span-2 overflow-hidden	' >
-      <BookingsView />
+        <BookingsTable />
          </div>
   </div>
   )

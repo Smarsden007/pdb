@@ -1,64 +1,38 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from 'react';
+import axios from 'axios';
 
 const TodoForm = () => {
-  const [description, setDescription] = useState("");
-  const [postedBy, setPostedBy] = useState("");
-  const [employeeData, setEmployeeData] = useState([]);
-
-  useEffect(() => {
-    async function fetchEmployeeData() {
-      const res = await axios.get("http://localhost:5000/api/employees");
-      console.log(res.data)
-      setEmployeeData(res.data);
-    }
-    fetchEmployeeData();
-  }, []);
+  const [description, setDescription] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     try {
-      const res = await axios.post("http://localhost:5000/api/tasks", {
+      await axios.post('http://localhost:5000/api/create-task', {
         description,
-        postedBy,
       });
-      console.log(res)
+
+      console.log('Task created successfully!');
+
+      // Clear the input field and reset the state
+      setDescription('');
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleChange = (event) => {
-    setPostedBy(event.target.value);
-  };
-
   return (
-    <form className='p-5' onSubmit={handleSubmit}>
-      <label className='text-white'>
-        Description:
-        <input
-          type="text" id="small-input" className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          value={description}
-          onChange={(event) => setDescription(event.target.value)}
-        />
-      </label>
-      <br />
-      <label className='text-white'>
-        Posted By:
-        {employeeData && (
-          <select
-          type="text" id="small-input" className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            value={postedBy}
-            onChange={handleChange}
-          >
-            {employeeData.map((employee) => (
-              <option key={employee.id} value={employee.id}>{employee.name}</option>
-            ))}
-          </select>
-        )}
-      </label>
-      <br />
-      <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-gradient-to-r from-purple-500 to-pink-500" type="submit">Add Todo</button>
+    <form onSubmit={handleSubmit}>
+
+<label for="description" type="text"
+        name="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Describe the task:</label>
+<textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Clean the bouncer..."
+type="text"
+name="description"
+value={description}
+onChange={(event) => setDescription(event.target.value)}></textarea>
+
+      <button class="outline rounded bg-gradient-to-r from-purple-500 to-pink-500 p-2 mt-6 text-xs text-white hover:text-black" type="submit">Create Task</button>
     </form>
   );
 };

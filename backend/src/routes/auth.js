@@ -6,7 +6,7 @@ const {
   protected,
   logout,
 } = require('../controllers/auth')
-const { createBooking, getBookings, getById, editBooking, getRecentBookings, getMostRecent, getTotalCost, getTotalCostForCurrentMonth, countBookingsWithin7Days, countBookingsWithin14Days } = require('../controllers/bookings')
+const { createBooking, getBookings, getById, editBooking, getRecentBookings, getMostRecent, getTotalCost, getTotalCostForCurrentMonth, countBookingsWithin7Days, countBookingsWithin14Days, getUnpaid, getBookingsPagination, searchBookings, calendarDates } = require('../controllers/bookings')
 const {
   validationMiddleware,
 } = require('../middlewares/validations-middleware')
@@ -33,6 +33,10 @@ router.get('/mtd-income', getTotalCostForCurrentMonth)
 router.get('/weekly-bookings', countBookingsWithin7Days)
 router.get('/biweekly-bookings', countBookingsWithin14Days)
 router.get('/recent-bookings', getRecentBookings)
+router.get('/unpaid', getUnpaid)
+router.get('/bookings-table', getBookingsPagination)
+router.get('/search-bookings', searchBookings)
+router.get('/rental_dates',calendarDates)
 //Finance Routes
 router.post('/receipts', createReceipt)
 router.get('/receipts/export', excelReceipts)

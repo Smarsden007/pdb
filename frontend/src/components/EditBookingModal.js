@@ -1,8 +1,8 @@
 import React from "react";
 import { useRef } from "react";
-import TodoForm from "./TodoForm";
+import { EditBookingModal, EditBookings } from "./EditBookings";
 
-export const TodoModal = (props) => {
+export const BookingModal = (props) => {
   const modalRef = useRef(null);
 
   const handleToggleClick = () => {
@@ -12,6 +12,8 @@ export const TodoModal = (props) => {
   const closeModal = () => {
     modalRef.current.classList.add("hidden");
   };
+
+
 
   return (
     <div>
@@ -64,7 +66,7 @@ export const TodoModal = (props) => {
             </div>
             {/* <!-- Modal body --> */}
             <div class="p-6 space-y-6">
-              <TodoForm />
+                <EditBookings />
             </div>
             {/* <!-- Modal footer --> */}
             <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">

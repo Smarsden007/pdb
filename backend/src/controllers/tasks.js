@@ -20,17 +20,21 @@ exports.editTask = async (req, res) => {
 
 exports.createTask = async (req, res) => {
   try {
-    const { task_description, completed, date_posted } = req.body;
-    const newTask = await db.query(
-      'INSERT INTO tasks (task_description, completed, date_posted) VALUES ($1, $2, $3) RETURNING *',
-      [task_description, completed, date_posted]
-    );
+    const { description } = req.body;
+    const completed = false;
 
-    res.json(newTask.rows[0]);
+    const result = await db.query(
+      "INSERT INTO tasks (task_description, completed, date_posted) VALUES ($1, $2, now()) RETURNING *",
+      [description, completed]
+    );
+    res.json(result.rows[0]);
   } catch (err) {
-    console.error(err.message);
+    console.error(err);
+    res.status(500).json({ message: "An error occurred" });
   }
 };
+
+
 // /task
 
 

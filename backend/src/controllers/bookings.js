@@ -41,9 +41,12 @@ exports.createBooking = async (req, res) => {
 };
 exports.editBooking = async (req, res) => {
   try {
+    // Get the ID of the booking to update
+    const { id } = req.params;
+
+    // Get the updated data for the booking
     const {
-      id,
-      full_name,
+      fulll_name,
       email,
       phone,
       delivery_ad,
@@ -62,14 +65,20 @@ exports.editBooking = async (req, res) => {
       paid,
       deposit,
       contract_sign,
-      booked_by,
-      delivered_by,
+      total_cost,
     } = req.body;
 
+    // Update the booking in the database
     const result = await db.query(
-      "UPDATE bookings SET full_name = $1, email = $2, phone = $3, delivery_ad = $4, bouncer = $5, rent_date = $6, rental_time = $7, generator = $8, balloons = $9, half_arch = $10, full_arch = $11, vinyl = $12, vinyl_theme = $13, park = $14, cust_nt = $15, int_nt = $16, paid = $17, deposit = $18, contract_sign = $19, booked_by = $20, delivered_by = $21 WHERE id = $22 RETURNING *",
+      `UPDATE bookings
+       SET fulll_name = $1, email = $2, phone = $3, delivery_ad = $4, bouncer = $5,
+           rent_date = $6, rental_time = $7, generator = $8, balloons = $9, half_arch = $10,
+           full_arch = $11, vinyl = $12, vinyl_theme = $13, park = $14, cust_nt = $15, int_nt = $16,
+           paid = $17, deposit = $18, contract_sign = $19, total_cost = $20
+       WHERE id = $21
+       RETURNING *`,
       [
-        full_name,
+        fulll_name,
         email,
         phone,
         delivery_ad,
@@ -88,17 +97,19 @@ exports.editBooking = async (req, res) => {
         paid,
         deposit,
         contract_sign,
-        booked_by,
-        delivered_by,
+        total_cost,
         id,
       ]
     );
+
+    // Send the updated booking data as the response
     res.json(result.rows[0]);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "An error occurred" });
   }
 };
+
 exports.getBookings = async (req, res) => {
   try {
     const { rows } = await db.query("select * FROM bookings");
@@ -124,7 +135,9 @@ exports.getById = async (req, res) => {
 };
 exports.getRecentBookings = async (req, res) => {
   try {
-    const { rows } = await db.query("SELECT * FROM bookings ORDER BY id DESC LIMIT 3");
+    const { rows } = await db.query(
+      "SELECT * FROM bookings ORDER BY id DESC LIMIT 3"
+    );
 
     return res.status(200).json({
       success: true,
@@ -144,13 +157,13 @@ exports.getTotalCost = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      total_cost: rows[0].total_cost_sum
+      total_cost: rows[0].total_cost_sum,
     });
   } catch (error) {
     console.log(error.message);
     return res.status(500).json({
       success: false,
-      message: 'An error occurred while retrieving the total cost'
+      message: "An error occurred while retrieving the total cost",
     });
   }
 };
@@ -181,7 +194,9 @@ exports.getTotalCostForCurrentMonth = async (req, res) => {
 exports.countBookingsWithin7Days = async (req, res) => {
   try {
     const currentDate = new Date();
-    const sevenDaysFromNow = new Date(currentDate.getTime() + 7 * 24 * 60 * 60 * 1000);
+    const sevenDaysFromNow = new Date(
+      currentDate.getTime() + 7 * 24 * 60 * 60 * 1000
+    );
 
     const { rows } = await db.query(
       "SELECT COUNT(*) FROM bookings WHERE rent_date BETWEEN $1 AND $2",
@@ -199,7 +214,9 @@ exports.countBookingsWithin7Days = async (req, res) => {
 exports.countBookingsWithin14Days = async (req, res) => {
   try {
     const currentDate = new Date();
-    const upcomingDate = new Date(currentDate.getTime() + 14 * 24 * 60 * 60 * 1000);
+    const upcomingDate = new Date(
+      currentDate.getTime() + 14 * 24 * 60 * 60 * 1000
+    );
 
     const { rows } = await db.query(
       "SELECT COUNT(*) FROM bookings WHERE rent_date BETWEEN $1 AND $2",
@@ -215,5 +232,84 @@ exports.countBookingsWithin14Days = async (req, res) => {
   }
 };
 
+exports.getUnpaid = async (req, res) => {
+  try {
+    // count the number of bookings with paid=false
+    const countQuery = "SELECT COUNT(*) FROM bookings WHERE paid=false";
+    const { rows } = await db.query(countQuery);
+    const count = rows[0].count;
+    res.json({ count });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ error: "An error occurred while counting unpaid bookings" });
+  }
+};
+exports.getBookingsPagination = async (req, res) => {
+  try {
+    // extract the page size from the query parameters
+    const pageSize = req.query.pageSize || 10; // default to 10 if not specified
+    // calculate the offset based on the page number
+    const page = req.query.page || 1; // default to page 1 if not specified
+    const offset = (page - 1) * pageSize;
+    // retrieve the bookings from the database
+    const bookingsQuery = "SELECT * FROM bookings LIMIT $1 OFFSET $2";
+    const { rows } = await db.query(bookingsQuery, [pageSize, offset]);
+    // count the total number of bookings
+    const countQuery = "SELECT COUNT(*) FROM bookings";
+    const { rows: countRows } = await db.query(countQuery);
+    const count = countRows[0].count;
+    // respond with the bookings and the total count
+    res.json({ bookings: rows, count });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "An error occurred while retrieving bookings" });
+  }
+};
 
+exports.searchBookings = async (req, res) => {
+  try {
+    // retrieve the search query from the request body
+    const { searchQuery } = req.body;
+
+    // construct the search query
+    const searchQueryString = `SELECT * FROM bookings WHERE full_name ILIKE '%${searchQuery}%' OR email ILIKE '%${searchQuery}%' OR phone ILIKE '%${searchQuery}%' OR delivery_ad ILIKE '%${searchQuery}%' OR bouncer ILIKE '%${searchQuery}%' OR half_arch ILIKE '%${searchQuery}%' OR full_arch ILIKE '%${searchQuery}%' OR vinyl_theme ILIKE '%${searchQuery}%' OR cust_nt ILIKE '%${searchQuery}%' OR int_nt ILIKE '%${searchQuery}%'`;
+
+    // execute the search query
+    const { rows } = await db.query(searchQueryString);
+
+    // send the search results back to the client
+    res.json({ bookings: rows });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "An error occurred while searching for bookings" });
+  }
+};
+exports.calendarDates = async (req, res) => {
+  // Get the month and year from the query parameters
+  const month = req.query.month;
+  const year = req.query.year;
+
+  try {
+    // Query the database for rental dates in the specified month and year
+    const result = await db.query(
+      `SELECT rent_date FROM bookings WHERE EXTRACT(MONTH FROM rent_date) = $1 AND EXTRACT(YEAR FROM rent_date) = $2`,
+      [month, year]
+    );
+    // Format the rental dates as mm/dd/yyyy
+    const formattedDates = result.rows.map(row => {
+      const date = new Date(row.rent_date);
+      const month = ("0" + (date.getMonth() + 1)).slice(-2);
+      const day = ("0" + date.getDate()).slice(-2);
+      const year = date.getFullYear();
+      return `${month}/${day}/${year}`;
+    });
+    // Send the formatted rental dates back to the client
+    res.json(formattedDates);
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
+};
 
