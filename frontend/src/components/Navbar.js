@@ -62,7 +62,7 @@ export const Navbar = () => {
               <span className="flex-1 ml-3 whitespace-nowrap" to='/dashboard'>Bookings</span>
             </Link  >
           </li>
-          <li>
+          {/* <li>
             <Link 
               to="/calendar-view"
               href="#"
@@ -84,7 +84,7 @@ export const Navbar = () => {
               </svg>
               <span className="flex-1 ml-3 whitespace-nowrap" to='/calendar-view'>Calendar</span>
             </Link  >
-          </li>
+          </li> */}
           {/* <li>
             <a
               href="#"
