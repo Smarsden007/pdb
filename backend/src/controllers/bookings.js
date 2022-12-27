@@ -247,24 +247,33 @@ exports.getUnpaid = async (req, res) => {
   }
 };
 exports.getBookingsPagination = async (req, res) => {
+  const { page, pageSize, search } = req.query; // destruct the query parameters
+  const offset = (page - 1) * pageSize; // calculate the offset based on the current page and page size
   try {
-    // extract the page size from the query parameters
-    const pageSize = req.query.pageSize || 10; // default to 10 if not specified
-    // calculate the offset based on the page number
-    const page = req.query.page || 1; // default to page 1 if not specified
-    const offset = (page - 1) * pageSize;
-    // retrieve the bookings from the database
-    const bookingsQuery = "SELECT * FROM bookings LIMIT $1 OFFSET $2";
-    const { rows } = await db.query(bookingsQuery, [pageSize, offset]);
-    // count the total number of bookings
-    const countQuery = "SELECT COUNT(*) FROM bookings";
-    const { rows: countRows } = await db.query(countQuery);
-    const count = countRows[0].count;
-    // respond with the bookings and the total count
-    res.json({ bookings: rows, count });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "An error occurred while retrieving bookings" });
+    // Query the database for bookings
+    let result;
+    if (search) {
+      // If a search query is provided, filter the results based on the search query
+      result = await db.query(
+        `SELECT * FROM bookings WHERE full_name ILIKE $1 OR email ILIKE $1 LIMIT $2 OFFSET $3`,
+        [`%${search}%`, pageSize, offset]
+      );
+    } else {
+      // If no search query is provided, fetch all bookings
+      result = await db.query(`SELECT * FROM bookings LIMIT $1 OFFSET $2`, [
+        pageSize,
+        offset,
+      ]);
+    }
+    // Get the total count of bookings
+    const countResult = await db.query(`SELECT count(*) FROM bookings`);
+    const count = parseInt(countResult.rows[0].count);
+
+    // Send the bookings and total count back to the client
+    res.json({ bookings: result.rows, count });
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
   }
 };
 
@@ -283,7 +292,9 @@ exports.searchBookings = async (req, res) => {
     res.json({ bookings: rows });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "An error occurred while searching for bookings" });
+    res
+      .status(500)
+      .json({ error: "An error occurred while searching for bookings" });
   }
 };
 exports.calendarDates = async (req, res) => {
@@ -298,7 +309,7 @@ exports.calendarDates = async (req, res) => {
       [month, year]
     );
     // Format the rental dates as mm/dd/yyyy
-    const formattedDates = result.rows.map(row => {
+    const formattedDates = result.rows.map((row) => {
       const date = new Date(row.rent_date);
       const month = ("0" + (date.getMonth() + 1)).slice(-2);
       const day = ("0" + date.getDate()).slice(-2);
@@ -312,4 +323,3 @@ exports.calendarDates = async (req, res) => {
     res.sendStatus(500);
   }
 };
-
