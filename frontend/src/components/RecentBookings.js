@@ -1,6 +1,5 @@
 import React from "react";
 import { Spinner } from "./Spinner";
-import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
@@ -13,7 +12,8 @@ export const RecentBookings = () => {
     );
     // convert the data from an object to an array
     const bookingsArray = Object.values(response.data.bookings);
-    console.log(bookings);
+    console.log(bookings,data);
+
     setBookings(bookingsArray);
     return bookingsArray;
   });
