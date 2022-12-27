@@ -6,7 +6,7 @@ export const BookingsTable = () => {
   const [bookings, setBookings] = useState([]);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(10);
+  const [limit] = useState(10);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
@@ -47,7 +47,6 @@ export const BookingsTable = () => {
       alert("An error occurred while updating the booking");
     }
   };
-
   const showModal = () => {
     setModalVisible(true);
   };
@@ -56,9 +55,12 @@ export const BookingsTable = () => {
     setModalVisible(false);
     setSearchTerm("");
   };
+  console.log(modalVisible,handleCancel)
+
   useEffect(() => {
     const fetchData = async () => {
       const offset = (page - 1) * limit;
+      console.log(offset)
       const { data } = await axios.get(
         "http://localhost:5000/api/bookings-table",
         {
@@ -105,30 +107,26 @@ export const BookingsTable = () => {
 
   const columns = [
     {
-      title: "Full Name",
       dataIndex: "fulll_name",
       key: "fulll_name",
       render: (text) => <span style={{ fontSize: "x-small" }}>{text}</span>,
       title: <span style={{ fontSize: ".65rem" }}>Full Name</span>,
     },
     {
-      title: "Phone",
       dataIndex: "phone",
       key: "phone",
-      render: (phone) => <span style={{ fontSize: "x-small" }}>{phone}</span>,
+      render: (text) => <span style={{ fontSize: "x-small" }}>{text}</span>,
       title: <span style={{ fontSize: ".65rem" }}>Phone</span>,
     },
     {
-      title: "Delivery Address",
       dataIndex: "delivery_ad",
       key: "delivery_ad",
-      render: (delivery_ad) => (
-        <span style={{ fontSize: "x-small" }}>{delivery_ad}</span>
+      render: (text) => (
+        <span style={{ fontSize: "x-small" }}>{text}</span>
       ),
       title: <span style={{ fontSize: ".65rem" }}>Address</span>,
     },
     {
-      title: "Bouncer",
       dataIndex: "bouncer",
       key: "bouncer",
       render: (bouncer) => (
@@ -138,7 +136,6 @@ export const BookingsTable = () => {
       title: <span style={{ fontSize: ".65rem" }}>Bouncer</span>,
     },
     {
-      title: "Rent Date",
       dataIndex: "rent_date",
       key: "rent_date",
       render: (rent_date) => (
@@ -147,7 +144,6 @@ export const BookingsTable = () => {
       title: <span style={{ fontSize: ".65rem" }}>Date</span>,
     },
     {
-      title: "Rental Time",
       dataIndex: "rental_time",
       key: "rental_time",
       render: (rental_time) => (
@@ -160,7 +156,6 @@ export const BookingsTable = () => {
       ),
     },
     {
-      title: "Generator",
       dataIndex: "generator",
       key: "generator",
       render: (generator) => (
@@ -169,7 +164,6 @@ export const BookingsTable = () => {
       title: <span style={{ fontSize: ".65rem" }}>Generator</span>,
     },
     {
-      title: "Balloons",
       dataIndex: "balloons",
       key: "balloons",
       render: (balloons) => (
@@ -178,7 +172,6 @@ export const BookingsTable = () => {
       title: <span style={{ fontSize: ".65rem" }}>Balloons</span>,
     },
     {
-      title: "Half Arch",
       dataIndex: "half_arch",
       key: "half_arch",
       render: (half_arch) => (
@@ -187,7 +180,6 @@ export const BookingsTable = () => {
       title: <span style={{ fontSize: ".65rem" }}>Full Arch</span>,
     },
     {
-      title: "Full Arch",
       dataIndex: "full_arch",
       key: "full_arch",
       render: (full_arch) => (
@@ -197,7 +189,6 @@ export const BookingsTable = () => {
     },
 
     {
-      title: "Vinyl",
       dataIndex: "vinyl",
       key: "vinyl",
       render: (vinyl) =>
@@ -210,7 +201,6 @@ export const BookingsTable = () => {
     },
 
     {
-      title: "Paid",
       dataIndex: "paid",
       key: "paid",
       render: (paid) =>
@@ -234,7 +224,7 @@ export const BookingsTable = () => {
         <h2 class="text-lg m-2">Edit Booking</h2>
         <form onSubmit={handleSubmit}>
           <div class=" m-2">
-            <label class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 text-black" htmlFor="fulll_name" class="">
+            <label class="peer-focus:font-medium absolute text-sm dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 text-black" htmlFor="fulll_name">
               Full Name
             </label>
             <input

@@ -221,15 +221,15 @@ exports.getBookingsPagination = async (req, res) => {
     if (search) {
       // If a search query is provided, filter the results based on the search query
       result = await db.query(
-        `SELECT * FROM bookings WHERE full_name ILIKE $1 OR email ILIKE $1 LIMIT $2 OFFSET $3`,
+        `SELECT * FROM bookings WHERE full_name ILIKE $1 OR email ILIKE $1 ORDER BY created_at DESC LIMIT $2 OFFSET $3`,
         [`%${search}%`, pageSize, offset]
       );
     } else {
       // If no search query is provided, fetch all bookings
-      result = await db.query(`SELECT * FROM bookings LIMIT $1 OFFSET $2`, [
-        pageSize,
-        offset,
-      ]);
+      result = await db.query(
+        `SELECT * FROM bookings ORDER BY created_at DESC LIMIT $1 OFFSET $2`,
+        [pageSize, offset]
+      );
     }
     // Get the total count of bookings
     const countResult = await db.query(`SELECT count(*) FROM bookings`);
@@ -242,6 +242,7 @@ exports.getBookingsPagination = async (req, res) => {
     res.sendStatus(500);
   }
 };
+
 
 exports.searchBookings = async (req, res) => {
   try {
