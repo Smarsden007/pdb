@@ -1,32 +1,38 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 const userAuthFromLocalStorage = () => {
-  const isAuth = localStorage.getItem('isAuth')
+  const isAuth = localStorage.getItem('isAuth');
 
   if (isAuth && JSON.parse(isAuth) === true) {
-    return true
+    return true;
   }
 
-  return false
-}
+  return false;
+};
 
 const initialState = {
   isAuth: userAuthFromLocalStorage(),
-}
+  user: null,
+  fullName: null,
+};
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    authenticateUser: (state) => {
-      state.isAuth = true
-    },
+    authenticateUser: (state, action) => {
+      state.isAuth = true;
+      console.log(action.payload)
+      state.fullName = action.payload.fullName},
+         // store the full name in the user object
+    
     unauthenticateUser: (state) => {
-      state.isAuth = false
+      state.isAuth = false;
+      state.user = null;
     },
   },
-})
+});
 
-export const { authenticateUser, unauthenticateUser } = authSlice.actions
+export const { authenticateUser, unauthenticateUser } = authSlice.actions;
 
-export default authSlice.reducer
+export default authSlice.reducer;

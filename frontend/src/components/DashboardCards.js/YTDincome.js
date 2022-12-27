@@ -136,3 +136,30 @@ export const FourteenDayBooking = () => {
     </div>
   );
 };
+
+
+export const UnPaid = () => {
+  const [count, setCount] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios.get('http://localhost:5000/api/unpaid');
+      setCount(result.data.count);
+    };
+    fetchData();
+  }, []);
+
+  if (count === null) {
+    return <div>Loading...</div>;
+  }
+
+
+  return (
+    <div>
+       <div class="hover:scale-110 block w-40 h-40 p-6 bg-white border border-gray-200 rounded-lg  drop-shadow-xl hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 text-lg">
+          
+          <p class="font-normal text-gray-700 dark:text-gray-400 text-center ">Number of unpaid bookings: {count}</p>
+        </div>
+    </div>
+  )
+}
