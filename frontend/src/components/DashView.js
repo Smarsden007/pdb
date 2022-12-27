@@ -27,7 +27,7 @@ export const DashView = () => {
         <UnPaid />
       </div>
       <div class="grid grid-cols-5 mt-16 h-36 w-12/12">
-        <div class=" relative shadow-md sm:rounded-lg col-span-2 h-72 w-10/12 p-10">
+        <div class=" relative shadow-md  drop-shadow-xl sm:rounded-lg col-span-2 h-72 w-10/12 p-10">
           <div class="p-1 -mt-4">
             <h5 class="fixed p-1 font-extrabold text-transparent text-2xl py-2 bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
               To-Do
@@ -38,7 +38,7 @@ export const DashView = () => {
             <TodoModal text="Add Task" />
           </div>
         </div>
-        <div class="overflow-y-auto relative shadow-md sm:rounded-lg col-span-3 w-11/12 p-10 -mt-4">
+        <div class="overflow-y-auto relative  drop-shadow-xl shadow-md sm:rounded-lg col-span-3  w-11/12 p-10 -mt-4">
           <RecentBookings />
         </div>
       </div>

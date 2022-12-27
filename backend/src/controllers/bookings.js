@@ -47,59 +47,24 @@ exports.editBooking = async (req, res) => {
     // Get the updated data for the booking
     const {
       fulll_name,
-      email,
-      phone,
-      delivery_ad,
-      bouncer,
-      rent_date,
-      rental_time,
-      generator,
-      balloons,
-      half_arch,
-      full_arch,
-      vinyl,
-      vinyl_theme,
-      park,
-      cust_nt,
-      int_nt,
       paid,
-      deposit,
-      contract_sign,
-      total_cost,
+      // other updated fields go here
     } = req.body;
+
+    // Build the SET clause of the UPDATE statement
+    // Only include the fields that have been included in the request body
+    const setClause = Object.entries({ fulll_name, paid })
+      .filter(([_, value]) => value !== undefined)
+      .map(([field, _], index) => `${field} = $${index + 1}`)
+      .join(", ");
 
     // Update the booking in the database
     const result = await db.query(
       `UPDATE bookings
-       SET fulll_name = $1, email = $2, phone = $3, delivery_ad = $4, bouncer = $5,
-           rent_date = $6, rental_time = $7, generator = $8, balloons = $9, half_arch = $10,
-           full_arch = $11, vinyl = $12, vinyl_theme = $13, park = $14, cust_nt = $15, int_nt = $16,
-           paid = $17, deposit = $18, contract_sign = $19, total_cost = $20
-       WHERE id = $21
+       SET ${setClause}
+       WHERE id = $${Object.keys(req.body).length + 1}
        RETURNING *`,
-      [
-        fulll_name,
-        email,
-        phone,
-        delivery_ad,
-        bouncer,
-        rent_date,
-        rental_time,
-        generator,
-        balloons,
-        half_arch,
-        full_arch,
-        vinyl,
-        vinyl_theme,
-        park,
-        cust_nt,
-        int_nt,
-        paid,
-        deposit,
-        contract_sign,
-        total_cost,
-        id,
-      ]
+      [...Object.values({ fulll_name, paid }), id]
     );
 
     // Send the updated booking data as the response
@@ -109,6 +74,7 @@ exports.editBooking = async (req, res) => {
     res.status(500).json({ message: "An error occurred" });
   }
 };
+
 
 exports.getBookings = async (req, res) => {
   try {

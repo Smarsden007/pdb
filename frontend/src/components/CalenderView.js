@@ -7,6 +7,7 @@ const StyledDiv = styled.div`
   background-color: ${(props) => (props.isRented ? "red" : "#4a5568")};
   border-radius: 0.25rem;
   border: 1px solid purple;
+  margin: .5rem;
 `;
 export const CalendarView = () => {
   const months = [
@@ -82,7 +83,7 @@ export const CalendarView = () => {
   }
 
   return (
-    <div class="mb-10 mt-16 ml-44">
+    <div class="mb-10 mt-8 ml-44">
       <div class=' grid grid-cols-3 w-3/5 ml-16 justify-center	'>
         <button class="outline rounded bg-gradient-to-r from-purple-500 to-pink-500 p-2 ml-3 mb-3 text-xs text-white  hover:text-black m-5" onClick={previousMonth}>Previous</button>
         <span class='font-extrabold	 p-2 mb-3 m-5 justify-center	'>
@@ -102,7 +103,7 @@ export const CalendarView = () => {
             <th>Sat</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody >
           {weeks.map((week, index) => (
             <tr key={index}>
               {week.map((day, index) => {
@@ -117,8 +118,8 @@ export const CalendarView = () => {
             
             
             return (
-              <td class='hover:scale-110' key={day}>
-              <StyledDiv  isRented={isRented}><p class='p-2 text-white'>{day}</p></StyledDiv></td>
+              <td class='hover:scale-110 m-8' key={day}>
+              <StyledDiv  isRented={isRented}><p class='p-2 text-white bg-gradient-to-r from-purple-500 to-pink-500 h-8'>{day}</p></StyledDiv></td>
             );
             
               })}
