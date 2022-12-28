@@ -16,4 +16,3 @@ createRoot(document.getElementById("root")).render(
     </QueryClientProvider>
   </Provider>
 );
-frontend/src/index.js
