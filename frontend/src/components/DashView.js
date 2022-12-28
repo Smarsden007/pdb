@@ -9,15 +9,15 @@ import {
 } from "./DashboardCards.js/YTDincome";
 import { TaskView } from "./TasksView";
 import { RecentBookings } from "./RecentBookings";
-import { DashboardWelcome } from "./DashboardWelcome";
+// import { DashboardWelcome } from "./DashboardWelcome";
 
 export const DashView = () => {
   return (
     <div class="ml-2">
       <div className="grid grid-cols-4">
-        <div class="col-span-4">
+        {/* <div class="col-span-4">
           <h1 class=" p-6 font-extrabold text-transparent text-5xl py-10 bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500"><DashboardWelcome /></h1>
-        </div>
+        </div> */}
       </div>
       <div class="grid  grid-cols-5 my-4">
         <YTDincome />
