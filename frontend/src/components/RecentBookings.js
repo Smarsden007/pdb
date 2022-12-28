@@ -6,13 +6,12 @@ import axios from "axios";
 import { parseISO } from "date-fns";
 export const RecentBookings = () => {
   const [bookings, setBookings] = useState();
-  const { data, error, isLoading } = useQuery("bookings", async () => {
+  const { error, isLoading } = useQuery("bookings", async () => {
     const response = await axios.get(
       "http://localhost:5000/api/recent-bookings"
     );
     // convert the data from an object to an array
     const bookingsArray = Object.values(response.data.bookings);
-    console.log(bookings,data);
     setBookings(bookingsArray);
     return bookingsArray;
   });
@@ -38,7 +37,6 @@ export const RecentBookings = () => {
                   month: "2-digit",
                   day: "2-digit",
                 });
-                console.log(formattedDate); // Output: "03/01/2022"
                 return (
                   <div
                     key={booking.id}
