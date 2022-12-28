@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
-    "start": "node --max-old-space-size=4096 server.js"
+    "start": "node --max-old-space-size=4096 --trace-warnings node_modules/react-scripts/scripts/start.js"
+
   },
   "keywords": [],
   "author": "",
