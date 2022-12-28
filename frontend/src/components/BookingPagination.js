@@ -55,12 +55,10 @@ export const BookingsTable = () => {
     setModalVisible(false);
     setSearchTerm("");
   };
-  console.log(modalVisible,handleCancel)
 
   useEffect(() => {
     const fetchData = async () => {
       const offset = (page - 1) * limit;
-      console.log(offset)
       const { data } = await axios.get(
         "http://localhost:5000/api/bookings-table",
         {
@@ -212,6 +210,7 @@ export const BookingsTable = () => {
       title: <span style={{ fontSize: ".65rem" }}>Paid</span>,
     },
   ];
+  
   const EditBookingModal = () => {
     return (
       <Modal
@@ -249,7 +248,9 @@ export const BookingsTable = () => {
       </Modal>
     );
   };
+  
   return (
+    
     <div class="p-4 m-0 relative drop-shadow-xl  sm:rounded-lg">
       <div class="w-2/5 mb-5">
         <Input.Search
