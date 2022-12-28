@@ -8,7 +8,7 @@ export const BookingsTable = () => {
   const [page, setPage] = useState(1);
   const [limit] = useState(10);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedBooking, setSelectedBooking] = useState(null);
+  const [selectedBooking, setSelectedBooking] = useState(null); // eslint-disable-next-line
   const [modalVisible, setModalVisible] = useState(false);
   const handleSubmit = async (event) => {
     try {
@@ -50,14 +50,14 @@ export const BookingsTable = () => {
   const showModal = () => {
     setModalVisible(true);
   };
-
+ // eslint-disable-next-line
   const handleCancel = () => {
     setModalVisible(false);
     setSearchTerm("");
   };
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = async () => { // eslint-disable-next-line
       const offset = (page - 1) * limit;
       const { data } = await axios.get(
         "http://localhost:5000/api/bookings-table",
