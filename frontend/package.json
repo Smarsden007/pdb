@@ -21,11 +21,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-<<<<<<< HEAD
-    "start": "node --max-old-space-size=4096 --trace-warnings node_modules/react-scripts/scripts/start.js",
-=======
     "start": "react-scripts start",
->>>>>>> 0ef42da561ec1bfdf3fb06ce5a88cdf31fbfbfb4
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
