@@ -4,6 +4,10 @@ module.exports = {
   theme: {
     extend: {},
   },
+  purge: {
+    // Specify the paths or glob patterns to analyze
+    content: ['./src/**/*.{html,js}'],
+  },
   plugins: [
     'tailwindcss',
     'autoprefixer',
