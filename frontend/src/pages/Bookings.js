@@ -1,5 +1,5 @@
 import React from 'react'
-// import { BookingsTable } from '../components/BookingPagination'
+import { BookingsTable } from '../components/BookingPagination'
 import { Navbar } from '../components/Navbar'
 
 export const Bookings = () => {
@@ -15,7 +15,7 @@ export const Bookings = () => {
           Bookings
         </h3>
         </div>
-        {/* <BookingsTable /> */}
+        <BookingsTable />
          </div>
   </div>
   )
