@@ -21,7 +21,7 @@ export const LoginPage = () => {
         try {
            const loginValues = await onLogin(values)
            console.log('######',loginValues)
-            dispatch(authenticateUser({ fullName: 'john doe' }));
+            dispatch(authenticateUser({ fullName: loginValues.data.user.full_name }));
 
             localStorage.setItem('isAuth', 'true')
         } catch (error) {
