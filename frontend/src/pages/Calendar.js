@@ -12,7 +12,7 @@ export const Calendar = ()=> {
       <div class="col-span-2 row-span-2 overflow-hidden">
         <Navbar />
       </div>
-      <div class='col-span-8 row-span-2 overflow-hidden	' >
+      <div class='col-span-8 row-span-2	' >
         <div class="overflow-hidden">
         <CalendarView />
         </div>
