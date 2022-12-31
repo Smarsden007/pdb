@@ -7,7 +7,6 @@ const StyledCalendar = styled(Calendar)`
     overflow-y: scroll;
     height: 70vh;
     margin-bottom: 5rem,
-
   }
 
   .react-calendar__tile {

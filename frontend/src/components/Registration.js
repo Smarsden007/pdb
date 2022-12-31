@@ -56,6 +56,7 @@ const Registration = () => {
  
   <div class="relative z-0 mb-6 w-full group">
       <input type="password"
+      autocomplete="off"
         name="password"
         value={password}
         onChange={e => onChange(e)}
@@ -64,6 +65,7 @@ const Registration = () => {
   </div>
   <div class="relative z-0 mb-6 w-full group">
       <input  type="text"
+      autocomplete="off"
         name="fullName"
         value={fullName}
         onChange={e => onChange(e)}
