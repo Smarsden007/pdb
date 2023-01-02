@@ -5,7 +5,7 @@ import Calendar from "react-calendar";
 const StyledCalendar = styled(Calendar)`
   .react-calendar {
     width: 350px;
-    max-width: 60%;
+    max-width: 80%;
     max-height: 80vh;
     background: white;
     border: 1px solid #a0a096;
@@ -38,24 +38,25 @@ const StyledCalendar = styled(Calendar)`
   .react-calendar button {
     margin: 0;
     border: 0;
-    outline: none; 
+    outline: none;
   }
   .react-calendar button:enabled:hover {
     cursor: pointer;
   }
   .react-calendar__navigation {
     display: flex;
-  justify-content: center;
-  height: 34px;
-  margin-bottom: 0rem;
-  background-color: white;
+    justify-content: center;
+    height: 34px;
+    margin-bottom: 0rem;
+    background-color: white;
   }
   .react-calendar__navigation button {
     min-width: 154px;
     min-height: 40px;
-    background: linear-gradient(to right, #ff0000, #0000ff);
-    margin: .5rem;
+    background: #0a2239;
+    margin: 0.5rem;
     border-radius: 0.5rem;
+    color: white;
   }
   .react-calendar__navigation button:enabled:hover,
   .react-calendar__navigation button:enabled:focus {
@@ -94,7 +95,7 @@ const StyledCalendar = styled(Calendar)`
     padding: 0.5rem;
   }
   .react-calendar__month-view__days {
-   padding: 0.5rem;
+    padding: 0.5rem;
     color: white;
   }
   .react-calendar__month-view__days__day--neighboringMonth {
@@ -108,10 +109,11 @@ const StyledCalendar = styled(Calendar)`
   }
   .react-calendar__tile {
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
     max-width: 100%;
     text-align: left;
-    background: #0A2239;
+    background: #0a2239;
     border-radius: 0.75rem;
     width: 1rem !important;
     border: white;
@@ -171,10 +173,11 @@ export const CalendarView = () => {
   const handleChange = (date) => {
     setDate(date);
   };
+
   return (
-    <div style={{ marginLeft: "8rem", marginTop: "3rem" }}>
-      <div style={{ width: "60vw", height: "90vh", overflowY: "scroll" }}>
-        <div style={{ width: "60vw", overflowY: "scroll" }}>
+    <div style={{ marginLeft: "2rem", marginTop: "1rem" }}>
+      <div style={{ width: "80vw", height: "90vh", overflowY: "scroll" }}>
+        <div style={{ width: "70vw", overflowY: "scroll" }}>
           <StyledCalendar
             onChange={handleChange}
             value={date}
@@ -193,16 +196,53 @@ export const CalendarView = () => {
                 <div>
                   <div className=" text-xs">
                     {bookingsOnDate.map((booking) => {
+                      const fulll_name = booking.fulll_name;
+                      const firstWord = fulll_name.split(" ")[0];
                       return (
-                        <div key={booking.id}>
+                        <div class="flex items-center w-40" key={booking.id}>
                           <button
                             data-popover-target="popover-default"
                             type="button"
-                            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-xs px-2 py-1.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            className="text-white  focus:outline-nonerounded-lg text-xs text-left  whitespace-nowrap inline-flex"
                             onMouseEnter={() => setCurrentBookingId(booking.id)}
                             onMouseLeave={() => setCurrentBookingId(null)}
                           >
-                            {booking.fulll_name}/{booking.bouncer}
+                            <div class="inline-flex">
+                              {firstWord}/
+                              {booking.bouncer === "bouncer1"
+                                ? "🏰"
+                                : booking.bouncer === "bouncer2"
+                                ? "🏯"
+                                : "👶"}
+                              {booking.paid ? (
+                                <svg
+                                  class="w-6 h-6"
+                                  fill="currentColor"
+                                  viewBox="0 0 20 20"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"></path>
+                                  <path
+                                    fill-rule="evenodd"
+                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z"
+                                    clip-rule="evenodd"
+                                  ></path>
+                                </svg>
+                              ) : (
+                                <svg
+                                  class="w-6 h-6"
+                                  fill="currentColor"
+                                  viewBox="0 0 20 20"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    fill-rule="evenodd"
+                                    d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                                    clip-rule="evenodd"
+                                  ></path>
+                                </svg>
+                              )}
+                            </div>
                           </button>
                           {currentBookingId === booking.id && (
                             <div>
