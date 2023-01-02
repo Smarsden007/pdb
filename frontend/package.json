@@ -11,7 +11,9 @@
     "axios": "^1.2.1",
     "date-fns": "^2.29.3",
     "jwt-decode": "^3.1.2",
+    "moment": "^2.29.4",
     "react": "^18.2.0",
+    "react-calendar": "^4.0.0",
     "react-dom": "^18.2.0",
     "react-query": "^3.39.2",
     "react-redux": "^8.0.5",
@@ -26,7 +28,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "analyze": "webpack-bundle-analyzer dist/stats.json"
-
   },
   "eslintConfig": {
     "extends": [
