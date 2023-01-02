@@ -203,7 +203,7 @@ export const CalendarView = () => {
                           <button
                             data-popover-target="popover-default"
                             type="button"
-                            className="text-white  focus:outline-nonerounded-lg text-xs text-left  whitespace-nowrap inline-flex"
+                            className="text-white  text-sm text-left  whitespace-nowrap inline-flex"
                             onMouseEnter={() => setCurrentBookingId(booking.id)}
                             onMouseLeave={() => setCurrentBookingId(null)}
                           >
@@ -256,6 +256,7 @@ export const CalendarView = () => {
                                   <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1v-5a1 1 0 00-.293-.707l-2-2A1 1 0 0015 7h-1z"></path>
                                 </svg>
                               ) : null}
+                              {booking.balloons ? "🎈" : null}
                             </div>
                           </button>
                           {currentBookingId === booking.id && (
