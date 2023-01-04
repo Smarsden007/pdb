@@ -203,7 +203,7 @@ export const CalendarView = () => {
                           <button
                             data-popover-target="popover-default"
                             type="button"
-                            className="text-white  focus:outline-nonerounded-lg text-xs text-left  whitespace-nowrap inline-flex"
+                            className="text-white  text-sm text-left  whitespace-nowrap inline-flex"
                             onMouseEnter={() => setCurrentBookingId(booking.id)}
                             onMouseLeave={() => setCurrentBookingId(null)}
                           >
@@ -216,7 +216,8 @@ export const CalendarView = () => {
                                 : "👶"}
                               {booking.paid ? (
                                 <svg
-                                  class="w-6 h-6"
+                                  style={{ fill: "green" }}
+                                  class="w-4 h-4"
                                   fill="currentColor"
                                   viewBox="0 0 20 20"
                                   xmlns="http://www.w3.org/2000/svg"
@@ -230,7 +231,8 @@ export const CalendarView = () => {
                                 </svg>
                               ) : (
                                 <svg
-                                  class="w-6 h-6"
+                                  style={{ fill: "red" }}
+                                  class="w-4 h-4 "
                                   fill="currentColor"
                                   viewBox="0 0 20 20"
                                   xmlns="http://www.w3.org/2000/svg"
@@ -242,6 +244,19 @@ export const CalendarView = () => {
                                   ></path>
                                 </svg>
                               )}
+                              {booking.delivery_fee ? (
+                                <svg
+                                  style={{ fill: "pink" }}
+                                  class="w-4 h-4 "
+                                  fill="currentColor"
+                                  viewBox="0 0 20 20"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"></path>
+                                  <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1v-5a1 1 0 00-.293-.707l-2-2A1 1 0 0015 7h-1z"></path>
+                                </svg>
+                              ) : null}
+                              {booking.balloons ? "🎈" : null}
                             </div>
                           </button>
                           {currentBookingId === booking.id && (
@@ -253,10 +268,15 @@ export const CalendarView = () => {
                                 class="absolute z-50 top-50 left-50 bottom-50 py-2 px-4 bg-white text-xs rounded-md shadow-md dark:bg-gray-800 dark:text-gray-100 "
                               >
                                 <p>
-                                  Rental Time: {booking.rental_time} <br />
-                                  Balloons: {booking.balloons
-                                    ? "Yes"
-                                    : "No"}{" "}
+                                  Balloons:{" "}
+                                  {booking.full_arch
+                                    ? "Full Arch"
+                                    : booking.half_arch
+                                    ? "Half Arch"
+                                    : "None"}{" "}
+                                  <br />
+                                  Rental Time: {booking.rental_time}
+                                  
                                   <br />
                                   Generator: {booking.generator
                                     ? "Yes"
