@@ -268,10 +268,15 @@ export const CalendarView = () => {
                                 class="absolute z-50 top-50 left-50 bottom-50 py-2 px-4 bg-white text-xs rounded-md shadow-md dark:bg-gray-800 dark:text-gray-100 "
                               >
                                 <p>
-                                  Rental Time: {booking.rental_time} <br />
-                                  Balloons: {booking.balloons
-                                    ? "Yes"
-                                    : "No"}{" "}
+                                  Balloons:{" "}
+                                  {booking.full_arch
+                                    ? "Full Arch"
+                                    : booking.half_arch
+                                    ? "Half Arch"
+                                    : "None"}{" "}
+                                  <br />
+                                  Rental Time: {booking.rental_time}
+                                  
                                   <br />
                                   Generator: {booking.generator
                                     ? "Yes"
