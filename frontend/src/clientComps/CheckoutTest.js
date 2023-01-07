@@ -78,7 +78,7 @@ function CheckoutTest() {
     }
   };
   return (
-    <form onSubmit={handleSubmit}>
+    <form  onSubmit={handleSubmit} type="submit">
       {rentals.map((rental, index) => (
         <div key={index}>
           <label htmlFor="startDate">Start Date</label>
@@ -127,7 +127,7 @@ function CheckoutTest() {
       <button onClick={handleAddRental}>Add Rental</button>
       <br />
       <CardElement />
-      <button type="submit" disabled={!stripe}>
+      <button type="submit">
         Pay
       </button>
     </form>
