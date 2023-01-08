@@ -4,5 +4,13 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [],
+  purge: {
+    // Specify the paths or glob patterns to analyze
+    content: ['./src/**/*.{html,js}'],
+  },
+  plugins: [
+    'tailwindcss',
+    'autoprefixer',
+    process.env.NODE_ENV === 'production' ? 'cssnano' : '',
+  ],
 }

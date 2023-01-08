@@ -171,7 +171,9 @@ export const Navbar = () => {
                   clipRule="evenodd"
                 ></path>
               </svg>
+              <div class='ml-3'>
               <LogoutButton />{" "}
+              </div>
             </div>
           </li>
         </ul>
