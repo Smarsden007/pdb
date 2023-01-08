@@ -44,7 +44,7 @@ function App() {
         </Route>
         <Route element={<RestrictedRoutes />}>
           <Route path="/" element={<Checkout />} />
-          <Route path="/" element={<LoginPage />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/" element={<LoginPage />} />
           <Route path="/" element={<LoginPage />} />
           <Route path="/" element={<LoginPage />} />
