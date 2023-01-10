@@ -1,5 +1,5 @@
 require("dotenv").config();
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const stripe = require("stripe")('sk_test_51MMODnEcHniquDkZJRJVaplYrpPWa3UNz8fTeFz5HsyFKDzVnYn0IiFmNGOWlYnkmKw7ZUVTFfsJWqYiBtmHBR4L00vowiiEDA');
 
 exports.paymentPost = async (req, res) => {
   try {
@@ -7,23 +7,34 @@ exports.paymentPost = async (req, res) => {
 
     // Process payment for each rental
     for (const rental of rentals) {
-      const { price, duration, startDate, addOn1, addOn2 } = rental;
-      let amount = price; // base price
+      const { duration, addOn1, addOn2 } = rental;
+      let price = 0;
+      if (duration === 4) {
+        price = 300;
+      } else if (duration === 6) {
+        price = 400;
+      } else if (duration === 8) {
+        price = 600;
+      }
+      let amount = price;
       if (addOn1) {
         amount += 500; // add $5.00 for add-on 1
       }
       if (addOn2) {
         amount += 1000; // add $10.00 for add-on 2
       }
-      amount *= duration; // multiply by duration
-      const charge = await stripe.charges.create({
-        amount: amount, // charge amount in cents
-        currency: "usd",
+      amount *= 100; // convert amount to smallest unit (cents)
+      const paymentIntent = await stripe.paymentIntents.create({
         payment_method: paymentMethodId,
+        amount: amount,
+        currency: 'usd',
+        confirm: true,
       });
-      console.log(charge);
+      
+      
+    
+      console.log(paymentIntent);
     }
-
     res.send({ message: "Payment successful" });
   } catch (error) {
     console.error(error);

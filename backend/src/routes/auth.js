@@ -67,5 +67,5 @@ router.put("/update-task/:id", editTask);
 router.get("/task", getIncompleteTasks);
 // router.get("/search", searchTable);
 //Payments
-router.post("/checkout-one", paymentPost);
+router.post("/charge", paymentPost);
 module.exports = router;
