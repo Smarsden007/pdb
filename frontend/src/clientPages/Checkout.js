@@ -15,8 +15,7 @@ export const Checkout = () => {
         <div>
             <Elements stripe={stripePromise}>
             <CheckoutTest />
-            <DateChecker />
-            <OptionSelector />
+        
             
             </Elements>
 
