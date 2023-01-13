@@ -15,10 +15,7 @@ export const Checkout = () => {
         <div>
             <Elements stripe={stripePromise}>
             <CheckoutTest />
-        
-            
             </Elements>
-
         </div>
     </div>
   )

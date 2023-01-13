@@ -3,8 +3,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 exports.paymentPost = async (req, res) => {
   try {
-    const { paymentMethodId, rentals } = req.body;
-
+    const { paymentMethodId, rentals, orderNumber, firstName, lastName } = req.body
     // Process payment for each rental
     for (const rental of rentals) {
       const { duration, addOn1, addOn2 } = rental;
@@ -29,10 +28,13 @@ exports.paymentPost = async (req, res) => {
         amount: amount,
         currency: 'usd',
         confirm: true,
+        metadata: {
+          order_number: orderNumber,
+          firstname: firstName,
+          lastname: lastName,
+        },
       });
-      
-      
-    
+
       console.log(paymentIntent);
     }
     res.send({ message: "Payment successful" });
@@ -41,3 +43,4 @@ exports.paymentPost = async (req, res) => {
     res.status(500).send({ error: "Payment Failed" });
   }
 };
+

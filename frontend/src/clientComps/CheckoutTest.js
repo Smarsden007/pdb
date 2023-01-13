@@ -4,18 +4,24 @@ import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 function CheckoutTest() {
   const stripe = useStripe();
   const elements = useElements();
-    const [rentals, setRentals] = useState([
-      {
-        price: 1000, // $10.00
-        duration: 3, // 3 days
-        startDate: "",
-        addOn1: false,
-        addOn2: false,
-        amount: 0, // initial amount is 0
-      },
-    ]);
-    
-
+  const generateOrderNumber = () => {
+    const timestamp = Date.now();
+    const randomNumber = Math.floor(Math.random() * 100000);
+    return `${timestamp}-${randomNumber}`;
+  };
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [orderNumber, setOrderNumber] = useState(generateOrderNumber());
+  const [rentals, setRentals] = useState([
+    {
+      price: 1000, // $10.00
+      duration: 3, // 3 days
+      startDate: "",
+      addOn1: false,
+      addOn2: false,
+      amount: 0, // initial amount is 0
+    },
+  ]);
 
   const handleChange = (event, index) => {
     const { name, value } = event.target;
@@ -42,8 +48,7 @@ function CheckoutTest() {
       )
     );
   };
-  
-  
+
   const handleCheckboxChange = (event, index) => {
     const { name, checked } = event.target;
     setRentals(
@@ -52,7 +57,6 @@ function CheckoutTest() {
       )
     );
   };
-  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -71,10 +75,13 @@ function CheckoutTest() {
         body: JSON.stringify({
           paymentMethodId: paymentMethod.id,
           rentals,
+          orderNumber,
+          metadata: { firstName, lastName },
         }),
       });
+
       const result = await response.json();
-      
+
       if (result.error) {
         console.log("Error:", result.error);
       } else {
@@ -82,11 +89,27 @@ function CheckoutTest() {
       }
     }
   };
+
   return (
     <div class="w-1/2 rounded bg-slate-400 p-2">
       <form class="m-10" onSubmit={handleSubmit} type="submit">
         {rentals.map((rental, index) => (
           <div key={index}>
+            <label htmlFor="firstName">First Name:</label>
+            <input
+              type="text"
+              id="firstName"
+              value={firstName}
+              onChange={(event) => setFirstName(event.target.value)}
+            />
+
+            <label htmlFor="lastName">Last Name:</label>
+            <input
+              type="text"
+              id="lastName"
+              value={lastName}
+              onChange={(event) => setLastName(event.target.value)}
+            />
             <label class="p-2" htmlFor="startDate">
               Start Date
             </label>
@@ -128,8 +151,7 @@ function CheckoutTest() {
                 type="checkbox"
                 name="addOn2"
                 checked={rental.addOn2}
-                onChange={(event) =>  handleCheckboxChange (event, index)
-                }
+                onChange={(event) => handleCheckboxChange(event, index)}
               />
             </label>
             <br />
