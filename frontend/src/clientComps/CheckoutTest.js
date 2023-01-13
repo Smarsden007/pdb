@@ -76,18 +76,20 @@ function CheckoutTest() {
           paymentMethodId: paymentMethod.id,
           rentals,
           orderNumber,
-          metadata: { firstName, lastName },
+          firstName,
+          lastName
         }),
+
       });
 
       const result = await response.json();
-
-      if (result.error) {
+    if (result.error) {
         console.log("Error:", result.error);
-      } else {
+    } else {
         console.log("Success:", result.message);
-      }
+        alert(result.message);
     }
+};
   };
 
   return (
