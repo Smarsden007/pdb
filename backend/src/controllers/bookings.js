@@ -290,3 +290,51 @@ exports.calendarDates = async (req, res) => {
     res.sendStatus(500);
   }
 };
+exports.availCalender = async (req, res) => {
+  try {
+    const { bouncer, date } = req.body;
+
+    // check if the bouncer is available on the specific date
+    const availability = await BounceHouse.findOne({
+      bouncer: bouncer,
+      date: date,
+    });
+
+    if (!availability) {
+      res.status(404).send({ error: "Bouncer not available on this date" });
+    } else {
+      res.status(200).send({ message: "Bouncer available on this date" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ error: "Error checking availability" });
+  }
+};
+
+exports.selectionBouncer1 = async (req, res) => {
+  try {
+      const bookedDates = await db.query('SELECT rent_date FROM bookings WHERE bouncer = $1', ['bouncer1']);
+      res.json(bookedDates.rows);
+  } catch (err) {
+      console.error(err.message);
+      res.status(500).json({ error: 'Server error' });
+  }
+};
+exports.selectionBouncer2 = async (req, res) => {
+  try {
+      const bookedDates = await db.query('SELECT rent_date FROM bookings WHERE bouncer = $1', ['bouncer2']);
+      res.json(bookedDates.rows);
+  } catch (err) {
+      console.error(err.message);
+      res.status(500).json({ error: 'Server error' });
+  }
+};
+exports.selectionBouncer3 = async (req, res) => {
+  try {
+      const bookedDates = await db.query('SELECT rent_date FROM bookings WHERE bouncer = $1', ['bouncer2']);
+      res.json(bookedDates.rows);
+  } catch (err) {
+      console.error(err.message);
+      res.status(500).json({ error: 'Server error' });
+  }
+};

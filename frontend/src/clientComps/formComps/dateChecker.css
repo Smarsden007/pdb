@@ -1,0 +1,8 @@
+.calendar-tile.disabled {
+    color: gray;
+    pointer-events: none;
+  }
+.react-calendar{
+    width: 300px;
+    border-radius: .25rem;
+  }

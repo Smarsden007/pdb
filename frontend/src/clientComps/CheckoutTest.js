@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
+import { Checkbox } from 'antd';
+import CheckoutForm from "./formComps/dateChecker";
 
 function CheckoutTest() {
   const stripe = useStripe();
@@ -91,7 +93,13 @@ function CheckoutTest() {
     }
 };
   };
+  const colorOptions = [  { label: 'Red', value: 'red' },  { label: 'Blue', value: 'blue' },  { label: 'Green', value: 'green' },  { label: 'Yellow', value: 'yellow' },  { label: 'Purple', value: 'purple' },];
 
+  const [selectedColors, setSelectedColors] = useState([]);
+  
+  function handleColorChange(checkedValues) {
+    setSelectedColors(checkedValues);
+  }
   return (
     <div class="w-1/2 rounded bg-slate-400 p-2">
       <form class="m-10" onSubmit={handleSubmit} type="submit">
@@ -112,9 +120,18 @@ function CheckoutTest() {
               value={lastName}
               onChange={(event) => setLastName(event.target.value)}
             />
+            <Checkbox.Group
+  options={colorOptions}
+  onChange={handleColorChange}
+  value={selectedColors}
+  style={{ width: '100%' }}
+  max={3}
+/>
+<CheckoutForm />
             <label class="p-2" htmlFor="startDate">
               Start Date
             </label>
+            
             <input
               class="p-2"
               type="date"
