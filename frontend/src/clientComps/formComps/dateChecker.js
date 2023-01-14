@@ -1,31 +1,60 @@
-import { useState, useEffect } from 'react';
-import DatePicker from 'react-date-picker';
-
-export const DateChecker = () => {
+import React, { useState, useEffect } from 'react';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+import './dateChecker.css'
+function CheckoutForm() {
   const [bookedDates, setBookedDates] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(null);
-
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedBouncer, setSelectedBouncer] = useState('bouncer1');
+  
   useEffect(() => {
-    // Fetch the booked dates from the API
     async function fetchBookedDates() {
-      const response = await fetch('http://localhost:5000/api/bookings');
+      const response = await fetch(`http://localhost:5000/api/check-availability/${selectedBouncer}`);
       const bookedDates = await response.json();
-      setBookedDates(bookedDates);
+      const dates = bookedDates.map((date)=> date.rent_date.slice(0,10));
+      setBookedDates(dates);
+      
     }
-
     fetchBookedDates();
-  }, []);
+  }, [selectedBouncer]);
 
-  const isDateDisabled = date => {
-    // Check if the date is in the bookedDates array
-    return bookedDates.includes(date);
-  }
+  const handleChange = date => {
+    setSelectedDate(date);
+  };
+
+  const handleSelect = date => {
+    if (bookedDates.includes(new Date(date).toISOString().slice(0, 10)))
+    {
+      alert('This date is already booked, please select another date.');
+      setSelectedDate(new Date());
+    } else {
+      setSelectedDate(date);
+    }
+  };
+
+
+  const handleBouncerChange = event => {
+    setSelectedBouncer(event.target.value);
+  };
 
   return (
-    <DatePicker
-      value={selectedDate}
-      onChange={setSelectedDate}
-      isDisabled={isDateDisabled}
-    />
+    <div >
+      <select value={selectedBouncer} onChange={handleBouncerChange}>
+        <option value="bouncer1">Toddler</option>
+        <option value="bouncer2">Classic Castle</option>
+        <option value="bouncer3">Bastille</option>
+      </select>
+      <Calendar
+        className='custom-cal'
+        onChange={handleChange}
+        onClickDay={handleSelect}
+        value={selectedDate}
+        tileDisabled={({ date }) => bookedDates.includes(new Date(date).toISOString().slice(0, 10))}
+
+    
+        />
+    </div>
   );
 }
+
+export default CheckoutForm;

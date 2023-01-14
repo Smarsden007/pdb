@@ -21,6 +21,10 @@ const {
   getBookingsPagination,
   searchBookings,
   calendarDates,
+  availCalender,
+  selectionBouncer1,
+  selectionBouncer2,
+  selectionBouncer3,
 } = require("../controllers/bookings");
 const {
   validationMiddleware,
@@ -57,6 +61,10 @@ router.get("/unpaid", getUnpaid);
 router.get("/bookings-table", getBookingsPagination);
 router.get("/search-bookings", searchBookings);
 router.get("/rental_dates", calendarDates);
+router.post("/check-availability", availCalender);
+router.get("/check-availability/bouncer1", selectionBouncer1);
+router.get("/check-availability/bouncer2",selectionBouncer2);
+router.get("/check-availability/bouncer3",selectionBouncer3);
 //Finance Routes
 router.post("/receipts", createReceipt);
 router.get("/receipts/export", excelReceipts);
