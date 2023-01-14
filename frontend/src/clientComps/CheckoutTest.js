@@ -33,17 +33,15 @@ function CheckoutTest() {
     },
   ]);
 
-
   const handleChange = (event, index) => {
     const { name, value } = event.target;
     const rental = rentals[index];
-let amount = rental.price; // initialize amount to rental.price
-if (name === "duration") {
+    let amount = rental.price; // initialize amount to rental.price
+    if (name === "duration") {
       const duration = Number(value);
       const hourlyRate = 300; // $300 per hour
       amount = duration * hourlyRate;
-    }
- else if (name === "addOn1") {
+    } else if (name === "addOn1") {
       if (value) {
         amount += 500; // add $5.00 for add-on 1
       }
@@ -121,10 +119,10 @@ if (name === "duration") {
                   handleSelect1={handleSelect1}
                   selectedDate1={selectedDate1}
                 />
-                <Input style={{textAlign:'center'}}  disabled />
+                <Input style={{ textAlign: "center" }} disabled />
               </div>
               <div class="col-start-1 col-span-2 md:col-span-4 lg:col-end-5 lg:col-span-2 max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-md">
-                <div>
+                <div class="mt-3">
                   <Title level={3}>Event Start Time</Title>
                   <Divider />
                   <TimePicker use12Hours format="h:mm a" onChange={onChange} />
@@ -182,41 +180,43 @@ if (name === "duration") {
                 <br />
               </div>
               <div class="col-start-1 col-span-2  md:col-span-4 lg:col-end-7 lg:col-span-2 h-46 max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-md ">
-                <label htmlFor="firstName">First Name:</label>
-                <Input
-                  type="text"
-                  id="firstName"
-                  value={firstName}
-                  onChange={(event) => setFirstName(event.target.value)}
-                />
-                <label htmlFor="lastName">Last Name:</label>
-                <Input
-                  type="text"
-                  id="lastName"
-                  value={lastName}
-                  onChange={(event) => setLastName(event.target.value)}
-                />
-                <label htmlFor="lastName">Email:</label>
-                <Input
-                  type="Email"
-                  id="Email"
-                  value={lastName}
-                  onChange={(event) => setLastName(event.target.value)}
-                />
-                <label htmlFor="firstName">Delivery Address:</label>
-                <Input
-                  type="text"
-                  id="firstName"
-                  value={firstName}
-                  onChange={(event) => setFirstName(event.target.value)}
-                />
-                <label htmlFor="lastName">Phone Number:</label>
-                <Input
-                  type="text"
-                  id="lastName"
-                  value={lastName}
-                  onChange={(event) => setLastName(event.target.value)}
-                />
+                <div class="mt-3">
+                  <label htmlFor="firstName">First Name:</label>
+                  <Input
+                    type="text"
+                    id="firstName"
+                    value={firstName}
+                    onChange={(event) => setFirstName(event.target.value)}
+                  />
+                  <label htmlFor="lastName">Last Name:</label>
+                  <Input
+                    type="text"
+                    id="lastName"
+                    value={lastName}
+                    onChange={(event) => setLastName(event.target.value)}
+                  />
+                  <label htmlFor="lastName">Email:</label>
+                  <Input
+                    type="Email"
+                    id="Email"
+                    value={lastName}
+                    onChange={(event) => setLastName(event.target.value)}
+                  />
+                  <label htmlFor="firstName">Delivery Address:</label>
+                  <Input
+                    type="text"
+                    id="firstName"
+                    value={firstName}
+                    onChange={(event) => setFirstName(event.target.value)}
+                  />
+                  <label htmlFor="lastName">Phone Number:</label>
+                  <Input
+                    type="text"
+                    id="lastName"
+                    value={lastName}
+                    onChange={(event) => setLastName(event.target.value)}
+                  />
+                </div>
                 <Divider />
                 <div class="">
                   <CardElement />
@@ -230,6 +230,12 @@ if (name === "duration") {
                   >
                     Pay
                   </Button>
+                </div>
+                <div class="mt-12">
+                  <Title level={5}>
+                    Questions? Call or text us at{" "}
+                    <a href="tel:+1234567890">707-238-1111</a>
+                  </Title>
                 </div>
               </div>
             </div>
