@@ -1,8 +1,8 @@
 .calendar-tile.disabled {
-    color: gray;
+    color: black;
     pointer-events: none;
   }
-.react-calendar{
+.custom-cal{
     width: 300px;
     border-radius: .25rem;
     margin: 1rem;

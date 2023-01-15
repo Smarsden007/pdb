@@ -1,14 +1,54 @@
 import React, { useState } from "react";
 import { Radio, Divider, Select } from "antd";
-import { Typography } from "antd";
+import { Typography, Button } from "antd";
 
 const { Title } = Typography;
 
 const { Option } = Select;
-
+const prices = {
+  "half-arch": 125,
+  "full-arch": 175,
+};
 function ColorSelector(props) {
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedArch, setSelectedArch] = useState("");
+
+  const [price, setPrice] = useState("");
+  const handleArchChange = (value) => {
+    setSelectedArch(value);
+    if (props.selectedBouncer === "bouncer1") {
+      if (value === "half-arch") {
+        setPrice(prices["half-arch"]);
+      } else if (value === "full-arch") {
+        setPrice(prices["full-arch"]);
+      }
+    } else if (props.selectedBouncer === "bouncer2") {
+      if (value === "half-arch") {
+        setPrice(prices["half-arch"] + 50);
+      } else if (value === "full-arch") {
+        setPrice(prices["full-arch"] + 75);
+      }
+    } else if (props.selectedBouncer === "bouncer3") {
+      if (value === "half-arch") {
+        setPrice(prices["half-arch"] + 50);
+      } else if (value === "full-arch") {
+        setPrice(prices["full-arch"] + 75);
+      }
+    }
+    props.handleSelection(selectedColors, value, price);
+  };
+  const halfArchPrice =
+    props.selectedBouncer === "bouncer1"
+      ? prices["half-arch"]
+      : props.selectedBouncer === "bouncer2"
+      ? prices["half-arch"] + 50
+      : prices["half-arch"] + 75;
+  const fullArchPrice =
+    props.selectedBouncer === "bouncer1"
+      ? prices["full-arch"]
+      : props.selectedBouncer === "bouncer2"
+      ? prices["full-arch"] + 50
+      : prices["full-arch"] + 75;
 
   const handleColorChange = (e) => {
     const newSelection = e.target.value;
@@ -18,24 +58,26 @@ function ColorSelector(props) {
     }
   };
 
-  const handleArchChange = (value) => {
-    setSelectedArch(value);
-    props.handleSelection(selectedColors, value);
-  };
-
   const handleReset = () => {
     setSelectedColors([]);
   };
   const colors = ["red", "blue", "green", "yellow", "purple", "orange"];
   return (
     <div>
-      <Title level={3}>Would you like balloons?</Title>
-      <Divider />
-      <Select defaultValue="Select an option" onChange={handleArchChange}>
+      <Title style={{ marginTop: "1rem", marginBottom: "-1rem" }} level={3}>
+        Balloons
+      </Title>
+      <Divider style={{ marginBottom: ".5rem" }} />
+      <Select
+        style={{ width: "10rem" }}
+        defaultValue="Select an option"
+        onChange={handleArchChange}
+      >
         <Option value="none">No thanks</Option>
-        <Option value="half-arch">Half-arch</Option>
-        <Option value="full-arch">Full-arch</Option>
+        <Option value="half-arch">Half-arch - ${halfArchPrice}</Option>
+        <Option value="full-arch">Full-arch - ${fullArchPrice}</Option>
       </Select>
+
       {selectedArch !== "none" && selectedArch !== "" ? (
         <Divider>Select 3 colors</Divider>
       ) : null}
@@ -57,7 +99,11 @@ function ColorSelector(props) {
         </Radio.Group>
       ) : null}
       {selectedArch !== "none" && selectedColors.length > 0 ? (
-        <button onClick={handleReset}>Reset</button>
+        <div class="flex flex-row justify-end">
+        <Button onClick={handleReset}
+        style={{width:'5rem'}}
+        >Reset</Button>
+        </div>
       ) : null}
     </div>
   );
