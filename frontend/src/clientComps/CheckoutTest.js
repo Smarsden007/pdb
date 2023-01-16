@@ -27,12 +27,7 @@ function CheckoutTest() {
   const [selectedTheme, setSelectedTheme] = useState("");
   const [themePrice, setThemePrice] = useState();
 
-  const themeOptions = [
-    { value: "theme1", label: "Super Man" },
-    { value: "theme2", label: "Safari" },
-    { value: "theme3", label: "Batman" },
-    // Add more options as needed
-  ];
+
   const handleSelect1 = (date) => {
     setSelectedDate1(date);
   };
@@ -146,6 +141,8 @@ function CheckoutTest() {
     setColors(selectedColors);
     setArch(selectedArch);
   };
+
+  //drop down values//
   const prices = {
     bouncer1: {
       4: 100,
@@ -168,6 +165,12 @@ function CheckoutTest() {
     marinCounty: 15,
     napaCounty: 20,
   };
+  const themeOptions = [
+    { value: "theme1", label: "Super Man" },
+    { value: "theme2", label: "Safari" },
+    { value: "theme3", label: "Batman" },
+    // Add more options as needed
+  ];
   const handleReset = () => {
     setSelectedDate1(null);
     setSelectedBouncer("");

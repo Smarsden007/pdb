@@ -13,7 +13,9 @@ import { Bookings } from "./pages/Bookings";
 import { Register } from "./pages/Register";
 import { Calendar } from "./pages/Calendar";
 import { Checkout } from "./clientPages/Checkout";
-import { Homepage } from "./clientPages/Homepage";
+import { HomePage } from "./clientPages/HomePage2";
+import Logo from "./clientComps/LogoRender";
+import { NavBar } from "./clientComps/NavBar";
 
 function App() {
   const PrivateRoutes = () => {
@@ -46,7 +48,15 @@ function App() {
         <Route element={<RestrictedRoutes />}>
           <Route path="/" element={<Checkout />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/home" element={<Homepage/>} />
+          <Route
+            path="/home"
+            element={
+              <div>
+                <NavBar />
+                <HomePage />
+              </div>
+            }
+          />{" "}
           <Route path="/" element={<LoginPage />} />
           <Route path="/" element={<LoginPage />} />
           <Route path="/" element={<LoginPage />} />
