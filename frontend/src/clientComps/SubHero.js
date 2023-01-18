@@ -1,16 +1,38 @@
 import React from "react";
 import Tearleft from "./../Media/TearLeft.png";
 import SubRight from "./../Media/SubRight.png";
+import RightSide from "./../Media/Rightside.png";
 
 export const SubHero = () => {
   return (
-    <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 lg:gap-0 lg:-mt-24'>
-    <div class='grid lg:col-start-1 lg:col-span-3'>
-      <img class="h-auto w-11/12 lg:-ml-24" src={Tearleft} />
+    <div class="grid grid-cols-2 grid-rows-1 lg:gap-12 lg:grid-cols-3 lg:grid-rows-1">
+      {/* left */}
+      <div class=" lg:col-start-1 lg:col-span-1 lg:row-span-3 invisible md:invisible lg:visible sm:invisible">
+        <img class="w-full lg:m-10" src={Tearleft} />
+      </div>
+
+      <div className="col-start-1 row-start-1 lg:col-start-2 lg:row-start-1 lg:mt-5">
+        <div>
+          <img class="w-full" src={RightSide} />
+        </div>
+        <div className="ml-10">
+          <h1 className="text-[.5rem] lg:text-lg p-2 md:p-4">
+            All the Lorem Ipsum generators on the Internet tend to repeat
+            predefined chunks as necessary, making this the first true generator
+            on the Internet.
+          </h1>
+
+          <h1 className="text-[.5rem] lg:text-lg p-2 md:p-4">
+            All the Lorem Ipsum generators on the Internet tend to repeat
+            predefined chunks as necessary, making this the first true generator
+            on the Internet.
+          </h1>
+        </div>
+      </div>
+      {/* right */}
+      <div class="col-start-2 row-start-1 lg:col-start-3 lg:col-span-1 lg:row-span-3 ">
+        <img class="w-full lg:mt-10" src={SubRight} />
+      </div>
     </div>
-       <div class='grid lg:col-start-4 lg:col-span-3 lg:col-end-7  lg:-mr-12'>
-       <img class="h-auto w-9/12 " src={SubRight} />
-     </div>
-     </div>
   );
 };

@@ -19,14 +19,14 @@ export const HomePage = () => {
       </div> */}
       <div className="grid grid-cols-4 grid-rows-1 lg:grid-cols-7 lg:grid-rows-1 h-8/12">
         {/* Left Image */}
-        <div className="h-1/2 col-span-2  row-span-1  lg:col-span-3 lg:row-span-3 lg:h5/12">
-          <img class="h-auto w-12/12" src={ripHero}></img>
+        <div className="h-1/2 col-span-2  row-span-1  lg:col-span-3 lg:row-span-3 lg:h-6/12">
+          <img class="lg:h-6/12 w-12/12" src={ripHero}></img>
         </div>
 
         {/* Middle Overlap Slogan */}
-        <div class="absolute lg:top-36 lg:w-auto lg:left-96 w-30 z-40  top-16 left-56">
+        <div class="absolute lg:top-36 lg:w-auto lg:left-96 w-30 z-40  top-16 left-56 md">
           <img
-            class="h-auto w-8/12 visible md:invisible lg:visible sm:visible"
+            class="h-auto w-8/12 visible md:visible lg:visible sm:visible"
             src={gravity}
           ></img>
         </div>
@@ -37,8 +37,13 @@ export const HomePage = () => {
             src={roundTop}
           ></img>
         </div>
+        {/* Book now Tablet View */}
+        <div className="absolute mb-28 bottom-0 left-[45vw] flex justify-center items-center invisible md:visible lg:invisible sm:invisible">
+  <button className="bg-stone-500 text-white py-2 px-4 rounded-md hover:bg-white hover:border hover:border-stone-500 hover:text-stone-500">View Rentals</button>
+</div>
+
         {/* Center Text Top Image */}
-        <div className="flex-1 flex p-5 mt-24 flex-col lg:justify-center md:justify-end md:h-full md:-mt-4 h-1/2 col-start-3 row-start-1 col-span-2 md:ml-20 lg:col-start-4 lg:row-start-1 lg:mt-28  lg:p-5 ">
+        <div className="flex-1 flex p-5 mt-24 flex-col lg:justify-center md:justify-end md:h-full md:-mt-4 h-1/2 col-start-3 row-start-1 col-span-2 md:ml-20 lg:col-start-4 lg:row-start-1 lg:mt-28  lg:p-5 visible md:invisible lg:visible sm:visible">
           <div className="md:bg-opacity-70 md:bg-white md:w-48 md:rounded-xl w-full lg:w-72 lg:bg-opacity-0">
             <h1 className="text-[.5rem] lg:text-lg p-2 md:p-4">
               All the Lorem Ipsum generators on the Internet tend to repeat

@@ -17,6 +17,8 @@ import { HomePage } from "./clientPages/HomePage2";
 import Logo from "./clientComps/LogoRender";
 import { NavBar } from "./clientComps/NavBar";
 import { DeskNavBar } from "./clientComps/DeskNavBar";
+import Footer from "./clientComps/Footer";
+import { SubHero } from "./clientComps/SubHero";
 
 function App() {
   const PrivateRoutes = () => {
@@ -58,6 +60,8 @@ function App() {
                   <DeskNavBar />
                 </div>
                 <HomePage />
+                <SubHero />
+                <Footer />
               </div>
             }
           />{" "}
