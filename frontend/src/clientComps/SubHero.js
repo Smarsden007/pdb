@@ -5,7 +5,7 @@ import RightSide from "./../Media/Rightside.png";
 
 export const SubHero = () => {
   return (
-    <div class="grid grid-cols-2 grid-rows-1 lg:gap-12 lg:grid-cols-3 lg:grid-rows-1">
+    <div class="grid lg:-mt-36 grid-cols-2 grid-rows-1 lg:gap-12 lg:grid-cols-3 lg:grid-rows-1">
       {/* left */}
       <div class=" lg:col-start-1 lg:col-span-1 lg:row-span-3 invisible md:invisible lg:visible sm:invisible">
         <img class="w-full lg:m-10" src={Tearleft} />
@@ -16,13 +16,13 @@ export const SubHero = () => {
           <img class="w-full" src={RightSide} />
         </div>
         <div className="ml-10">
-          <h1 className="text-[.5rem] lg:text-lg p-2 md:p-4">
+          <h1 className="text-[.5rem] md:text-lg lg:text-lg p-2 md:p-4">
             All the Lorem Ipsum generators on the Internet tend to repeat
             predefined chunks as necessary, making this the first true generator
             on the Internet.
           </h1>
 
-          <h1 className="text-[.5rem] lg:text-lg p-2 md:p-4">
+          <h1 className="text-[.5rem] md:text-lg lg:text-lg p-2 md:p-4">
             All the Lorem Ipsum generators on the Internet tend to repeat
             predefined chunks as necessary, making this the first true generator
             on the Internet.

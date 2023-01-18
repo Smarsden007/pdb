@@ -60,7 +60,7 @@ function App() {
                   <DeskNavBar />
                 </div>
                 <HomePage />
-                <SubHero />
+                <SubHero className='lg:-mt-10'/>
                 <Footer />
               </div>
             }
