@@ -1,17 +1,23 @@
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
+import { SocialsRow } from "./SocialsRow";
+import { Divider } from "antd";
 
 export const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div>
+    <div
+      class={`${
+        isOpen ? "fixed top-0 left-0 w-full h-full bg-white z-50" : ""
+      }`}
+    >
       <div class="fixed top-0 z-10 bg-transparent w-full">
         <nav class="container mx-auto flex justify-end">
-          <div class="block lg:hidden ">
+          <div class="block lg:hidden mt-2 mr-2">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              class="flex items-center m-5 px-3 py-2 border rounded text-beige-200 border-stone-500 hover:text-red-300 hover:border-red-300"
+              class="flex items-center m-2 px-5 py-3 border  rounded text-beige-200 border-stone-500 hover:text-red-300 hover:border-red-300"
             >
               <svg
                 class="fill-current h-3 w-3"
@@ -26,29 +32,57 @@ export const NavBar = () => {
               </svg>
             </button>
           </div>
+
           <ul
             class={`text-right font-light text-2xl p-4 inline-flex ${
               isOpen ? "" : "hidden lg:flex justify-end mx-22"
-            }`}
+            } lg:hidden`}
+            style={{
+              position: "absolute",
+              top: "0",
+              left: "0",
+              width: "100%",
+              height: "100%",
+              backgroundColor: "white",
+              zIndex: "5",
+              display: isOpen ? "block" : "none",
+            }}
           >
-            <li class="m-4  hover:text-slate-400">
-              <a href="#">HOME</a>
-            </li>
-            <li class="m-4 hover:text-slate-400 ">
-              <a href="#">RENTALS</a>
-            </li>
-            <li class="m-4 hover:text-slate-400 ">
-              <a href="extra">EXTRAS</a>
-            </li>
-            <li class="m-4 hover:text-slate-400 ">
-              <a href="#">POP-UPS</a>
-            </li>
-            <li class="m-4 hover:text-slate-400 ">
-              <a href="#">PARTNERS</a>
-            </li>
-            <li class="m-4 hover:text-slate-400 ">
-             <Link to='/'> <a href="#">BOOK</a></Link>
-            </li>
+            <Divider className="m-10" />
+
+            <div className="grid grid-cols-2">
+              <div className="gird col-start-2">
+                <li class="m-4  hover:text-slate-400">
+                  <a href="#">HOME</a>
+                </li>
+                <li class="m-4 hover:text-slate-400 ">
+                  <a href="#">RENTALS</a>
+                </li>
+                <li class="m-4 hover:text-slate-400 ">
+                  <a href="extra">EXTRAS</a>
+                </li>
+                <li class="m-4 hover:text-slate-400 ">
+                  <a href="#">POP-UPS</a>
+                </li>
+                <li class="m-4 hover:text-slate-400 ">
+                  <a href="#">PARTNERS</a>
+                </li>
+                <li class="m-4 hover:text-slate-400 ">
+                  <Link to="/">
+                    {" "}
+                    <a href="#">BOOK</a>
+                  </Link>
+                </li>
+              </div>
+              <div className="grid col-start-1 absolute top-0">
+                <li class="m-4 hover:text-slate-400 ">
+                  <button onClick={() => setIsOpen(!isOpen)}>x</button>
+                </li>
+              </div>
+            </div>
+            <div>
+              <SocialsRow />
+            </div>
           </ul>
         </nav>
       </div>

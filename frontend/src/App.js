@@ -16,6 +16,7 @@ import { Checkout } from "./clientPages/Checkout";
 import { HomePage } from "./clientPages/HomePage2";
 import Logo from "./clientComps/LogoRender";
 import { NavBar } from "./clientComps/NavBar";
+import { DeskNavBar } from "./clientComps/DeskNavBar";
 
 function App() {
   const PrivateRoutes = () => {
@@ -53,6 +54,9 @@ function App() {
             element={
               <div>
                 <NavBar />
+                <div className="hidden lg:block">
+                  <DeskNavBar />
+                </div>
                 <HomePage />
               </div>
             }
