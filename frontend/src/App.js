@@ -19,6 +19,7 @@ import { NavBar } from "./clientComps/NavBar";
 import { DeskNavBar } from "./clientComps/DeskNavBar";
 import Footer from "./clientComps/Footer";
 import { SubHero } from "./clientComps/SubHero";
+import { Rentals } from "./clientPages/Rentals";
 
 function App() {
   const PrivateRoutes = () => {
@@ -49,23 +50,44 @@ function App() {
           <Route path="/register-user" element={<Register />} />
         </Route>
         <Route element={<RestrictedRoutes />}>
-          <Route path="/" element={<Checkout />} />
-          <Route path="/login" element={<LoginPage />} />
           <Route
-            path="/home"
+            path="/checkout"
             element={
               <div>
                 <NavBar />
                 <div className="hidden lg:block">
                   <DeskNavBar />
                 </div>
+                <Checkout className="" />
+                <Footer />
+              </div>
+            }
+          />
+          <Route path="/login" element={<LoginPage />} />
+          <Route
+            path="/"
+            element={
+              <div>
+                <NavBar />
+                <div className="hidden lg:block ">
+                  <DeskNavBar />
+                </div>
                 <HomePage />
-                <SubHero className='lg:-mt-10'/>
+                <SubHero className="" />
                 <Footer />
               </div>
             }
           />{" "}
-          <Route path="/" element={<LoginPage />} />
+          <Route path="/rentals"  element={
+              <div>
+                <NavBar />
+                <div className="hidden lg:block ">
+                  <DeskNavBar />
+                </div>
+                <Rentals />
+                <Footer />
+              </div>
+            } />
           <Route path="/" element={<LoginPage />} />
           <Route path="/" element={<LoginPage />} />
         </Route>

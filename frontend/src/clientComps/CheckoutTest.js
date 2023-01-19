@@ -5,7 +5,7 @@ import DateChecker from "./formComps/dateChecker";
 import ColorSelector from "./formComps/colorSelector";
 import { Button, Divider, Input, Select, TimePicker, Typography } from "antd";
 const { Option } = Select;
-const { Title } = Typography;
+  const { Title } = Typography;
 function CheckoutTest() {
   const stripe = useStripe();
   const elements = useElements();

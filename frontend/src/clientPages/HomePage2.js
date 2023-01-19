@@ -10,7 +10,7 @@ export const HomePage = () => {
 
   return (
     <div class="relative">
-      <div class=" absolute top-20 right-[32rem] z-10 w-36 visible md:invisible lg:visible sm:invisible">
+      <div class=" absolute top-20 right-[32rem] z-10 w-36 invisible md:invisible lg:visible sm:invisible">
         <div class="flex gap-6">
           <img src={Castle} alt="image1" class="hover:scale-110" />
           <img src={Castle} alt="image1" class="hover:scale-110" />
@@ -39,19 +39,20 @@ export const HomePage = () => {
         </div>
         {/* Book now Tablet View */}
         <div className="absolute mb-28 bottom-0 left-[45vw] flex justify-center items-center invisible md:visible lg:invisible sm:invisible">
-  <button className="bg-stone-500 text-white py-2 px-4 rounded-md hover:bg-white hover:border hover:border-stone-500 hover:text-stone-500">View Rentals</button>
-</div>
-
+          <button className="bg-stone-500 text-white py-2 px-4 rounded-md hover:bg-white hover:border hover:border-stone-500 hover:text-stone-500">
+            View Rentals
+          </button>
+        </div>
         {/* Center Text Top Image */}
-        <div className="flex-1 flex p-5 mt-24 flex-col lg:justify-center md:justify-end  md:-mt-4  col-start-3 row-start-1 col-span-1 md:ml-20 lg:col-start-5 lg:ml-0 lg:row-start-1 lg:mt-48  lg:p-5 visible md:invisible lg:visible sm:visible">
-          <div className="md:bg-opacity-70 md:bg-white md:w-48 md:rounded-xl w-full lg:w-72 lg:bg-opacity-0">
-            <h1 className="text-[.5rem] lg:text-lg p-2 md:p-4">
+        <div className="flex-1 flex p-5 mt-28 w-48 flex-col lg:justify-center md:justify-end  md:-mt-4  col-start-3 row-start-1 col-span-1 md:ml-20 lg:col-start-5 lg:ml-0 lg:row-start-1 lg:mt-48  sm:w-48 md:w-3/4 lg:w-80 lg:p-5 visible md:invisible lg:visible sm:visible">
+          <div className="md:bg-opacity-70 md:bg-white  md:rounded-xl lg:bg-opacity-0" >
+            <h1 className="text-[.35rem] lg:text-lg p-2 md:p-4">
               All the Lorem Ipsum generators on the Internet tend to repeat
               predefined chunks as necessary, making this the first true
               generator on the Internet. It uses a dictionary of over 200 Latin
               words, combined with a handful of model sentence structures.
             </h1>
-            <Button className="mt-2 lg:mt-4 w-28 md:m-4">View Rentals</Button>
+            <Button className="lg:mt-4 w-28 md:m-4 ">View Rentals</Button>
           </div>
         </div>
       </div>

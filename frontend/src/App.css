@@ -37,3 +37,9 @@
   }
 }
 
+@font-face {
+  font-family: 'MyCustomFont';
+  src: url('./Media/Magic\ Retro.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
