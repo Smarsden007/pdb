@@ -43,3 +43,12 @@
   font-weight: normal;
   font-style: normal;
 }
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #fbf8f8 !important; 
+  font-weight: 500;
+}
+.ant-tabs-ink-bar {
+  position: absolute;
+  background: #fbf8f8 !important;
+  pointer-events: none;
+}
