@@ -14,6 +14,7 @@ function ColorSelector(props) {
   const [selectedArch, setSelectedArch] = useState("");
 
   const [price, setPrice] = useState("");
+
   const handleArchChange = (value) => {
     setSelectedArch(value);
     if (props.selectedBouncer === "bouncer1") {
@@ -37,6 +38,7 @@ function ColorSelector(props) {
     }
     props.handleSelection(selectedColors, value, price);
   };
+
   const halfArchPrice =
     props.selectedBouncer === "bouncer1"
       ? prices["half-arch"]
@@ -54,29 +56,31 @@ function ColorSelector(props) {
     const newSelection = e.target.value;
     if (selectedColors.length < 3) {
       setSelectedColors([...selectedColors, newSelection]);
-      props.handleSelection(selectedColors, selectedArch);
+      props.handleSelection(selectedColors, selectedArch, price);
     }
   };
 
   const handleReset = () => {
     setSelectedColors([]);
+    setSelectedArch("");
+    setPrice("");
   };
   const colors = ["red", "blue", "green", "yellow", "purple", "orange"];
   return (
     <div>
-      <Title style={{ marginTop: "1rem", marginBottom: "-1rem" }} level={3}>
-        Balloons
-      </Title>
-      <Divider style={{ marginBottom: ".5rem" }} />
-      <Select
-        style={{ width: "10rem" }}
-        defaultValue="Select an option"
-        onChange={handleArchChange}
-      >
-        <Option value="none">No thanks</Option>
-        <Option value="half-arch">Half-arch - ${halfArchPrice}</Option>
-        <Option value="full-arch">Full-arch - ${fullArchPrice}</Option>
-      </Select>
+    <Title style={{ marginTop: "1rem", marginBottom: "-1rem" }} level={3}>
+    Balloons
+    </Title>
+    <Divider style={{ marginBottom: ".5rem" }} />
+    <Select
+    style={{ width: "10rem" }}
+    defaultValue="Select an option"
+    onChange={handleArchChange}
+    >
+    <Option value="none">No thanks</Option>
+    <Option value="half-arch">Half-arch - ${halfArchPrice}</Option>
+    <Option value="full-arch">Full-arch - ${fullArchPrice}</Option>
+    </Select>
 
       {selectedArch !== "none" && selectedArch !== "" ? (
         <Divider>Select 3 colors</Divider>
@@ -100,9 +104,9 @@ function ColorSelector(props) {
       ) : null}
       {selectedArch !== "none" && selectedColors.length > 0 ? (
         <div class="flex flex-row justify-end">
-        <Button onClick={handleReset}
-        style={{width:'5rem'}}
-        >Reset</Button>
+          <Button onClick={handleReset} style={{ width: "5rem" }}>
+            Reset
+          </Button>
         </div>
       ) : null}
     </div>

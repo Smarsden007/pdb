@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import moment from "moment";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import DateChecker from "./formComps/dateChecker";
 import ColorSelector from "./formComps/colorSelector";
 import { Button, Divider, Input, Select, TimePicker, Typography } from "antd";
 const { Option } = Select;
-  const { Title } = Typography;
+const { Title } = Typography;
 function CheckoutTest() {
   const stripe = useStripe();
   const elements = useElements();
@@ -14,8 +14,11 @@ function CheckoutTest() {
     const randomNumber = Math.floor(Math.random() * 100000);
     return `${timestamp}-${randomNumber}`;
   };
-  const [halfArchPrice, setHalfArchPrice] = useState();
-  const [fullArchPrice, setFullArchPrice] = useState();
+  const [selectedPrice, setSelectedPrice] = useState(0);
+  const [selectedColors, setSelectedColors] = useState([]);
+  const [selectedArch, setSelectedArch] = useState("");
+  const [halfArchPrice, setHalfArchPrice] = useState(0);
+  const [fullArchPrice, setFullArchPrice] = useState(0);
   const [colors, setColors] = useState([]);
   const [arch, setArch] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -26,7 +29,14 @@ function CheckoutTest() {
   const [isConfirmed2, setIsConfirmed2] = useState(false);
   const [selectedTheme, setSelectedTheme] = useState("");
   const [themePrice, setThemePrice] = useState();
+  const [selectedDuration, setSelectedDuration] = useState(null);
+  const [total, setTotal] = useState(0);
+  const [addOn1, setAddOn1] = useState(false);
 
+  const handleDurationSelect = (value) => {
+    setSelectedDuration(value);
+    setTotal(calculateTotal(selectedBouncer, value));
+  };
 
   const handleSelect1 = (date) => {
     setSelectedDate1(date);
@@ -41,8 +51,7 @@ function CheckoutTest() {
             i === 0 ? { ...rental, price: 1500 } : rental
           )
         );
-        setHalfArchPrice(1000);
-        setFullArchPrice(1500);
+
         setThemePrice(50);
         break;
       case "bouncer2":
@@ -51,8 +60,7 @@ function CheckoutTest() {
             i === 0 ? { ...rental, price: 2000 } : rental
           )
         );
-        setHalfArchPrice(1200);
-        setFullArchPrice(1800);
+
         setThemePrice(75);
         break;
       case "bouncer3":
@@ -61,8 +69,7 @@ function CheckoutTest() {
             i === 0 ? { ...rental, price: 2500 } : rental
           )
         );
-        setHalfArchPrice(1500);
-        setFullArchPrice(2000);
+
         setThemePrice(100);
         break;
       default:
@@ -71,8 +78,7 @@ function CheckoutTest() {
             i === 0 ? { ...rental, price: 1000 } : rental
           )
         );
-        setHalfArchPrice(800);
-        setFullArchPrice(1200);
+
         setThemePrice(50);
     }
   };
@@ -91,17 +97,39 @@ function CheckoutTest() {
   ]);
 
   const handleCheckboxChange = (event, index) => {
-    const { name, checked } = event.target;
     setRentals(
-      rentals.map((rental, i) =>
-        i === index ? { ...rental, [name]: checked } : rental
-      )
+        rentals.map((rental, i) =>
+            i === index ? { ...rental, addOn1: event.target.checked } : rental
+        )
     );
-  };
+    setTotal(
+        calculateTotal(
+            selectedBouncer,
+            selectedDuration,
+            selectedTheme,
+            selectedPrice,
+            event.target.checked
+        )
+    );
+};
 
+
+  //Bouncer and Date selected Captured Here.//
   const handleConfirm = () => {
     setIsConfirmed2(true);
+    console.log(`Selected bouncer: ${selectedBouncer}`);
+    console.log(`Selected date: ${selectedDate1}`);
   };
+  useEffect(() => {
+    const total = calculateTotal(
+      selectedBouncer,
+      selectedDuration,
+      selectedTheme
+    );
+    // set the total in state
+    setTotal(total);
+  }, [selectedDuration, selectedBouncer, selectedTheme]);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -137,9 +165,22 @@ function CheckoutTest() {
   const onChange = (time, timeString) => {
     console.log(time, timeString);
   };
-  const handleColorSelection = (selectedColors, selectedArch) => {
-    setColors(selectedColors);
-    setArch(selectedArch);
+  const handleSelection = (colors, arch, halfArch, fullArch) => {
+    setSelectedColors(colors);
+    setSelectedArch(arch);
+    if (arch === "half-arch") {
+      setSelectedPrice(halfArch);
+    } else if (arch === "full-arch") {
+      setSelectedPrice(fullArch);
+    }
+    setTotal(
+      calculateTotal(
+        selectedBouncer,
+        selectedDuration,
+        selectedTheme,
+        selectedPrice
+      )
+    );
   };
 
   //drop down values//
@@ -166,11 +207,23 @@ function CheckoutTest() {
     napaCounty: 20,
   };
   const themeOptions = [
-    { value: "theme1", label: "Super Man" },
-    { value: "theme2", label: "Safari" },
-    { value: "theme3", label: "Batman" },
-    // Add more options as needed
+    <Option key="theme1" value="theme1">
+      Super Man - $10
+    </Option>,
+    <Option key="theme2" value="theme2">
+      Safari - $20
+    </Option>,
+    <Option key="theme3" value="theme3">
+      Batman - $30
+    </Option>,
   ];
+
+  const themePrices = {
+    theme1: 20,
+    theme2: 25,
+    theme3: 30,
+  };
+
   const handleReset = () => {
     setSelectedDate1(null);
     setSelectedBouncer("");
@@ -186,10 +239,38 @@ function CheckoutTest() {
       )
     );
   };
-  const handleThemeSelect = (theme) => {
-    setSelectedTheme(theme);
+  const handleThemeSelect = (value) => {
+    setSelectedTheme(value);
+    setTotal(calculateTotal(selectedBouncer, selectedDuration, value, selectedPrice));
+  };
+  const handleRentalLengthChange = (value) => {
+    setSelectedDuration(value);
+    setSelectedPrice(bouncerPrices[value]);
   };
   const bouncerPrices = prices[selectedBouncer] || {};
+  const calculateTotal = (
+    selectedBouncer,
+    selectedDuration,
+    selectedTheme,
+    selectedPrice,
+    addOn1
+  ) => {
+    let total = 0;
+    if (selectedBouncer && selectedDuration) {
+      total += prices[selectedBouncer][selectedDuration];
+    }
+    if (selectedTheme) {
+      total += themePrices[selectedTheme];
+    }
+    if (selectedPrice) {
+      total += selectedPrice;
+    }
+    if (addOn1) {
+      total += 50;
+    }
+    console.log(total);
+    return total;
+  };
 
   return (
     <div class="p-2">
@@ -202,10 +283,21 @@ function CheckoutTest() {
                 {isConfirmed2 ? (
                   <div>
                     {" "}
-                    <Title style={{ marginTop: "1rem", marginBottom: "-1rem" }}
-                  level={3}>Bouncer Details:</Title>
-                    <Divider style={{ marginBottom: ".5rem" }}/>
-                    <Title style={{textAlign:'left', padding:'1rem', fontWeight:'lighter'}} level={2}>
+                    <Title
+                      style={{ marginTop: "1rem", marginBottom: "-1rem" }}
+                      level={3}
+                    >
+                      Bouncer Details:
+                    </Title>
+                    <Divider style={{ marginBottom: ".5rem" }} />
+                    <Title
+                      style={{
+                        textAlign: "left",
+                        padding: "1rem",
+                        fontWeight: "lighter",
+                      }}
+                      level={2}
+                    >
                       You selected the{" "}
                       <span style={{ fontWeight: "bold" }}>
                         {selectedBouncer}
@@ -217,8 +309,8 @@ function CheckoutTest() {
                     </Title>{" "}
                     <Title level={5}>Please continue with checkout.</Title>
                     <Divider />
-                    <div class='flex flex-row justify-end'>
-                    <Button onClick={handleReset}>Reset</Button>
+                    <div class="flex flex-row justify-end">
+                      <Button onClick={handleReset}>Reset</Button>
                     </div>
                   </div>
                 ) : (
@@ -259,8 +351,12 @@ function CheckoutTest() {
                   Rental Length
                 </Title>
                 <Divider style={{ marginBottom: ".5rem" }} />
-                <Select style={{ width: "10rem" }} name="duration" defaultValue="Select an option">
-
+                <Select
+                  style={{ width: "10rem" }}
+                  name="duration"
+                  defaultValue="Select an option"
+                  onChange={handleDurationSelect}
+                >
                   <Option value="4">4 hours (${bouncerPrices["4"]}.00)</Option>
                   <Option value="6">6 hours (${bouncerPrices["6"]}.00)</Option>
                   <Option value="8">8 hours (${bouncerPrices["8"]}.00)</Option>
@@ -271,7 +367,10 @@ function CheckoutTest() {
                   setColors={setColors}
                   arch={arch}
                   setArch={setArch}
+                  handleSelection={handleSelection}
+                  handleRentalLengthChange={handleRentalLengthChange}
                   selectedBouncer={selectedBouncer}
+                  calculateTotal={calculateTotal}
                 />
 
                 <br />
@@ -280,14 +379,26 @@ function CheckoutTest() {
                   style={{ marginTop: "1rem", marginBottom: "-1rem" }}
                   level={3}
                 >
-                 Vinyl Theme
+                  Vinyl Theme
                 </Title>
                 <Divider style={{ marginBottom: ".5rem" }} />
                 <div class="flex flex-col">
-                  <Select onChange={handleThemeSelect} defaultValue="Select an option">
-                    {themeOptions.map(({ value, label }) => (
-                      <Option key={value} value={value} >
-                        {label} - ${themePrice}
+                  <Select
+                    onChange={(value) => {
+                      handleThemeSelect(value);
+                      calculateTotal(
+                        selectedBouncer,
+                        selectedDuration,
+                        value,
+                        selectedPrice,
+                        rental.addOn1
+                      );
+                    }}
+                    defaultValue="Select an option"
+                  >
+                    {themeOptions.map((themeOption) => (
+                      <Option value={themeOption.key}>
+                        {themeOption.props.children}
                       </Option>
                     ))}
                   </Select>
@@ -318,9 +429,19 @@ function CheckoutTest() {
                     type="checkbox"
                     name="addOn1"
                     checked={rental.addOn1}
-                    onChange={(event) => handleCheckboxChange(event, index)}
+                    onChange={(event) => {
+                      handleCheckboxChange(event, index);
+                      calculateTotal(
+                        selectedBouncer,
+                        selectedDuration,
+                        selectedTheme,
+                        selectedPrice,
+                        rental.addOn1
+                      );
+                    }}
                   />
                 </label>
+
                 <br />
 
                 {rental.addOn2 ? (
@@ -403,6 +524,8 @@ function CheckoutTest() {
                 </div>
                 <Divider />
                 <div class="">
+                  <p>Total cost: ${total}</p>
+
                   <CardElement />
                   <Button
                     style={{
