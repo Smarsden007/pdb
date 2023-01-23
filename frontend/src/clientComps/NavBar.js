@@ -53,23 +53,23 @@ export const NavBar = () => {
             <div className="grid grid-cols-2">
               <div className="gird col-start-2">
                 <Link onClick={() => setIsOpen(false)} to='/home'>
-                <li class="m-4  hover:text-slate-400">
+                <li class="m-4  hover:text-stone-400">
                   <a href="#">HOME</a>
                 </li>
                 </Link>
-                <li class="m-4 hover:text-slate-400 ">
+                <li class="m-4 hover:text-stone-400 ">
                   <a href="#">RENTALS</a>
                 </li>
-                <li class="m-4 hover:text-slate-400 ">
+                <li class="m-4 hover:text-stone-400 ">
                   <a href="extra">EXTRAS</a>
                 </li>
-                <li class="m-4 hover:text-slate-400 ">
+                <li class="m-4 hover:text-stone-400 ">
                   <a href="#">POP-UPS</a>
                 </li>
-                <li class="m-4 hover:text-slate-400 ">
+                <li class="m-4 hover:text-stone-400 ">
                   <a href="#">PARTNERS</a>
                 </li>
-                <li class="m-4 hover:text-slate-400 ">
+                <li class="m-4 hover:text-stone-400 ">
                   <Link to="/" onClick={() => setIsOpen(false)}>
                     {" "}
                     <a href="#">BOOK</a>
