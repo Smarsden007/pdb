@@ -36,8 +36,8 @@ function ColorSelector(props) {
         setPrice(prices["full-arch"] + 75);
       }
     }
-    props.handleSelection(selectedColors, value, price);
-  };
+    props.handleSelection(selectedColors, value, price)
+    };
 
   const halfArchPrice =
     props.selectedBouncer === "bouncer1"
@@ -56,8 +56,8 @@ function ColorSelector(props) {
     const newSelection = e.target.value;
     if (selectedColors.length < 3) {
       setSelectedColors([...selectedColors, newSelection]);
-      props.handleSelection(selectedColors, selectedArch, price);
-    }
+      props.handleSelection(selectedColors, selectedArch, price)
+        }
   };
 
   const handleReset = () => {
@@ -82,34 +82,32 @@ function ColorSelector(props) {
     <Option value="full-arch">Full-arch - ${fullArchPrice}</Option>
     </Select>
 
-      {selectedArch !== "none" && selectedArch !== "" ? (
-        <Divider>Select 3 colors</Divider>
-      ) : null}
-      {selectedArch === "half-arch" ||
-      (selectedArch === "full-arch" && selectedArch !== "none") ? (
-        <Radio.Group onChange={handleColorChange} value={selectedColors}>
-          {colors.map((color, index) => (
-            <Radio
-              value={color}
-              key={color}
-              className={`color-${color}`}
-              disabled={
-                selectedColors.length >= 3 && !selectedColors.includes(color)
-              }
-            >
-              <div className="color-circle"></div>
-            </Radio>
-          ))}
-        </Radio.Group>
-      ) : null}
-      {selectedArch !== "none" && selectedColors.length > 0 ? (
-        <div class="flex flex-row justify-end">
-          <Button onClick={handleReset} style={{ width: "5rem" }}>
-            Reset
-          </Button>
-        </div>
-      ) : null}
-    </div>
+        {selectedArch !== "none" && selectedArch !== "" ? (
+    <Divider>Select 3 colors</Divider>
+  ) : null}
+  {selectedArch === "half-arch" ||
+  (selectedArch === "full-arch" && selectedArch !== "none") ? (
+    <Radio.Group onChange={handleColorChange} value={selectedColors}>
+      {colors.map((color, index) => (
+        <Radio
+          value={color}
+          key={color}
+          className={`color-${color}`}
+          disabled={
+            selectedColors.length >= 3 && !selectedColors.includes(color)
+          }
+        >
+          {color}
+        </Radio>
+      ))}
+    </Radio.Group>
+  ) : null}
+
+  <Button onClick={handleReset} style={{ marginTop: "1rem" }}>
+    Reset
+  </Button>
+</div>
+
   );
 }
 export default ColorSelector;
