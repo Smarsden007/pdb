@@ -8,7 +8,7 @@ const { Title } = Typography;
 function DateSelection({ handleSelect1, selectedDate1, handleOptionSelect }) {
   const [bookedDates, setBookedDates] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [selectedBouncer, setSelectedBouncer] = useState("default");
+  const [selectedBouncer, setSelectedBouncer] = useState("bouncer1");
   const [hasSelection, setHasSelection] = useState(false);
   const [isCalendarDisabled, setIsCalendarDisabled] = useState(true);
   useEffect(() => {
@@ -46,7 +46,6 @@ function DateSelection({ handleSelect1, selectedDate1, handleOptionSelect }) {
       setSelectedBouncer(value);
       setIsCalendarDisabled(false);
       handleOptionSelect(selectedBouncer);
-
     }
   };
 
@@ -55,50 +54,41 @@ function DateSelection({ handleSelect1, selectedDate1, handleOptionSelect }) {
       <>
         <div class="flex flex-start	mt-3 ml-3">
           <Title style={{ marginBottom: "-1rem" }} level={3}>
-            Select Your Bouncer
+            The Toddler
           </Title>
         </div>
         <Divider style={{ marginBottom: "-.25rem" }} />
         <div class="flex flex-start	m-3">
-          <Select
-            style={{ width: "10rem" }}
-            value={selectedBouncer}
+          <input
+            value="bouncer1"
+            type="hidden"
             onChange={handleBouncerChange}
-          >
-            <option value="default" default disabled>
-              Please Make a Selection
-            </option>
-            <option value="bouncer1">Toddler</option>
-            <option value="bouncer2">Classic Castle</option>
-            <option value="bouncer3">Bastille</option>
-          </Select>
+          />
         </div>
+
         <div class="flex flex-start	">
-          {!isCalendarDisabled ? (
-            <Calendar
-              className="custom-cal"
-              onChange={handleChange}
-              onClickDay={(date) => {
-                handleSelect(date);
-              }}
-              value={selectedDate}
-              tileDisabled={({ date }) =>
-                bookedDates.includes(new Date(date).toISOString().slice(0, 10))
-              }
-            />
-          ) : null}
+          <Calendar
+            className="custom-cal"
+            onChange={handleChange}
+            onClickDay={(date) => {
+              handleSelect(date);
+            }}
+            value={selectedDate}
+            tileDisabled={({ date }) =>
+              bookedDates.includes(new Date(date).toISOString().slice(0, 10))
+            }
+          />
         </div>
-        {!isCalendarDisabled ? (
-          <div class="flex flex-row">
-            <p style={{  margin: "1rem" }}>Selected Date:</p>
-            <Input
-              style={{  margin: "1rem", textAlign: "center" }}
-              type="text"
-              value={selectedDate.toLocaleDateString()}
-              readOnly
-            />
-          </div>
-        ) : null}
+
+        <div class="flex flex-row">
+          <p style={{ margin: "1rem" }}>Selected Date:</p>
+          <Input
+            style={{ margin: "1rem", textAlign: "center" }}
+            type="text"
+            value={selectedDate.toLocaleDateString()}
+            readOnly
+          />
+        </div>
       </>
     </div>
   );

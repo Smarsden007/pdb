@@ -1,28 +1,46 @@
 import React, { useState } from "react";
-import moment from "moment";
+import moment, { duration } from "moment";
 // import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
-import {  Select, Typography } from "antd";
+import { Select, Typography } from "antd";
 import DateSelection from "./childComps/DateSelection";
-import { RentalSelection } from "./childComps/RentalSelection";
+import RentalSelection from "./childComps/DurationSelection";
+import DurationSelection from "./childComps/DurationSelection";
+import BalloonSelection from "./childComps/BalloonSelection";
 const { Option } = Select;
 const { Title } = Typography;
 function Form() {
+  //Date Selection
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedBouncer, setSelectedBouncer] = useState("default");
-  const [selectedOption, setSelectedOption] = useState("default");
+  //Master State for Total
+  const [totalPrice, setTotalPrice] = useState(0);
+  //Drop Down Selections
+  //-Duration-//
+  const [durationPrice, setDurationPrice] = useState(0);
+  const [durationSelection, setDurationSelection] =
+    useState("Select a duration");
+  //-Balloons-//
+  const [balloonPrice, setBalloonPrice] = useState(0);
+  const [balloonSelection, setBalloonSelection] = useState("Select an option");
+  
 
-  //Pricing:
-  const [prices, setPrices] = useState({
-    bouncer1: { option1: 100, option2: 150, option3: 200 },
-    bouncer2: { option1: 150, option2: 200, option3: 250 },
-    bouncer3: { option1: 200, option2: 250, option3: 300 },
-  });
-  const [addOnPrices, setAddOnPrices] = useState({
-    balloons: { halfArch: 125, fullArch: 175 },
-    vinyl: { theme1: 75, theme2: 75, theme3: 75, theme4: 75 },
-    addOn3: 20,
-    addOn4: 25,
-  });
+  //Child Comp Handlers
+  function handleChild1PriceSelection(price, option) {
+    setDurationPrice(price);
+    setDurationSelection(option);
+    setTotalPrice((prev) => prev.durationPrice + prev.balloonPrice);
+  }
+
+  
+  function handleChild2PriceSelection(price,option) {
+    setBalloonPrice(price);
+    setBalloonSelection(option);
+    setTotalPrice((prev) => prev.durationPrice + prev.balloonPrice);
+  }
+
+
+
+
 
   const handleSelect1 = (date) => {
     setSelectedDate(date);
@@ -31,9 +49,6 @@ function Form() {
   const handleOptionSelect = (bouncer) => {
     setSelectedBouncer(bouncer);
   };
-  const handleOptionChange = (value) => {
-    setSelectedOption(value);
-}
 
   return (
     <div class="p-2">
@@ -50,20 +65,22 @@ function Form() {
 
             {/* Middle */}
             <div class="col-start-1 col-span-2 md:grid-span-full lg:col-end-5 lg:col-span-2 max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-md">
-            <RentalSelection
-    prices={prices}
-    selectedBouncer={selectedBouncer}
-    handleOptionChange={handleOptionChange}
-/>
-
-              
+              <DurationSelection
+                handlePriceSelect={handleChild1PriceSelection}
+              />
+              <BalloonSelection 
+              handlePriceSelect={handleChild2PriceSelection}
+              />
             </div>
 
             {/* Right */}
             <div class="col-start-1 col-span-2  md:grid-span-full lg:col-end-7 lg:col-span-2 h-46 max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-md ">
               <div class="mt-3">
                 <div class="flex flex-row">
-                  <div class="flex flex-col m-1"></div>
+                  <div class="flex flex-col m-1">
+                    <p className="text-3xl">{totalPrice}</p>
+                    <p>{durationSelection}</p>
+                  </div>
                   <div class="flex flex-col m-1"></div>
                 </div>
 
