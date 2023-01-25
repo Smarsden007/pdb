@@ -1,28 +1,54 @@
-import React, { useState } from "react";
-import moment from "moment";
+import React, { useState, useEffect } from "react";
+import moment, { duration } from "moment";
 // import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
-import {  Select, Typography } from "antd";
+import { Select, Typography } from "antd";
 import DateSelection from "./childComps/DateSelection";
-import { RentalSelection } from "./childComps/RentalSelection";
+import RentalSelection from "./childComps/DurationSelection";
+import DurationSelection from "./childComps/DurationSelection";
+import BalloonSelection from "./childComps/BalloonSelection";
 const { Option } = Select;
 const { Title } = Typography;
 function Form() {
+  //Date Selection
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedBouncer, setSelectedBouncer] = useState("default");
-  const [selectedOption, setSelectedOption] = useState("default");
+  //Master State for Total
+  const [selectedOption1, setSelectedOption1] = useState({});
+  const [selectedOption2, setSelectedOption2] = useState({});
+  const [selectedOption3, setSelectedOption3] = useState({});
+  const [selectedOption4, setSelectedOption4] = useState({});
+  const [total, setTotal] = useState(0);
 
-  //Pricing:
-  const [prices, setPrices] = useState({
-    bouncer1: { option1: 100, option2: 150, option3: 200 },
-    bouncer2: { option1: 150, option2: 200, option3: 250 },
-    bouncer3: { option1: 200, option2: 250, option3: 300 },
-  });
-  const [addOnPrices, setAddOnPrices] = useState({
-    balloons: { halfArch: 125, fullArch: 175 },
-    vinyl: { theme1: 75, theme2: 75, theme3: 75, theme4: 75 },
-    addOn3: 20,
-    addOn4: 25,
-  });
+  useEffect(() => {
+    let newTotal = 0;
+    if (Object.keys(selectedOption1).length > 0) newTotal += selectedOption1.price;
+    if (Object.keys(selectedOption2).length > 0) newTotal += selectedOption2.price;
+    if (Object.keys(selectedOption3).length > 0) newTotal += selectedOption3.price;
+    if (Object.keys(selectedOption4).length > 0) newTotal += selectedOption4.price;
+    setTotal(newTotal);
+    console.log(total)
+  }, [selectedOption1, selectedOption2, selectedOption3, selectedOption4]);
+
+
+  const options1 = [
+    { value: "option1", price: 10 },
+    { value: "option2", price: 20 },
+  ];
+  const options2 = [
+    { value: "option1", price: 15 },
+    { value: "option2", price: 25 },
+    { value: "option3", price: 30 },
+  ];
+  const options3 = [
+    { value: "option1", price: 5 },
+    { value: "option2", price: 10 },
+  ];
+  // const options4 = [
+  //   {value: "option1", price: 20},
+  //   {value: "option2", price: 30},
+  //   {value: "option3", price: 40},
+  //   {value: "option4", price: 50},
+  // ];
 
   const handleSelect1 = (date) => {
     setSelectedDate(date);
@@ -31,9 +57,6 @@ function Form() {
   const handleOptionSelect = (bouncer) => {
     setSelectedBouncer(bouncer);
   };
-  const handleOptionChange = (value) => {
-    setSelectedOption(value);
-}
 
   return (
     <div class="p-2">
@@ -50,20 +73,46 @@ function Form() {
 
             {/* Middle */}
             <div class="col-start-1 col-span-2 md:grid-span-full lg:col-end-5 lg:col-span-2 max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-md">
-            <RentalSelection
-    prices={prices}
-    selectedBouncer={selectedBouncer}
-    handleOptionChange={handleOptionChange}
-/>
-
-              
+              <select
+                onChange={(e) =>
+                  setSelectedOption1(
+                    options1.find((option) => option.value === e.target.value)
+                  )
+                }
+              >
+                <option value={{}}>Select an option</option>
+                {options1.map((option) => (
+                  <option key={option.value} value={option}>
+                    {option.value}
+                  </option>
+                ))}
+              </select>
+              <select onChange={(e) => setSelectedOption2(e.target.value)}>
+                <option value={{}}>Select an option</option>
+                {options2.map((option) => (
+                  <option key={option.value} value={option}>
+                    {option.value}
+                  </option>
+                ))}
+              </select>
+              <select onChange={(e) => setSelectedOption3(e.target.value)}>
+                <option value={{}}>Select an option</option>
+                {options3.map((option) => (
+                  <option key={option.value} value={option}>
+                    {option.value}
+                  </option>
+                ))}
+              </select>
             </div>
 
             {/* Right */}
             <div class="col-start-1 col-span-2  md:grid-span-full lg:col-end-7 lg:col-span-2 h-46 max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-md ">
               <div class="mt-3">
                 <div class="flex flex-row">
-                  <div class="flex flex-col m-1"></div>
+                  <div class="flex flex-col m-1">
+                    {" "}
+                    <div>Total: {total}</div>
+                  </div>
                   <div class="flex flex-col m-1"></div>
                 </div>
 
