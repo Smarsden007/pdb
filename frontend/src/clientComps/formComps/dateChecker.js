@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
+// import "react-calendar/dist/Calendar.css";
 import "./dateChecker.css";
 import { Divider, Input, Select, Typography } from "antd";
 const { Title } = Typography;
