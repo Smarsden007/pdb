@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
+// import "react-calendar/dist/Calendar.css";
 import "./DateSelection";
 import { Divider, Input, Select, Typography } from "antd";
 const { Title } = Typography;
@@ -13,6 +13,7 @@ function DateSelection({ handleSelect1, selectedDate1, handleOptionSelect }) {
   const [isCalendarDisabled, setIsCalendarDisabled] = useState(true);
   useEffect(() => {
     async function fetchBookedDates() {
+      
       const response = await fetch(
         `http://localhost:5000/api/check-availability/${selectedBouncer}`
       );
