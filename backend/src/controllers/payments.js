@@ -1,34 +1,35 @@
 require("dotenv").config();
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-const nodemailer = require("nodemailer");
-const sendgridTransport = require("nodemailer-sendgrid-transport");
 
-// Set up the email transporter
-const transporter = nodemailer.createTransport(
-  sendgridTransport({
-    auth: {
-      api_key: process.env.SENDGRID_API_KEY, // Retrieve API key from .env file
-    },
-  })
-);
-
-exports.paymentPost = (req, res) => {
+exports.paymentPost = async (req, res) => {
   try {
-      // Get the token, options, and total amount from the request body
-      const { token, options, total } = req.body;
+    const paymentMethodId = req.body.paymentMethodId;
+    const amount = req.body.amount;
+    const orderNumber = req.body.orderNumber;
+    const selectedOption1 = req.body.selectedOption1;
+    const selectedOption2 = req.body.selectedOption2;
+    const selectedOption3 = req.body.selectedOption3;
+    const selectedOption4 = req.body.selectedOption4;
+    const selectedColors = req.body.selectedColors;
+    const selectedDate = req.body.selectedDate;
+    const selectedBouncer = req.body.selectedBouncer;
 
-      // Use the Stripe API to create a charge
-      const charge = stripe.charges.create({
-          amount: total,
-          currency: 'usd',
-          description: 'Example charge',
-          source: token.id,
-      });
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: amount,
+      currency: "usd",
+      payment_method: paymentMethodId,
+      confirmation_method: 'manual',
+      confirm: true,
+      description: `Order Number: ${orderNumber}`,
+      metadata: {
+        order_number: orderNumber,
+       
+      },
+    });
 
-      // Send a success response
-      res.json({ status: 'success' });
+    res.json({ status: 'success', paymentIntent, orderNumber });
   } catch (error) {
-      console.error(error);
-      res.status(500).json({ status: 'error' });
+    console.log(error);
+    res.status(500).json({ status: 'error', message: error.message });
   }
 };

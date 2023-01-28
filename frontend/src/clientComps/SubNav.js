@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { SocialsRow } from "./SocialsRow";
 import { Divider } from "antd";
 
-export const NavBar = () => {
+export const SubNav = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -14,7 +14,7 @@ export const NavBar = () => {
     >
       <div class="fixed top-0 z-10 bg-transparent w-full">
         <nav class="container mx-auto flex justify-end">
-          <div class="block  mt-2 mr-2">
+          <div class="block lg:hidden mt-2 mr-2">
             <button
               onClick={() => setIsOpen(!isOpen)}
               class="flex items-center m-2 px-5 py-3 border  rounded text-beige-200 border-stone-500 hover:text-red-300 hover:border-red-300"
@@ -52,13 +52,13 @@ export const NavBar = () => {
 
             <div className="grid grid-cols-2">
               <div className="gird col-start-2">
-                <Link onClick={() => setIsOpen(false)} to='/'>
+                <Link onClick={() => setIsOpen(false)} to='/home'>
                 <li class="m-4  hover:text-stone-400">
                   <a href="home">HOME</a>
                 </li>
                 </Link>
                 <li class="m-4 hover:text-stone-400 ">
-                  <Link onClick={() => setIsOpen(false)} to='/rentals'>
+                  <Link to='/rentals'>
                   <a href="rentals">RENTALS</a>
                   </Link>
                 </li>
@@ -69,12 +69,12 @@ export const NavBar = () => {
                   <a href="pop-ups">POP-UPS</a>
                 </li>
                 <li class="m-4 hover:text-stone-400 ">
-                  <Link onClick={() => setIsOpen(false)} to='/partners'>
+                  <Link to='/partners'>
                   <a href="partners">PARTNERS</a>
                   </Link>
                 </li>
                 <li class="m-4 hover:text-stone-400 ">
-                  <Link to="/checkout" onClick={() => setIsOpen(false)}>
+                  <Link to="/" onClick={() => setIsOpen(false)}>
                     {" "}
                     <a href="book">BOOK</a>
                   </Link>

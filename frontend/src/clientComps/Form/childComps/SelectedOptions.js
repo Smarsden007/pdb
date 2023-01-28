@@ -2,45 +2,64 @@ import { Divider } from "antd";
 import React from "react";
 
 function SelectedOptionsList({
-  selectedOption1,
-  selectedOption2,
-  selectedOption3,
-  selectedOption4,
+  selectedDuration,
+  selectedBalloons,
+  selectedVinyl,
+  selectedGenerator,
+  selectedGarland,
+  selectedDelivery,
+  selectedDate,
 }) {
   return (
     <div>
       <h3>Selected Options</h3>
       <ul>
-        {selectedOption1.value !== "No Thank You" && (
+        <Divider className="m-0 border-[#c0a58e]" />
+        {selectedDuration.value !== "No Thank You" && (
           <li className="flex flex-row justify-between w-48">
-            <p>{selectedOption1.value}</p>
-            <p> ${selectedOption1.price}</p>
+            <p>{selectedDuration.value}</p>
+            <p> ${selectedDuration.price}</p>
           </li>
         )}
-        <Divider className="m-0" />
-        {selectedOption2.value !== "No Thank You" && (
+        <Divider className="m-0 border-[#c0a58e]" />
+        {selectedBalloons.value !== "No Thank You" && (
           <li className="flex flex-row justify-between w-48">
-            <p>{selectedOption2.value}</p>
-            <p> ${selectedOption2.price}</p>
+            <p>{selectedBalloons.value}</p>
+            <p> ${selectedBalloons.price}</p>
           </li>
         )}
-        <Divider className="m-0" />
+        <Divider className="m-0 border-[#c0a58e]" />
+        {selectedVinyl.value !== "No Thank You" && (
+          <li className="flex flex-row justify-between w-48">
+            <p>{selectedVinyl.value}</p>
+            <p> ${selectedVinyl.price}</p>
+          </li>
+        )}
+        <Divider className="m-0 border-[#c0a58e]" />
 
-        {selectedOption3.value !== "No Thank You" && (
+        {selectedGarland.value !== "No Thank You" && (
           <li className="flex flex-row justify-between w-48">
-            <p>{selectedOption3.value}</p>
-            <p> ${selectedOption3.price}</p>
+            <p>{selectedGarland.value}</p>
+            <p> ${selectedGarland.price}</p>
           </li>
         )}
-        <Divider className="m-0" />
+        <Divider className="m-0 border-[#c0a58e]" />
+        {selectedGenerator.value !== "No Thank You" && (
+          <li className="flex flex-row justify-between w-48">
+            <p>{selectedGenerator.value}</p>
+            <p> ${selectedGenerator.price}</p>
+          </li>
+        )}
 
-        {selectedOption4.value !== "No Thank You" && (
+        <Divider className="m-0 border-[#c0a58e]" />
+        {selectedDelivery.value !== "No Thank You" && (
           <li className="flex flex-row justify-between w-48">
-            <p>{selectedOption4.value}</p>
-            <p> ${selectedOption4.price}</p>
+            <p>{selectedDelivery.value}</p>
+            <p> ${selectedDelivery.price}</p>
           </li>
         )}
-        <Divider className="m-0" />
+        <Divider className="m-0 border-[#c0a58e]" />
+        
       </ul>
     </div>
   );

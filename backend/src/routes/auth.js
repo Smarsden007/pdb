@@ -25,6 +25,7 @@ const {
   selectionBouncer1,
   selectionBouncer2,
   selectionBouncer3,
+  createBooking2,
 } = require("../controllers/bookings");
 const {
   validationMiddleware,
@@ -49,6 +50,8 @@ router.post("/login", loginValidation, validationMiddleware, login);
 router.get("/logout", logout);
 //Booking Table Routes
 router.post("/bookings", createBooking);
+router.post("/booking", createBooking2);
+
 router.get("/bookings", getBookings);
 router.get("bookings/:id", getById);
 router.patch("/bookings/:id", editBooking);

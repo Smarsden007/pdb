@@ -1,23 +1,27 @@
-import React from 'react'
-import CheckoutTest from '../clientComps/CheckoutTest'
-import { loadStripe } from '@stripe/stripe-js';
-import { Elements } from '@stripe/react-stripe-js';
-import { OptionSelector } from '../clientComps/formComps/FormIntro';
-import { DateChecker } from '../clientComps/formComps/dateChecker';
-import Form from '../clientComps/Form/Form';
+import React from "react";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import Form from "../clientComps/Form/Form";
+import left from "./../Media/StarLeft.png";
+import right from "./../Media/StarRight.png";
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
 
-
-
 export const Checkout = () => {
   return (
-    <div>Checkout
-        <div>
-            <Elements stripe={stripePromise}>
-            <Form />
-            </Elements>
-        </div>
+    <div>
+      <div className="flex flex-row justify-center align-center items-center">
+        <img alt="stars" src={left} className="w-14 h-14 mt-5" />
+        <h1 className="text-6xl p-4 font-mono font-semibold text-black">
+          CHECK-OUT
+        </h1>
+        <img alt="stars" src={right} className="w-14 h-14 mt-5" />
+      </div>
+      <div>
+        <Elements stripe={stripePromise}>
+          <Form />
+        </Elements>
+      </div>
     </div>
-  )
-}
+  );
+};

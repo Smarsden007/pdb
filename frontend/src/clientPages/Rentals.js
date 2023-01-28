@@ -1,17 +1,17 @@
 import React from "react";
-import { Typography } from "antd";
-import { RentalDetails } from "../clientComps/RentalDetails";
-const { Title } = Typography;
+
+import { RentalCards } from "../clientComps/clientStyles/RentalCards";
+import { RentalsHeader } from "../clientComps/clientStyles/RentalsHeader";
 
 export const Rentals = () => {
   return (
     <div>
-    <div className="text-bolder">
-      <h1 className="text-6xl p-4">Rentals</h1>
-    </div>
-    <div>
-        <RentalDetails />
-    </div>
+      <div className="flex flex-col text-center mt-10 w-full align-center justify-center items-center">
+        <RentalsHeader />
+      </div>
+      <div>
+        <RentalCards />
+      </div>
     </div>
   );
 };

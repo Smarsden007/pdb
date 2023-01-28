@@ -10,7 +10,7 @@ export const Circles = () => {
     <img src={Col} alt="Small Photo" className="block w-28 md:w-48 md:mt-8 custom" />
   </div>
   <div className="hidden mb-8 lg:block">
-    <img src={Row} alt="Large Photo" className="block custom" />
+    <img src={Row} alt="Large" className="block custom" />
   </div>
   </div>
   );
