@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 // import "react-calendar/dist/Calendar.css";
-import "./DateSelection";
-import { Divider, Input, Select, Typography } from "antd";
+import "./DateSelection.css";
+import { Divider, Typography } from "antd";
 const { Title } = Typography;
 
 function DateSelection({ handleSelect1, selectedDate1, handleOptionSelect }) {
   const [bookedDates, setBookedDates] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedBouncer, setSelectedBouncer] = useState("bouncer1");
-  const [hasSelection, setHasSelection] = useState(false);
+
   const [isCalendarDisabled, setIsCalendarDisabled] = useState(true);
   useEffect(() => {
     async function fetchBookedDates() {
-      
       const response = await fetch(
         `http://localhost:5000/api/check-availability/${selectedBouncer}`
       );
@@ -28,28 +27,17 @@ function DateSelection({ handleSelect1, selectedDate1, handleOptionSelect }) {
     setSelectedDate(date);
   };
 
-  const handleSelect = (date) => {
-    if (isCalendarDisabled) return;
-
-    if (bookedDates.includes(new Date(date).toISOString().slice(0, 10))) {
-      alert("This date is already booked, please select another date.");
-      setSelectedDate(new Date());
-    } else {
-      setSelectedDate(date);
-      handleSelect1(date);
-      handleOptionSelect(selectedBouncer);
-      setHasSelection(true);
-    }
-  };
+  console.log(isCalendarDisabled)
 
   const handleBouncerChange = (value) => {
     if (value !== "") {
       setSelectedBouncer(value);
       setIsCalendarDisabled(false);
-      handleOptionSelect(selectedBouncer);
+      handleOptionSelect(selectedBouncer); // call the callback function with the selected bouncer
     }
   };
 
+ 
   return (
     <div class="flex flex-col">
       <>
@@ -59,6 +47,16 @@ function DateSelection({ handleSelect1, selectedDate1, handleOptionSelect }) {
           </Title>
         </div>
         <Divider style={{ marginBottom: "-.25rem" }} />
+        <div className="ml-3">
+          <p className="text-bold text-left">Requires 14' X 14' clearance</p>
+          <p className="text-bold text-left">
+            includes: shoe rack, 50-foot extesion cord, entrance turf
+          </p>
+          <p className="text-bold text-left font-mono font-bold">
+            *FOR ALL AGES*
+          </p>
+        </div>
+        <Divider style={{ marginBottom: "-.25rem" }} />
         <div class="flex flex-start	m-3">
           <input
             value="bouncer1"
@@ -66,30 +64,24 @@ function DateSelection({ handleSelect1, selectedDate1, handleOptionSelect }) {
             onChange={handleBouncerChange}
           />
         </div>
-
-        <div class="flex flex-start	">
+  <div className="flex flex-row justify-start ml-3">
+            <div className="w-6 h-6 mr-2 bg-[#c0a58e]"/> = <p>Booked</p>
+          </div>
+        <div class="flex flex-col	align-center justify-center items-center">
           <Calendar
-            className="custom-cal"
+            className="custom-cal w-full"
             onChange={handleChange}
             onClickDay={(date) => {
-              handleSelect(date);
+              handleSelect1(date);
             }}
             value={selectedDate}
             tileDisabled={({ date }) =>
               bookedDates.includes(new Date(date).toISOString().slice(0, 10))
             }
           />
+          
         </div>
-
-        <div class="flex flex-row">
-          <p style={{ margin: "1rem" }}>Selected Date:</p>
-          <Input
-            style={{ margin: "1rem", textAlign: "center" }}
-            type="text"
-            value={selectedDate.toLocaleDateString()}
-            readOnly
-          />
-        </div>
+      
       </>
     </div>
   );

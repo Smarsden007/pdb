@@ -2,7 +2,9 @@
 module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
-    extend: {},
+    extend: {
+      
+    },
   },
   purge: {
     // Specify the paths or glob patterns to analyze

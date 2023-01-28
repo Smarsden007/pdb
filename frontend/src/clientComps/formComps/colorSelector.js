@@ -1,59 +1,49 @@
 import React, { useState } from "react";
-import { Radio, Divider, Select } from "antd";
-import { Typography, Button } from "antd";
 
-const { Title } = Typography;
+const ColorSelector = ({ handleSelection }) => {
+  const options = [
+    { value: "red", label: "Red" },
+    { value: "green", label: "Green" },
+    { value: "blue", label: "Blue" },
+    { value: "yellow", label: "Yellow" },
+    { value: "purple", label: "Purple" },
+  ];
+  const [selectedColors, setSelectedColors] = useState([]);
 
-const { Option } = Select;
-const prices = {
-  "half-arch": 125,
-  "full-arch": 175,
-};
-function ColorSelector(props) {
-  const [selectedColors, setSelectedColors] = useState([0]);
-  const [selectedArch, setSelectedArch] = useState("");
-
-  const [price, setPrice] = useState("");
-
-  
-
-
-      const handleColorChange = (e) => {
-        const newSelection = e.target.value;
-        if (selectedColors.length < 3) {
-          setSelectedColors([...selectedColors, newSelection]);
-          props.handleSelection(selectedColors);
-        }
-    };
-    
-
-  const handleReset = () => {
-    setSelectedColors([]);
-    setSelectedArch("");
-    setPrice("");
-  };
-  const colors = ["red", "blue", "green", "yellow", "purple", "orange"];
   return (
     <div>
-    <Radio.Group onChange={handleColorChange} value={selectedColors}>
-      {colors.map((color, index) => (
-        <Radio
-        value={color}
-        key={color}
-        style={{ backgroundColor: color, padding: '14px', borderRadius:'100%'}}
-        disabled={
-          selectedColors.length >= 3 && !selectedColors.includes(color)
-        }
-      >
-      </Radio>
-      
+    <label>Select up to 3 colors:</label>
+    {options.map((option) => (
+      <div key={option.value}>
+        <input
+          type="checkbox"
+          value={option.value}
+          checked={selectedColors.includes(option.value)}
+          onChange={(e) => {
+            if (!e.target.checked) {
+              setSelectedColors((prevColors) =>
+                prevColors.filter((color) => color !== e.target.value)
+              );
+            } else {
+              if (selectedColors.length < 3) {
+                setSelectedColors([...selectedColors, e.target.value]);
+              }
+            }
+          }}
+          disabled={selectedColors.length === 3}
+        />
+        <label>{option.label}</label>
+      </div>
+    ))}
+    <div>
+      {selectedColors.map((color) => (
+        <div key={color}>
+          <p style={{ color: color }}>{color}</p>
+        </div>
       ))}
-    </Radio.Group>
-  <Button onClick={handleReset} style={{ marginTop: "1rem" }}>
-    Reset
-  </Button>
-</div>
-
+    </div>
+  </div>
   );
-}
+};
+
 export default ColorSelector;

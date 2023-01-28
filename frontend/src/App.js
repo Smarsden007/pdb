@@ -14,12 +14,14 @@ import { Register } from "./pages/Register";
 import { Calendar } from "./pages/Calendar";
 import { Checkout } from "./clientPages/Checkout";
 import { HomePage } from "./clientPages/HomePage2";
-import Logo from "./clientComps/LogoRender";
 import { NavBar } from "./clientComps/NavBar";
 import { DeskNavBar } from "./clientComps/DeskNavBar";
 import Footer from "./clientComps/Footer";
 import { SubHero } from "./clientComps/SubHero";
 import { Rentals } from "./clientPages/Rentals";
+import { Partners } from "./clientPages/Partners";
+import { OrderConfirmation } from "./clientComps/Form/OrderConfirmation";
+import { SubNav } from "./clientComps/SubNav";
 
 function App() {
   const PrivateRoutes = () => {
@@ -55,9 +57,6 @@ function App() {
             element={
               <div>
                 <NavBar />
-                <div className="hidden lg:block">
-                  <DeskNavBar />
-                </div>
                 <Checkout className="" />
                 <Footer />
               </div>
@@ -68,7 +67,7 @@ function App() {
             path="/"
             element={
               <div>
-                <NavBar />
+                <SubNav />
                 <div className="hidden lg:block ">
                   <DeskNavBar />
                 </div>
@@ -78,18 +77,34 @@ function App() {
               </div>
             }
           />{" "}
-          <Route path="/rentals"  element={
+          <Route
+            path="/rentals"
+            element={
               <div>
                 <NavBar />
-                <div className="hidden lg:block ">
-                  <DeskNavBar />
-                </div>
+
                 <Rentals />
                 <Footer />
               </div>
-            } />
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/" element={<LoginPage />} />
+            }
+          />
+          <Route
+            path="/partners"
+            element={
+              <div>
+                <NavBar />
+
+                <Partners />
+                <Footer />
+              </div>
+            }
+          />
+          <Route path="/success/:orderNumber" element={<div>
+                <NavBar />
+
+                <OrderConfirmation />
+                <Footer />
+              </div>} />
         </Route>
       </Routes>
     </BrowserRouter>

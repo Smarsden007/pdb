@@ -1,36 +1,28 @@
 const db = require("../db");
 
 exports.createBooking = async (req, res) => {
-  const { email, phone } = req.body;
+  const { fulll_name, delivery_ad, bouncer, rent_date, generator, balloons, vinyl, vinyl_theme, paid,email,phone } = req.body;
   try {
     await db.query(
-      "bookings(fulll_name, email, phone, delivery_ad, bouncer, rent_date, rental_time, generator, balloons, half_arch, full_arch, vinyl, vinyl_theme, park, cust_nt, int_nt, paid, deposit, contract_sign) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21)",
+      "INSERT INTO bookings(fulll_name, delivery_ad, bouncer, rent_date, generator, balloons, vinyl, vinyl_theme, phone,email,paid) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9, $10, $11)",
       [
         fulll_name,
-        email,
-        phone,
         delivery_ad,
         bouncer,
         rent_date,
-        rental_time,
         generator,
         balloons,
-        half_arch,
-        full_arch,
         vinyl,
         vinyl_theme,
-        park,
-        cust_nt,
-        int_nt,
         paid,
-        deposit,
-        contract_sign,
+        email,
+        phone
       ]
     );
 
     return res.status(201).json({
       success: true,
-      message: "The creation was succefull",
+      message: "The creation was successful",
     });
   } catch (error) {
     console.log(error.message);
@@ -39,6 +31,62 @@ exports.createBooking = async (req, res) => {
     });
   }
 };
+exports.createBooking2 = async (req, res) => {
+  const { 
+    selectedDuration,
+    selectedBalloons,
+    selectedVinyl,
+    selectedGenerator,
+    selectedGarland,
+    selectedDelivery,
+    selectedDate,
+    selectedTime,
+    selectedColors,
+    selectedOptionDelivery,
+    billingName,
+    billingAddress,
+    billingCity,
+    billingState,
+    orderNumber,
+    bouncerName,
+    billingEmail
+  } = req.body;
+  try {
+    await db.query(
+      "INSERT INTO booking(selected_duration, selected_balloons, selected_vinyl, selected_generator, selected_garland, selected_delivery, selected_date, selected_time, selected_colors, selected_option_delivery, billing_name, billing_address, billing_city, billing_state, order_number,bouncer,billing_email) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17)",
+      [
+        selectedDuration,
+        selectedBalloons,
+        selectedVinyl,
+        selectedGenerator,
+        selectedGarland,
+        selectedDelivery,
+        selectedDate,
+        selectedTime,
+        selectedColors,
+        selectedOptionDelivery,
+        billingName,
+        billingAddress,
+        billingCity,
+        billingState,
+        orderNumber,
+        bouncerName,
+        billingEmail
+      ]
+    );
+
+    return res.status(201).json({
+      success: true,
+      message: "The creation was successful",
+    });
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).json({
+      error: error.message,
+    });
+  }
+};
+
 exports.editBooking = async (req, res) => {
   try {
     // Get the ID of the booking to update
