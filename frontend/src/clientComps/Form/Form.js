@@ -78,7 +78,7 @@ function Form() {
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [orderNumber, setOrderNumber] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
-  const [billingEmail, setBillingEmail] = useState("")
+  const [billingEmail, setBillingEmail] = useState("");
 
   const navigate = useNavigate();
 
@@ -97,6 +97,7 @@ function Form() {
     { value: "purple", label: "Purple" },
   ];
   useEffect(() => {
+
     let newTotal = 0;
 
     console.log("### setting total");
@@ -109,7 +110,6 @@ function Form() {
 
     console.log("### setting total", newTotal);
     setTotal(newTotal);
-    console.log(total);
   }, [
     selectedDuration,
     selectedBalloons,
@@ -150,7 +150,7 @@ function Form() {
           option2: selectedBalloons.value,
         }
         );
-        console.log(data)
+        console.log(data,'test')
         const time = new Date(selectedTime).toLocaleTimeString();
 
         const bookingData = {
@@ -174,7 +174,7 @@ function Form() {
         };
         await axios.post("http://localhost:5000/api/booking", bookingData);
         setOrderPlaced(true);
-
+        console.log(orderPlaced)
         navigate(`/success/${orderNumber}`);
       } catch (e) {
         console.log(e);
@@ -233,7 +233,7 @@ function Form() {
               )}
             </div>
 
-            {/* Middle */}
+            {/* Middle I need to see if this works or not */}
             <div class="row-start-2 lg:col-start-2 lg:row-start-1 max-w-sm p-6 bg-white border-4 border-[#c0a58e] rounded-lg shadow-md">
               <div>
                 <Title className="m-0 p-0" level={3}>
