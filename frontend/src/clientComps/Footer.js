@@ -11,7 +11,7 @@ const Footer = () => {
     <footer className="bg-[#c0a58e] text-white p-1 mt-14">
       <div className="flex justify-between items-center">
         <div className="flex items-center">
-          <img src={logo} />
+          <img alt="logo" src={logo} />
         </div>
         <div className="flex justify-center my-6">
           <SocialsRow />
@@ -19,13 +19,13 @@ const Footer = () => {
         <div className="flex flex-col">
         <div className="flex flex-row">
           <nav className="flex flex-col p-10">
-            <a href="#" className="px-2 text-white hover:text-white">
+            <a href="home" className="px-2 text-white hover:text-white">
               HOME
             </a>
-            <a href="#" className="px-2 text-white hover:text-white">
+            <a href="#rentals" className="px-2 text-white hover:text-white">
               RENTALS
             </a>
-            <a href="#" className="px-2 text-white hover:text-white">
+            <a href="extras" className="px-2 text-white hover:text-white">
               EXTRAS
             </a>
           </nav>

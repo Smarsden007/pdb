@@ -142,12 +142,15 @@ function Form() {
       const { id } = paymentMethod;
       try {
         const { data } = await axios.post("http://localhost:5000/api/charge", {
+          
           amount: total * 100, //convert to cents
           paymentMethodId: id,
           orderNumber,
           option1: selectedBalloons.value,
           option2: selectedBalloons.value,
-        });
+        }
+        );
+        console.log(data)
         const time = new Date(selectedTime).toLocaleTimeString();
 
         const bookingData = {
@@ -178,9 +181,7 @@ function Form() {
       }
     }
   };
-  const handleSelect1 = (date) => {
-    setSelectedDate(date);
-  };
+ 
   const handleDeliveryChange = (e) => {
     setDeliveryOption(e.target.value);
     if (e.target.value === "no") {
@@ -191,9 +192,7 @@ function Form() {
     setSelectedBouncer(bouncer);
   };
 
-  const handleSelection = (colors) => {
-    setSelectedColors(colors);
-  };
+
 
   //Master State Console- Delete before DEPLOY!!
   console.log(

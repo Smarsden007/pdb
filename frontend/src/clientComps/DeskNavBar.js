@@ -8,27 +8,27 @@ export const DeskNavBar = () => {
       <ul class="flex items-center">
         <Link to="/">
         <li class="m-3  hover:text-slate-400">
-          <a href="#">HOME</a>
+          <a href="home">HOME</a>
         </li>
         </Link>
         <Link to='/rentals'>
         <li class="m-4 hover:text-black ">
-          <a href="#">RENTALS</a>
+          <a href="rentals">RENTALS</a>
         </li>
         </Link>
         <li class="m-4 hover:text-slate-400 ">
           <a href="extra">EXTRAS</a>
         </li>
         <li class="m-4 hover:text-slate-400 ">
-          <a href="#">POP-UPS</a>
+          <a href="pop-ups">POP-UPS</a>
         </li>
         <li class="m-4 hover:text-slate-400 ">
-          <a href="#">PARTNERS</a>
+          <a href="partners">PARTNERS</a>
         </li>
         <li class="m-4 hover:text-slate-400 ">
           <Link to="/checkout">
             {" "}
-            <a href="#">BOOK</a>
+            <a href="book">BOOK</a>
           </Link>
         </li>
       </ul>
