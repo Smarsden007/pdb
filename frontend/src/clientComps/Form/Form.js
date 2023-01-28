@@ -167,7 +167,7 @@ function Form() {
           billingCity: billingCity,
           billingState: billingState,
           orderNumber: orderNumber,
-          bouncerName: 'bouncer1'
+          bouncerName: selectedBouncer.value
         };
         await axios.post("http://localhost:5000/api/booking", bookingData);
         setOrderPlaced(true);
