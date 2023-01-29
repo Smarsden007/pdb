@@ -2,25 +2,27 @@ import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { SocialsRow } from "./SocialsRow";
 import { Divider } from "antd";
+import { Background } from "./Background";
 
 export const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
+    <Background>
     <div
       class={`${
-        isOpen ? "fixed top-0 left-0 w-full h-full bg-white z-50" : ""
+        isOpen ? "fixed top-0 left-0 w-full h-full bg-white z-50" : "bg-[#f8f5f2]"
       }`}
     >
-      <div class="fixed top-0 z-10 bg-transparent w-full">
-        <nav class="container mx-auto flex justify-end">
+      <div class="fixed top-0 z-10 bg-transparent w-full bg-[#f8f5f2]">
+        <nav class="container mx-auto flex justify-end bg-[#f8f5f2]">
           <div class="block  mt-2 mr-2">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              class="flex items-center m-2 px-5 py-3 border  rounded text-beige-200 border-stone-500 hover:text-red-300 hover:border-red-300"
+              class="flex items-center m-2 px-5 py-3 border  rounded text-[#c0a58e] border-black hover:text-[#c0a58e] hover:border-[#c0a58e]"
             >
               <svg
-                class="fill-current h-3 w-3"
+                class="fill-current h-6 w-6"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -53,38 +55,38 @@ export const NavBar = () => {
             <div className="grid grid-cols-2">
               <div className="gird col-start-2">
                 <Link onClick={() => setIsOpen(false)} to="/">
-                  <li class="m-4  hover:text-stone-400">
+                  <li class="m-4  hover:text-[#c0a58e]">
                     <a href="home">HOME</a>
                   </li>
                 </Link>
-                <li class="m-4 hover:text-stone-400 ">
+                <li class="m-4 hover:text-[#c0a58e]">
                   <Link onClick={() => setIsOpen(false)} to="/rentals">
                     <a href="rentals">RENTALS</a>
                   </Link>
                 </li>
-                <li class="m-4 hover:text-stone-400 ">
+                <li class="m-4 hover:text-[#c0a58e]">
                   <Link onClick={() => setIsOpen(false)} to="/extras">
                     <a href="extra">EXTRAS</a>
                   </Link>
                 </li>
-                <li class="m-4 hover:text-stone-400 ">
+                <li class="m-4 hover:text-[#c0a58e] ">
                   <Link to="/pop-ups" onClick={() => setIsOpen(false)}>
                     <a href="pop-ups">POP-UPS</a>
                   </Link>
                 </li>
-                <li class="m-4 hover:text-stone-400 ">
+                <li class="m-4 hover:text-[#c0a58e] ">
                   <Link onClick={() => setIsOpen(false)} to="/partners">
                     <a href="partners">PARTNERS</a>
                   </Link>
                 </li>
-                <li class="m-4 hover:text-stone-400 ">
+                <li class="m-4 hover:text-[#c0a58e] ">
                   <Link to="/checkout" onClick={() => setIsOpen(false)}>
                     <a href="book">BOOK</a>
                   </Link>
                 </li>
               </div>
               <div className="grid col-start-1 absolute top-0">
-                <li class="m-4 hover:text-slate-400 ">
+                <li class="m-4 hover:text-black ">
                   <button onClick={() => setIsOpen(!isOpen)}>x</button>
                 </li>
               </div>
@@ -96,5 +98,6 @@ export const NavBar = () => {
         </nav>
       </div>
     </div>
+    </Background>
   );
 };

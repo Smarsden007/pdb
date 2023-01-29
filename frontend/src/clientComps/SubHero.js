@@ -9,19 +9,19 @@ export const SubHero = () => {
     <div class="grid lg:-mt-36 grid-cols-2  lg:gap-12 lg:grid-cols-3 lg:grid-rows-1 sm:grid-cols-2">
       {/* left */}
       <div class=" lg:col-start-1 lg:col-span-1 lg:row-span-3 visible md:visible lg:visible sm:visible">
-        <img alt="tearpic" class="w-full h-full lg:m-10 lg:max-h-fit" src={Tearleft} />
+        <img alt="tearpic" class="w-full h-full lg:m-10 lg:max-h-fit p-8" src={Tearleft} />
       </div>
       <div className="col-start-1 row-start-1 lg:col-start-2 lg:row-start-1 lg:mt-5">
         <div>
           <img alt='cleaning' class="w-full m-2" src={RightSide} />
         </div>
         <div className="ml-10">
-          <h1 className="text-[.5rem] md:text-lg lg:text-lg p-2 md:p-4">
+          <h1 className="text-[.75rem] md:text-lg lg:text-lg p-2 md:p-4">
             All the Lorem Ipsum generators on the Internet tend to repeat
             predefined chunks as necessary, making this the first true generator
             on the Internet.
           </h1>
-          <h1 className="text-[.5rem] md:text-lg lg:text-lg p-2 md:p-4">
+          <h1 className="text-[.75rem] md:text-lg lg:text-lg p-2 md:p-4">
             All the Lorem Ipsum generators on the Internet tend to repeat
             predefined chunks as necessary, making this the first true generator
             on the Internet.
@@ -30,7 +30,7 @@ export const SubHero = () => {
       </div>
       {/* right */}
       <div class="col-start-2 row-start-1 lg:col-start-3 lg:col-span-1 lg:row-span-3 ">
-        <img alt='paul' class="w-full h-full lg:mt-10 " src={SubRight} />
+        <img alt='paul' class="w-full h-full lg:mt-10 p-8" src={SubRight} />
       </div>
       <div className='col-start-2 row-start-2 flex flex-row align-center justify-center items-center m-10 '>
         <Circles />
