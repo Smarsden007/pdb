@@ -50,11 +50,12 @@ exports.createBooking2 = async (req, res) => {
     orderNumber,
     bouncerName,
     billingEmail,
-    total_cost
+    total_cost,
+    phone
   } = req.body;
   try {
     await db.query(
-      "INSERT INTO booking(selected_duration, selected_balloons, selected_vinyl, selected_generator, selected_garland, selected_delivery, selected_date, selected_time, selected_colors, selected_option_delivery, billing_name, billing_address, billing_city, billing_state, order_number,bouncer,billing_email,total) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17, $18)",
+      "INSERT INTO booking(selected_duration, selected_balloons, selected_vinyl, selected_generator, selected_garland, selected_delivery, selected_date, selected_time, selected_colors, selected_option_delivery, billing_name, billing_address, billing_city, billing_state, order_number,bouncer,billing_email,total, phone) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17, $18, $19)",
       [
         selectedDuration,
         selectedBalloons,
@@ -73,7 +74,8 @@ exports.createBooking2 = async (req, res) => {
         orderNumber,
         bouncerName,
         billingEmail,
-        total_cost
+        total_cost,
+        phone
 
       ]
     );
@@ -168,13 +170,13 @@ exports.getTotalCost = async (req, res) => {
   try {
     // Use the SUM() function to add up all the values in the total_cost column
     const { rows } = await db.query(`
-      SELECT SUM(total_cost) as total_cost_sum FROM bookings 
-      WHERE rent_date >= '2022-01-01' AND rent_date <= '2022-12-31'
+      SELECT SUM(total) as total_sum FROM booking 
+      WHERE selected_date >= '2023-01-01' AND selected_date <= '2023-12-31'
     `);
 
     return res.status(200).json({
       success: true,
-      total_cost: rows[0].total_cost_sum,
+      total: rows[0].total_sum,
     });
   } catch (error) {
     console.log(error.message);
@@ -192,9 +194,9 @@ exports.getTotalCostForCurrentMonth = async (req, res) => {
 
     // build the query to select all bookings in the current month
     const query = `
-      SELECT SUM(total_cost) as total_cost
-      FROM bookings
-      WHERE EXTRACT(YEAR FROM created_at) = $1 AND EXTRACT(MONTH FROM created_at) = $2
+      SELECT SUM(total) as total
+      FROM booking
+      WHERE EXTRACT(YEAR FROM selected_date) = $1 AND EXTRACT(MONTH FROM selected_date) = $2
     `;
 
     // execute the query and retrieve the sum of the total cost for all bookings in the current month
@@ -202,7 +204,7 @@ exports.getTotalCostForCurrentMonth = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      totalCost: rows[0].total_cost,
+      total: rows[0].total,
     });
   } catch (error) {
     console.log(error.message);
@@ -216,7 +218,7 @@ exports.countBookingsWithin7Days = async (req, res) => {
     );
 
     const { rows } = await db.query(
-      "SELECT COUNT(*) FROM bookings WHERE rent_date BETWEEN $1 AND $2",
+      "SELECT COUNT(*) FROM booking WHERE selected_date BETWEEN $1 AND $2",
       [currentDate, sevenDaysFromNow]
     );
 
@@ -236,7 +238,7 @@ exports.countBookingsWithin14Days = async (req, res) => {
     );
 
     const { rows } = await db.query(
-      "SELECT COUNT(*) FROM bookings WHERE rent_date BETWEEN $1 AND $2",
+      "SELECT COUNT(*) FROM booking WHERE selected_date BETWEEN $1 AND $2",
       [currentDate, upcomingDate]
     );
 

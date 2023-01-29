@@ -119,7 +119,7 @@ function ToddlerForm() {
     selectedGenerator,
     selectedGarland,
     selectedDelivery,
-    selectedBackdrop
+    selectedBackdrop,
   ]);
 
   const handleSubmit = async (e) => {
@@ -171,8 +171,8 @@ function ToddlerForm() {
           billingCity: billingCity,
           billingState: billingState,
           orderNumber: orderNumber,
-          bouncerName: selectedBouncer.value,
-          totalCost: total,
+          bouncerName: selectedBouncer,
+          total_cost: total,
         };
         await axios.post("http://localhost:5000/api/booking", bookingData);
         setOrderPlaced(true);

@@ -193,8 +193,8 @@ export const CalendarView = () => {
                 <div>
                   <div className=" text-xs">
                     {bookingsOnDate.map((booking) => {
-                      const fulll_name = booking.billing_name;
-                      const firstWord = fulll_name.split(" ")[0];
+                      const billing_name = booking.billing_name;
+                      const firstWord = billing_name.split(" ")[0];
                       return (
                         <div class="flex items-center w-40" key={booking.id}>
                           <button
@@ -207,10 +207,10 @@ export const CalendarView = () => {
                             <div class="inline-flex">
                               {firstWord}/
                               {booking.bouncer === "bouncer1"
-                                ? "🏰"
+                                ? "👶"
                                 : booking.bouncer === "bouncer2"
                                 ? "🏯"
-                                : "👶"}
+                                : "🏰"}
                               {booking.paid ? (
                                 <svg
                                   style={{ fill: "green" }}
@@ -241,7 +241,7 @@ export const CalendarView = () => {
                                   ></path>
                                 </svg>
                               )}
-                              {booking.delivery_fee ? (
+                              {booking.selected_option_delivery ? (
                                 <svg
                                   style={{ fill: "pink" }}
                                   class="w-4 h-4 "
@@ -268,12 +268,8 @@ export const CalendarView = () => {
                                 class="absolute z-50 top-50 left-50 bottom-50 py-2 px-4 bg-white text-xs rounded-md shadow-md dark:bg-gray-800 dark:text-gray-100 "
                               >
                                 <p>
-                                  Balloons:{" "}
-                                  {booking.selected_balloons
-                                    ? "Full Arch"
-                                    : booking.selected_balloons
-                                    ? "Half Arch"
-                                    : "None"}{" "}
+                                Balloons: {booking.selected_balloons === "No Thank You" ? "None" : booking.selected_balloons ? "Full Arch" : "Half Arch"}
+
                                   <br />
                                   Rental Time: {booking.selected_time}
                                   <br />
@@ -283,7 +279,9 @@ export const CalendarView = () => {
                                     : "No"}{" "}
                                   <br />
                                   Phone: {booking.phone} <br />
-                                  Email: {booking.billing_email}
+                                  Email: {booking.billing_email}<br />
+                                  Confirmation #: {booking.order_number}<br/>
+                                  Delivery Address: {booking.billing_address}<br/>{booking.billing_city}
                                 </p>
                               </div>
                             </div>

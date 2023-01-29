@@ -119,7 +119,7 @@ function CastleForm() {
     selectedGenerator,
     selectedGarland,
     selectedDelivery,
-    selectedBackdrop
+    selectedBackdrop,
   ]);
 
   const handleSubmit = async (e) => {
@@ -172,7 +172,7 @@ function CastleForm() {
           billingState: billingState,
           orderNumber: orderNumber,
           bouncerName: selectedBouncer,
-          totalCost: total,
+          total_cost: total,
         };
         await axios.post("http://localhost:5000/api/booking", bookingData);
         setOrderPlaced(true);
