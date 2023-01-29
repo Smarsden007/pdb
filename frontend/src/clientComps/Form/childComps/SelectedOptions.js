@@ -8,6 +8,7 @@ function SelectedOptionsList({
   selectedGenerator,
   selectedGarland,
   selectedDelivery,
+  selectedBackdrop,
   selectedDate,
 }) {
   return (
@@ -26,6 +27,13 @@ function SelectedOptionsList({
           <li className="flex flex-row justify-between w-48">
             <p>{selectedBalloons.value}</p>
             <p> ${selectedBalloons.price}</p>
+          </li>
+        )}
+         <Divider className="m-0 border-[#c0a58e]" />
+        {selectedBackdrop.value !== "No Thank You" && (
+          <li className="flex flex-row justify-between w-48">
+            <p>{selectedBackdrop.value}</p>
+            <p> ${selectedBackdrop.price}</p>
           </li>
         )}
         <Divider className="m-0 border-[#c0a58e]" />

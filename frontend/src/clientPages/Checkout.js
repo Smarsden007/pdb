@@ -1,7 +1,7 @@
 import React from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
-import Form from "../clientComps/Form/Form";
+import Form from "../clientComps/Form/ToddlerForm";
 import left from "./../Media/StarLeft.png";
 import right from "./../Media/StarRight.png";
 
