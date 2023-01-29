@@ -27,7 +27,7 @@ export const RentalCards = () => {
               <p className="text-bold text-center font-mono font-bold">
                 *FOR AGES 10 AND UNDER*
               </p>
-              <Link>
+              <Link to="castle-checkout">
                 <button className="bg-[#c0a58e] text-white rounded-lg w-36 h-12 hover:bg-white hover:border-[#c0a58e] hover:border-solid hover:border-4 hover:text-[#c0a58e]">
                   Book Now
                 </button>
@@ -58,7 +58,7 @@ export const RentalCards = () => {
               <p className="text-bold text-center font-mono font-bold">
                 *FOR ALL AGES*
               </p>
-              <Link>
+              <Link to="bastille-checkout">
                 <button className="bg-[#c0a58e] text-white rounded-lg w-36 h-12 hover:bg-white hover:border-[#c0a58e] hover:border-solid hover:border-4 hover:text-[#c0a58e]">
                   Book Now
                 </button>
@@ -88,7 +88,7 @@ export const RentalCards = () => {
               <p className="text-bold text-center font-mono font-bold">
                 *FOR ALL AGES*
               </p>
-              <Link>
+              <Link to="toddler-checkout">
                 <button className="bg-[#c0a58e] text-white rounded-lg w-36 h-12 hover:bg-white hover:border-[#c0a58e] hover:border-solid hover:border-4 hover:text-[#c0a58e]">
                   Book Now
                 </button>

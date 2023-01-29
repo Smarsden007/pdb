@@ -30,7 +30,7 @@ export const SubHero = () => {
       </div>
       {/* right */}
       <div class="col-start-2 row-start-1 lg:col-start-3 lg:col-span-1 lg:row-span-3 ">
-        <img alt='paul' class="w-full h-full lg:mt-10 p-8" src={SubRight} />
+        <img alt='paul' class="w-full lg:h-full h-[50vh] lg:mt-10 p-8" src={SubRight} />
       </div>
       <div className='col-start-2 row-start-2 flex flex-row align-center justify-center items-center m-10 '>
         <Circles />
