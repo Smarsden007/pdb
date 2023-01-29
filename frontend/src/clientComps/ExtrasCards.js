@@ -6,7 +6,7 @@ export const ExtrasCards = () => {
   return (
     <div>
       <div>
-        <div className="grid grid-cols-1 grid-rows-6 lg:grid-cols-3 lg:grid-rows-2 lg:gap-16">
+        <div className="grid grid-cols-1 grid-rows-6 lg:grid-cols-3 lg:grid-rows-2 lg:gap-16 gap-8">
             <div>
           <div className="flex flex-col justify-center items-center align-center">
             <div className=" flex flex-col justify-center align-center items-center border-solid border-4 rounded-[4rem] border-[#c0a58e]  w-72 lg:w-96 p-2 md:col-start-1 md:row-start-1 lg:col-start-1">
@@ -32,7 +32,7 @@ export const ExtrasCards = () => {
                     <li>In-house Theme Package:$70</li>
                   </div>
                 </div>
-                <Link>
+                <Link to='/checkout'>
                   <button className="bg-[#c0a58e] text-white rounded-lg w-48 h-12 m-4 hover:bg-white hover:border-[#c0a58e] hover:border-solid hover:border-4 hover:text-[#c0a58e]">
                     Continue to Booking
                   </button>
@@ -65,7 +65,7 @@ export const ExtrasCards = () => {
                     <li>In-house Theme Package:$70</li>
                   </div>
                 </div>
-                <Link>
+                <Link to='/checkout'>
                   <button className="bg-[#c0a58e] text-white rounded-lg w-48 h-12 m-4 hover:bg-white hover:border-[#c0a58e] hover:border-solid hover:border-4 hover:text-[#c0a58e]">
                     Continue to Booking
                   </button>
@@ -98,7 +98,7 @@ export const ExtrasCards = () => {
                     <li>In-house Theme Package:$70</li>
                   </div>
                 </div>
-                <Link>
+                <Link to='/checkout'>
                   <button className="bg-[#c0a58e] text-white rounded-lg w-48 h-12 m-4 hover:bg-white hover:border-[#c0a58e] hover:border-solid hover:border-4 hover:text-[#c0a58e]">
                     Continue to Booking
                   </button>
@@ -131,7 +131,7 @@ export const ExtrasCards = () => {
                     <li>In-house Theme Package:$70</li>
                   </div>
                 </div>
-                <Link>
+                <Link to='/checkout'>
                   <button className="bg-[#c0a58e] text-white rounded-lg w-48 h-12 m-4 hover:bg-white hover:border-[#c0a58e] hover:border-solid hover:border-4 hover:text-[#c0a58e]">
                     Continue to Booking
                   </button>
@@ -164,7 +164,7 @@ export const ExtrasCards = () => {
                     <li>In-house Theme Package:$70</li>
                   </div>
                 </div>
-                <Link>
+                <Link to='/checkout'>
                   <button className="bg-[#c0a58e] text-white rounded-lg w-48 h-12 m-4 hover:bg-white hover:border-[#c0a58e] hover:border-solid hover:border-4 hover:text-[#c0a58e]">
                     Continue to Booking
                   </button>
@@ -197,7 +197,7 @@ export const ExtrasCards = () => {
                     <li>In-house Theme Package:$70</li>
                   </div>
                 </div>
-                <Link>
+                <Link to='/checkout'>
                   <button className="bg-[#c0a58e] text-white rounded-lg w-48 h-12 m-4 hover:bg-white hover:border-[#c0a58e] hover:border-solid hover:border-4 hover:text-[#c0a58e]">
                     Continue to Booking
                   </button>

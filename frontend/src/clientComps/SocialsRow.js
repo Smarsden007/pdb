@@ -6,19 +6,19 @@ export const SocialsRow = () => {
     <div className="flex flex-col justify-center p-4">
       <div className="flex mx-auto">
         <a
-          href="https://www.facebook.com"
+          href="https://www.facebook.com/pouncyparties/"
           className="text-2xl lg:text-4xl mx-4"
         >
           <FaFacebook />
         </a>
         <a
-          href="https://www.instagram.com"
+          href="https://www.instagram.com/pouncyparties"
           className="text-2xl lg:text-4xl mx-4"
         >
           <FaInstagram />
         </a>
         <a
-          href="https://www.instagram.com"
+          href="https://www.tiktok.com/@pouncyparties"
           className="text-2xl lg:text-4xl mx-4"
         >
           <FaTiktok />

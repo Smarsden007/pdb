@@ -25,6 +25,9 @@ import { SubNav } from "./clientComps/SubNav";
 import { PopUps } from "./clientPages/PopUps";
 import { Background } from "./clientComps/Background";
 import { Extras } from "./clientPages/Extras";
+import { ToddlerMasterCheckout } from "./clientComps/ToddlerMasterCheckout";
+import { CastleMasterCheckout } from "./clientComps/CastleMasterCheckout";
+import { BastilleMasterCheckout } from "./clientComps/BastilleMasterCheckout";
 
 function App() {
   const PrivateRoutes = () => {
@@ -61,7 +64,37 @@ function App() {
               <div>
                 <NavBar />
                 <Checkout className="" />
-                <Footer />
+                <Footer className=""/>
+              </div>
+            }
+          />
+          <Route
+            path="/toddler-checkout"
+            element={
+              <div>
+                <NavBar />
+                <ToddlerMasterCheckout />
+                <Footer className=""/>
+              </div>
+            }
+          />
+          <Route
+            path="/castle-checkout"
+            element={
+              <div>
+                <NavBar />
+                <CastleMasterCheckout />
+                <Footer className=""/>
+              </div>
+            }
+          />
+          <Route
+            path="/bastille-checkout"
+            element={
+              <div>
+                <NavBar />
+                <BastilleMasterCheckout />
+                <Footer className=""/>
               </div>
             }
           />

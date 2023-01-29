@@ -51,6 +51,7 @@ router.get("/logout", logout);
 //Booking Table Routes
 router.post("/bookings", createBooking);
 router.post("/booking", createBooking2);
+router.get("/bookings2", getBookings);
 
 router.get("/bookings", getBookings);
 router.get("bookings/:id", getById);

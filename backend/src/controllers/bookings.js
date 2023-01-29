@@ -129,7 +129,7 @@ exports.editBooking = async (req, res) => {
 
 exports.getBookings = async (req, res) => {
   try {
-    const { rows } = await db.query("select * FROM bookings");
+    const { rows } = await db.query("select * FROM booking");
 
     return res.status(200).json({
       success: true,
@@ -342,29 +342,18 @@ exports.calendarDates = async (req, res) => {
   }
 };
 exports.availCalender = async (req, res) => {
-  try {
-    const { bouncer, date } = req.body;
-
-    // check if the bouncer is available on the specific date
-    const availability = await BounceHouse.findOne({
-      bouncer: bouncer,
-      date: date,
-    });
-
-    if (!availability) {
-      res.status(404).send({ error: "Bouncer not available on this date" });
-    } else {
-      res.status(200).send({ message: "Bouncer available on this date" });
+  Booking.find({ selected_bouncer: req.params.bouncer }, (err, bookings) => {
+    if (err) {
+      return res.status(500).send(err);
     }
-  } catch (error) {
-    console.error(error);
-    res.status(500).send({ error: "Error checking availability" });
-  }
-};
+    const dates = bookings.map(booking => booking.selected_date);
+    res.json(dates);
+  });
+}
 
 exports.selectionBouncer1 = async (req, res) => {
   try {
-      const bookedDates = await db.query('SELECT rent_date FROM bookings WHERE bouncer = $1', ['bouncer1']);
+      const bookedDates = await db.query('SELECT selected_date FROM booking WHERE bouncer = $1', ['bouncer1']);
       res.json(bookedDates.rows);
   } catch (err) {
       console.error(err.message);
@@ -373,7 +362,7 @@ exports.selectionBouncer1 = async (req, res) => {
 };
 exports.selectionBouncer2 = async (req, res) => {
   try {
-      const bookedDates = await db.query('SELECT rent_date FROM bookings WHERE bouncer = $1', ['bouncer2']);
+      const bookedDates = await db.query('SELECT selected_date FROM booking WHERE bouncer = $1', ['bouncer2']);
       res.json(bookedDates.rows);
   } catch (err) {
       console.error(err.message);
@@ -382,7 +371,7 @@ exports.selectionBouncer2 = async (req, res) => {
 };
 exports.selectionBouncer3 = async (req, res) => {
   try {
-      const bookedDates = await db.query('SELECT rent_date FROM bookings WHERE bouncer = $1', ['bouncer2']);
+      const bookedDates = await db.query('SELECT selected_date FROM booking WHERE bouncer = $1', ['bouncer3']);
       res.json(bookedDates.rows);
   } catch (err) {
       console.error(err.message);

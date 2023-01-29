@@ -6,7 +6,7 @@ import moment from "moment";
 
 // import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import { Divider, TimePicker, Typography } from "antd";
-import DateSelection from "./childComps/DateSelection";
+import DateSelection2 from "./childComps/DateSelection2";
 import SelectedOptionsList from "./childComps/SelectedOptions";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import { Radio } from "antd";
@@ -14,15 +14,15 @@ import { Radio } from "antd";
 const { Title } = Typography;
 
 const options0 = [
-  { value: "4-Hours", price: 100 },
-  { value: "6-Hours", price: 200 },
-  { value: "8-Hours", price: 300 },
+  { value: "4-Hours", price: 300 },
+  { value: "6-Hours", price: 400 },
+  { value: "8-Hours", price: 500 },
   { value: "Photo-Shoot", price: 300 },
 ];
 const options1 = [
   { value: "No Thank You", price: 0 },
-  { value: "Half Arch", price: 125 },
-  { value: "Full Arch", price: 175 },
+  { value: "Half Arch", price: 150 },
+  { value: "Full Arch", price: 200 },
 ];
 
 const options2 = [
@@ -51,13 +51,13 @@ const options5 = [
 ];
 const options6 = [
   { value: "No Thank You", price: 0 },
-  { value: "Double Pannel", price: 100 },
-  { value: "3 Pannels", price: 125 },
+  { value: "Double Pannel", price: 150 },
+  { value: "3 Pannels", price: 200 },
 ];
-function ToddlerForm() {
+function CastleForm() {
   //Date Selection
   const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedBouncer, setSelectedBouncer] = useState("bouncer1");
+  const [selectedBouncer, setSelectedBouncer] = useState("bouncer2");
   //Master State for Total
   const [selectedOptionDelivery, setDeliveryOption] = useState("");
   const [selectedDuration, setSelectedOption0] = useState(options0[0]);
@@ -171,7 +171,7 @@ function ToddlerForm() {
           billingCity: billingCity,
           billingState: billingState,
           orderNumber: orderNumber,
-          bouncerName: selectedBouncer.value,
+          bouncerName: selectedBouncer,
           totalCost: total,
         };
         await axios.post("http://localhost:5000/api/booking", bookingData);
@@ -223,7 +223,7 @@ function ToddlerForm() {
           <div class="grid grid-cols-1 grid-rows-3 gap-2 lg:grid-cols-3 lg:grid-rows-1 ">
             {/* Left */}
             <div class="col-start-1 lg:col-start-1  max-w-sm p-6 bg-white border-4 border-[#c0a58e] rounded-lg shadow-md ">
-              <DateSelection
+              <DateSelection2
                 handleSelect1={setSelectedDate}
                 handleOptionSelect={handleOptionSelect}
               />
@@ -560,4 +560,4 @@ function ToddlerForm() {
   );
 }
 
-export default ToddlerForm;
+export default CastleForm;

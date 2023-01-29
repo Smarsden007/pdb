@@ -5,16 +5,16 @@ import "./DateSelection.css";
 import { Divider, Typography } from "antd";
 const { Title } = Typography;
 
-function DateSelection({ handleSelect1, selectedDate1, handleOptionSelect }) {
+function DateSelection2({ handleSelect1, selectedDate1, handleOptionSelect }) {
   const [bookedDates, setBookedDates] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [selectedBouncer, setSelectedBouncer] = useState("bouncer1");
+  const [selectedBouncer, setSelectedBouncer] = useState("bouncer3");
 
   const [isCalendarDisabled, setIsCalendarDisabled] = useState(true);
   useEffect(() => {
     async function fetchBookedDates() {
       const response = await fetch(
-        `http://localhost:5000/api/check-availability/bouncer1`
+        `http://localhost:5000/api/check-availability/bouncer3`
       );
       const bookedDates = await response.json();
       const dates = bookedDates.map((date) => date.selected_date.slice(0, 10));
@@ -43,7 +43,7 @@ function DateSelection({ handleSelect1, selectedDate1, handleOptionSelect }) {
       <>
         <div class="flex flex-start	mt-3 ml-3">
           <Title style={{ marginBottom: "-1rem" }} level={3}>
-            The Toddler
+            The Bastille
           </Title>
         </div>
         <Divider style={{ marginBottom: "-.25rem" }} />
@@ -92,4 +92,4 @@ function DateSelection({ handleSelect1, selectedDate1, handleOptionSelect }) {
   );
 }
 
-export default DateSelection;
+export default DateSelection2;
