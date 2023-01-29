@@ -49,11 +49,12 @@ exports.createBooking2 = async (req, res) => {
     billingState,
     orderNumber,
     bouncerName,
-    billingEmail
+    billingEmail,
+    total_cost
   } = req.body;
   try {
     await db.query(
-      "INSERT INTO booking(selected_duration, selected_balloons, selected_vinyl, selected_generator, selected_garland, selected_delivery, selected_date, selected_time, selected_colors, selected_option_delivery, billing_name, billing_address, billing_city, billing_state, order_number,bouncer,billing_email) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17)",
+      "INSERT INTO booking(selected_duration, selected_balloons, selected_vinyl, selected_generator, selected_garland, selected_delivery, selected_date, selected_time, selected_colors, selected_option_delivery, billing_name, billing_address, billing_city, billing_state, order_number,bouncer,billing_email,total) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17, $18)",
       [
         selectedDuration,
         selectedBalloons,
@@ -71,7 +72,9 @@ exports.createBooking2 = async (req, res) => {
         billingState,
         orderNumber,
         bouncerName,
-        billingEmail
+        billingEmail,
+        total_cost
+
       ]
     );
 

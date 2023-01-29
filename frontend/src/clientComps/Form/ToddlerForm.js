@@ -5,17 +5,11 @@ import "./../Form/childComps/DateSelection.css";
 import moment from "moment";
 
 // import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
-import {
-  
-  Divider,
-  TimePicker,
-  Typography,
-} from "antd";
+import { Divider, TimePicker, Typography } from "antd";
 import DateSelection from "./childComps/DateSelection";
 import SelectedOptionsList from "./childComps/SelectedOptions";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import { Radio } from "antd";
-
 
 const { Title } = Typography;
 
@@ -63,7 +57,7 @@ const options6 = [
 function Form() {
   //Date Selection
   const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedBouncer, setSelectedBouncer] = useState("default");
+  const [selectedBouncer, setSelectedBouncer] = useState("bouncer1");
   //Master State for Total
   const [selectedOptionDelivery, setDeliveryOption] = useState("");
   const [selectedDuration, setSelectedOption0] = useState(options0[0]);
@@ -104,11 +98,10 @@ function Form() {
     { value: "purple", label: "Purple" },
   ];
   useEffect(() => {
-
     let newTotal = 0;
 
     console.log("### setting total");
-    
+
     newTotal += selectedDuration ? selectedDuration.price : 0;
     newTotal += selectedBalloons ? selectedBalloons.price : 0;
     newTotal += selectedVinyl ? selectedVinyl.price : 0;
@@ -116,7 +109,6 @@ function Form() {
     newTotal += selectedGarland ? selectedGarland.price : 0;
     newTotal += selectedDelivery ? selectedDelivery.price : 0;
     newTotal += selectedBackdrop ? selectedBackdrop.price : 0;
-
 
     console.log("### setting total", newTotal);
     setTotal(newTotal);
@@ -127,6 +119,7 @@ function Form() {
     selectedGenerator,
     selectedGarland,
     selectedDelivery,
+    selectedBackdrop
   ]);
 
   const handleSubmit = async (e) => {
@@ -138,7 +131,7 @@ function Form() {
       card: elements.getElement(CardElement),
       billing_details: {
         name: billingName,
-        email:billingEmail,
+        email: billingEmail,
         address: {
           line1: billingAddress,
           city: billingCity,
@@ -152,15 +145,13 @@ function Form() {
       const { id } = paymentMethod;
       try {
         const { data } = await axios.post("http://localhost:5000/api/charge", {
-          
           amount: total * 100, //convert to cents
           paymentMethodId: id,
           orderNumber,
           option1: selectedBalloons.value,
           option2: selectedBalloons.value,
-        }
-        );
-        console.log(data,'test')
+        });
+        console.log(data, "test");
         const time = new Date(selectedTime).toLocaleTimeString();
 
         const bookingData = {
@@ -180,18 +171,19 @@ function Form() {
           billingCity: billingCity,
           billingState: billingState,
           orderNumber: orderNumber,
-          bouncerName: selectedBouncer.value
+          bouncerName: selectedBouncer.value,
+          totalCost: total,
         };
-        await axios.post("http://localhost:5000/api/booking", bookingData);
+        await axios.post("postgresql://postgres:DWqN5oDcgd7inGdFgfnN@containers-us-west-89.railway.app:7194/railway/api/booking", bookingData);
         setOrderPlaced(true);
-        console.log(orderPlaced)
+        console.log(orderPlaced);
         navigate(`/success/${orderNumber}`);
       } catch (e) {
         console.log(e);
       }
     }
   };
- 
+
   const handleDeliveryChange = (e) => {
     setDeliveryOption(e.target.value);
     if (e.target.value === "no") {
@@ -201,8 +193,6 @@ function Form() {
   const handleOptionSelect = (bouncer) => {
     setSelectedBouncer(bouncer);
   };
-
-
 
   //Master State Console- Delete before DEPLOY!!
   console.log(
@@ -222,7 +212,8 @@ function Form() {
     billingCity,
     billingState,
     orderNumber,
-    billingEmail
+    billingEmail,
+    selectedBouncer
   );
 
   return (
@@ -482,7 +473,7 @@ function Form() {
                     <div className="flex flex-row justify-between mb-2 ">
                       <label>Name: </label>
                       <input
-                        className="border-[#c0a58e] border-2 p-2 rounded w-36"
+                        className="border-[#c0a58e] border-2 p-2 rounded w-36 lg:w-48"
                         type="text"
                         value={billingName}
                         onChange={(e) => setBillingName(e.target.value)}
@@ -491,7 +482,7 @@ function Form() {
                     <div className="flex flex-row justify-between mb-2">
                       <label>Email: </label>
                       <input
-                        className="border-[#c0a58e] border-2 p-2 rounded w-36"
+                        className="border-[#c0a58e] border-2 p-2 rounded w-36 lg:w-48"
                         type="email"
                         value={billingEmail}
                         onChange={(e) => setBillingEmail(e.target.value)}
@@ -500,7 +491,7 @@ function Form() {
                     <div className="flex flex-row justify-between mb-2">
                       <label>Address:</label>
                       <input
-                        className="border-[#c0a58e] border-2 p-2 rounded w-36"
+                        className="border-[#c0a58e] border-2 p-2 rounded w-36 lg:w-48"
                         type="text"
                         value={billingAddress}
                         onChange={(e) => setBillingAddress(e.target.value)}
@@ -509,7 +500,7 @@ function Form() {
                     <div className="flex flex-row justify-between mb-2">
                       <label>City:</label>
                       <input
-                        className="border-[#c0a58e] border-2 p-2 rounded w-36"
+                        className="border-[#c0a58e] border-2 p-2 rounded w-36 lg:w-48"
                         type="text"
                         value={billingCity}
                         onChange={(e) => setBillingCity(e.target.value)}
@@ -518,7 +509,7 @@ function Form() {
                     <div className="flex flex-row justify-between mb-2">
                       <label>State:</label>
                       <input
-                        className="border-[#c0a58e] border-2 p-2 rounded w-36"
+                        className="border-[#c0a58e] border-2 p-2 rounded w-36 lg:w-48"
                         type="text"
                         value={billingState}
                         onChange={(e) => setBillingState(e.target.value)}
@@ -527,7 +518,7 @@ function Form() {
                     <div className="flex flex-row justify-between mb-2">
                       <label>Zip:</label>
                       <input
-                        className="border-[#c0a58e] border-2 p-2 rounded w-36"
+                        className="border-[#c0a58e] border-2 p-2 rounded w-36 lg:w-48"
                         type="text"
                         value={billingZip}
                         onChange={(e) => setBillingZip(e.target.value)}
@@ -552,7 +543,14 @@ function Form() {
                   <div></div>
                 </div>
               </div>
-              <div class=""></div>
+              <div class="">
+                <div class="mt-12">
+                  <Title level={5}>
+                    Questions? Call or text us at{" "}
+                    <a href="tel:+1234567890">707-238-1111</a>
+                  </Title>
+                </div>
+              </div>
               <div class="mt-12"></div>
             </div>
           </div>
