@@ -58,18 +58,22 @@ export const SubNav = () => {
                 </li>
                 </Link>
                 <li class="m-4 hover:text-stone-400 ">
-                  <Link to='/rentals'>
+                  <Link to='/rentals' onClick={() => setIsOpen(false)}>
                   <a href="rentals">RENTALS</a>
                   </Link>
                 </li>
                 <li class="m-4 hover:text-stone-400 ">
+                  <Link to='/extras' onClick={() => setIsOpen(false)}>
                   <a href="extra">EXTRAS</a>
+                  </Link>
                 </li>
                 <li class="m-4 hover:text-stone-400 ">
+                  <Link to='/pop-ups' onClick={() => setIsOpen(false)}>
                   <a href="pop-ups">POP-UPS</a>
+                  </Link>
                 </li>
                 <li class="m-4 hover:text-stone-400 ">
-                  <Link to='/partners'>
+                  <Link to='/partners' onClick={() => setIsOpen(false)}>
                   <a href="partners">PARTNERS</a>
                   </Link>
                 </li>

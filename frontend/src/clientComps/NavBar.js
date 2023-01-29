@@ -52,30 +52,33 @@ export const NavBar = () => {
 
             <div className="grid grid-cols-2">
               <div className="gird col-start-2">
-                <Link onClick={() => setIsOpen(false)} to='/'>
-                <li class="m-4  hover:text-stone-400">
-                  <a href="home">HOME</a>
-                </li>
+                <Link onClick={() => setIsOpen(false)} to="/">
+                  <li class="m-4  hover:text-stone-400">
+                    <a href="home">HOME</a>
+                  </li>
                 </Link>
                 <li class="m-4 hover:text-stone-400 ">
-                  <Link onClick={() => setIsOpen(false)} to='/rentals'>
-                  <a href="rentals">RENTALS</a>
+                  <Link onClick={() => setIsOpen(false)} to="/rentals">
+                    <a href="rentals">RENTALS</a>
                   </Link>
                 </li>
                 <li class="m-4 hover:text-stone-400 ">
-                  <a href="extra">EXTRAS</a>
+                  <Link onClick={() => setIsOpen(false)} to="/extras">
+                    <a href="extra">EXTRAS</a>
+                  </Link>
                 </li>
                 <li class="m-4 hover:text-stone-400 ">
-                  <a href="pop-ups">POP-UPS</a>
+                  <Link to="/pop-ups" onClick={() => setIsOpen(false)}>
+                    <a href="pop-ups">POP-UPS</a>
+                  </Link>
                 </li>
                 <li class="m-4 hover:text-stone-400 ">
-                  <Link onClick={() => setIsOpen(false)} to='/partners'>
-                  <a href="partners">PARTNERS</a>
+                  <Link onClick={() => setIsOpen(false)} to="/partners">
+                    <a href="partners">PARTNERS</a>
                   </Link>
                 </li>
                 <li class="m-4 hover:text-stone-400 ">
                   <Link to="/checkout" onClick={() => setIsOpen(false)}>
-                    {" "}
                     <a href="book">BOOK</a>
                   </Link>
                 </li>
