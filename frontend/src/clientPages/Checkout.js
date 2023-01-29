@@ -4,6 +4,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import Form from "../clientComps/Form/ToddlerForm";
 import left from "./../Media/StarLeft.png";
 import right from "./../Media/StarRight.png";
+import { BookingSelection } from "../clientComps/BookingSelection";
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
 
@@ -19,7 +20,7 @@ export const Checkout = () => {
       </div>
       <div>
         <Elements stripe={stripePromise}>
-          <Form />
+          <BookingSelection/>
         </Elements>
       </div>
     </div>

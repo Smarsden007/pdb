@@ -174,7 +174,7 @@ function Form() {
           bouncerName: selectedBouncer.value,
           totalCost: total,
         };
-        await axios.post("postgresql://postgres:DWqN5oDcgd7inGdFgfnN@containers-us-west-89.railway.app:7194/railway/api/booking", bookingData);
+        await axios.post("http://localhost:5000/api/booking", bookingData);
         setOrderPlaced(true);
         console.log(orderPlaced);
         navigate(`/success/${orderNumber}`);

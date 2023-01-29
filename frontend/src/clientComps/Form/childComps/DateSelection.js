@@ -14,10 +14,10 @@ function DateSelection({ handleSelect1, selectedDate1, handleOptionSelect }) {
   useEffect(() => {
     async function fetchBookedDates() {
       const response = await fetch(
-        `http://localhost:5000/api/check-availability/${selectedBouncer}`
+        `http://localhost:5000/api/check-availability/bouncer1`
       );
       const bookedDates = await response.json();
-      const dates = bookedDates.map((date) => date.rent_date.slice(0, 10));
+      const dates = bookedDates.map((date) => date.selected_date.slice(0, 10));
       setBookedDates(dates);
     }
     fetchBookedDates();
@@ -75,9 +75,14 @@ function DateSelection({ handleSelect1, selectedDate1, handleOptionSelect }) {
               handleSelect1(date);
             }}
             value={selectedDate}
-            tileDisabled={({ date }) =>
-              bookedDates.includes(new Date(date).toISOString().slice(0, 10))
-            }
+            tileDisabled={({ date }) => {
+              return bookedDates.includes(
+                date.toISOString().slice(0, 10)
+              );
+            }}
+            
+            
+          
           />
           
         </div>

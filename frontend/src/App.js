@@ -61,7 +61,7 @@ function App() {
               <div>
                 <NavBar />
                 <Checkout className="" />
-                <Footer />
+                <Footer className=""/>
               </div>
             }
           />

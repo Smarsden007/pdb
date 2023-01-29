@@ -162,7 +162,7 @@ export const CalendarView = () => {
   const [currentBookingId, setCurrentBookingId] = useState(null);
   useEffect(() => {
     // Fetch the bookings data from the back-end server
-    fetch("http://localhost:5000/api/bookings")
+    fetch("http://localhost:5000/api/bookings2")
       .then((response) => response.json())
       .then(({ bookings }) => {
         console.log(bookings);
@@ -182,21 +182,18 @@ export const CalendarView = () => {
             onChange={handleChange}
             value={date}
             tileContent={({ date, view }) => {
-              const formattedDate = date
-                .toISOString()
-                .slice(0, 10)
-                .replace(/-/g, "");
               const bookingsOnDate = bookings.filter(
                 (booking) =>
-                  booking.rent_date.slice(0, 10).replace(/-/g, "") ===
-                  formattedDate
+                  new Date(booking.selected_date).toISOString().slice(0, 10) ===
+                  date.toISOString().slice(0, 10)
               );
+
               console.log(bookingsOnDate);
               return bookingsOnDate.length > 0 ? (
                 <div>
                   <div className=" text-xs">
                     {bookingsOnDate.map((booking) => {
-                      const fulll_name = booking.fulll_name;
+                      const fulll_name = booking.billing_name;
                       const firstWord = fulll_name.split(" ")[0];
                       return (
                         <div class="flex items-center w-40" key={booking.id}>
@@ -256,7 +253,10 @@ export const CalendarView = () => {
                                   <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1v-5a1 1 0 00-.293-.707l-2-2A1 1 0 0015 7h-1z"></path>
                                 </svg>
                               ) : null}
-                              {booking.balloons ? "🎈" : null}
+                              {booking.selected_balloons == "Half Arch" ||
+                              booking.selected_balloons == "Full Arch"
+                                ? "🎈"
+                                : null}
                             </div>
                           </button>
                           {currentBookingId === booking.id && (
@@ -269,21 +269,21 @@ export const CalendarView = () => {
                               >
                                 <p>
                                   Balloons:{" "}
-                                  {booking.full_arch
+                                  {booking.selected_balloons
                                     ? "Full Arch"
-                                    : booking.half_arch
+                                    : booking.selected_balloons
                                     ? "Half Arch"
                                     : "None"}{" "}
                                   <br />
-                                  Rental Time: {booking.rental_time}
-                                  
+                                  Rental Time: {booking.selected_time}
                                   <br />
-                                  Generator: {booking.generator
+                                  Generator:{" "}
+                                  {booking.selected_generator === "Generator"
                                     ? "Yes"
                                     : "No"}{" "}
                                   <br />
                                   Phone: {booking.phone} <br />
-                                  Internal Notes: {booking.int_notes}
+                                  Email: {booking.billing_email}
                                 </p>
                               </div>
                             </div>
