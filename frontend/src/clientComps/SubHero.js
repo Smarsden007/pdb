@@ -13,7 +13,7 @@ export const SubHero = () => {
       </div>
       <div className="col-start-1 row-start-1 lg:col-start-2 lg:row-start-1 lg:mt-5">
         <div>
-          <img alt='cleaning' class="w-full" src={RightSide} />
+          <img alt='cleaning' class="w-full m-2" src={RightSide} />
         </div>
         <div className="ml-10">
           <h1 className="text-[.5rem] md:text-lg lg:text-lg p-2 md:p-4">
@@ -32,7 +32,7 @@ export const SubHero = () => {
       <div class="col-start-2 row-start-1 lg:col-start-3 lg:col-span-1 lg:row-span-3 ">
         <img alt='paul' class="w-full h-full lg:mt-10 " src={SubRight} />
       </div>
-      <div className='col-start-2 row-start-2 '>
+      <div className='col-start-2 row-start-2 flex flex-row align-center justify-center items-center m-10 '>
         <Circles />
       </div>
     </div>
