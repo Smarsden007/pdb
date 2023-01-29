@@ -5,17 +5,11 @@ import "./../Form/childComps/DateSelection.css";
 import moment from "moment";
 
 // import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
-import {
-  
-  Divider,
-  TimePicker,
-  Typography,
-} from "antd";
+import { Divider, TimePicker, Typography } from "antd";
 import DateSelection from "./childComps/DateSelection";
 import SelectedOptionsList from "./childComps/SelectedOptions";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import { Radio } from "antd";
-
 
 const { Title } = Typography;
 
@@ -55,10 +49,15 @@ const options5 = [
   { value: "South Bay", price: 40 },
   { value: "Test Bay", price: 50 },
 ];
+const options6 = [
+  { value: "No Thank You", price: 0 },
+  { value: "Double Pannel", price: 100 },
+  { value: "3 Pannels", price: 125 },
+];
 function Form() {
   //Date Selection
   const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedBouncer, setSelectedBouncer] = useState("default");
+  const [selectedBouncer, setSelectedBouncer] = useState("bouncer1");
   //Master State for Total
   const [selectedOptionDelivery, setDeliveryOption] = useState("");
   const [selectedDuration, setSelectedOption0] = useState(options0[0]);
@@ -67,6 +66,8 @@ function Form() {
   const [selectedGenerator, setSelectedOption3] = useState(options3[0]);
   const [selectedGarland, setSelectedOption4] = useState(options1[0]);
   const [selectedDelivery, setSelectedOption5] = useState(options5[0]);
+  const [selectedBackdrop, setSelectedOption6] = useState(options6[0]);
+
   const [total, setTotal] = useState(0);
   const [selectedColors, setSelectedColors] = useState([]);
   //billing Details
@@ -97,16 +98,17 @@ function Form() {
     { value: "purple", label: "Purple" },
   ];
   useEffect(() => {
-
     let newTotal = 0;
 
     console.log("### setting total");
+
     newTotal += selectedDuration ? selectedDuration.price : 0;
     newTotal += selectedBalloons ? selectedBalloons.price : 0;
     newTotal += selectedVinyl ? selectedVinyl.price : 0;
     newTotal += selectedGenerator ? selectedGenerator.price : 0;
     newTotal += selectedGarland ? selectedGarland.price : 0;
     newTotal += selectedDelivery ? selectedDelivery.price : 0;
+    newTotal += selectedBackdrop ? selectedBackdrop.price : 0;
 
     console.log("### setting total", newTotal);
     setTotal(newTotal);
@@ -117,6 +119,7 @@ function Form() {
     selectedGenerator,
     selectedGarland,
     selectedDelivery,
+    selectedBackdrop
   ]);
 
   const handleSubmit = async (e) => {
@@ -128,7 +131,7 @@ function Form() {
       card: elements.getElement(CardElement),
       billing_details: {
         name: billingName,
-        email:billingEmail,
+        email: billingEmail,
         address: {
           line1: billingAddress,
           city: billingCity,
@@ -142,15 +145,13 @@ function Form() {
       const { id } = paymentMethod;
       try {
         const { data } = await axios.post("http://localhost:5000/api/charge", {
-          
           amount: total * 100, //convert to cents
           paymentMethodId: id,
           orderNumber,
           option1: selectedBalloons.value,
           option2: selectedBalloons.value,
-        }
-        );
-        console.log(data,'test')
+        });
+        console.log(data, "test");
         const time = new Date(selectedTime).toLocaleTimeString();
 
         const bookingData = {
@@ -170,18 +171,19 @@ function Form() {
           billingCity: billingCity,
           billingState: billingState,
           orderNumber: orderNumber,
-          bouncerName: selectedBouncer.value
+          bouncerName: selectedBouncer.value,
+          totalCost: total,
         };
-        await axios.post("http://localhost:5000/api/booking", bookingData);
+        await axios.post("postgresql://postgres:DWqN5oDcgd7inGdFgfnN@containers-us-west-89.railway.app:7194/railway/api/booking", bookingData);
         setOrderPlaced(true);
-        console.log(orderPlaced)
+        console.log(orderPlaced);
         navigate(`/success/${orderNumber}`);
       } catch (e) {
         console.log(e);
       }
     }
   };
- 
+
   const handleDeliveryChange = (e) => {
     setDeliveryOption(e.target.value);
     if (e.target.value === "no") {
@@ -191,8 +193,6 @@ function Form() {
   const handleOptionSelect = (bouncer) => {
     setSelectedBouncer(bouncer);
   };
-
-
 
   //Master State Console- Delete before DEPLOY!!
   console.log(
@@ -212,7 +212,8 @@ function Form() {
     billingCity,
     billingState,
     orderNumber,
-    billingEmail
+    billingEmail,
+    selectedBouncer
   );
 
   return (
@@ -368,6 +369,24 @@ function Form() {
                 </div>
               ) : null}
               <div>
+                <Title className="m-0 p-0" level={3}>
+                  Back Drop
+                </Title>
+                <Divider className="m-0" />
+                <select
+                  className="w-48 mt-2 mb-3 border border-[#c0a58e] rounded"
+                  onChange={(e) =>
+                    setSelectedOption6(options6[e.target.selectedIndex])
+                  }
+                >
+                  {options1.map((option) => (
+                    <option key={option.value} value={option}>
+                      {option.value}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
                 <Title className="m-0 p-0" level={5}>
                   Need power for a remote location?
                 </Title>
@@ -425,6 +444,7 @@ function Form() {
                         selectedGenerator={selectedGenerator}
                         selectedGarland={selectedGarland}
                         selectedDelivery={selectedDelivery}
+                        selectedBackdrop={selectedBackdrop}
                       />
                       {selectedDate && (
                         <p>
@@ -450,10 +470,10 @@ function Form() {
                   </div>
                   <div class="flex flex-col m-1">
                     <p className="text-xl">Your Sub Total:$ {total}</p>
-                    <div className="flex flex-row justify-between mb-2">
+                    <div className="flex flex-row justify-between mb-2 ">
                       <label>Name: </label>
                       <input
-                        className="border-[#c0a58e] border-2 p-2 rounded"
+                        className="border-[#c0a58e] border-2 p-2 rounded w-36 lg:w-48"
                         type="text"
                         value={billingName}
                         onChange={(e) => setBillingName(e.target.value)}
@@ -462,7 +482,7 @@ function Form() {
                     <div className="flex flex-row justify-between mb-2">
                       <label>Email: </label>
                       <input
-                        className="border-[#c0a58e] border-2 p-2 rounded"
+                        className="border-[#c0a58e] border-2 p-2 rounded w-36 lg:w-48"
                         type="email"
                         value={billingEmail}
                         onChange={(e) => setBillingEmail(e.target.value)}
@@ -471,7 +491,7 @@ function Form() {
                     <div className="flex flex-row justify-between mb-2">
                       <label>Address:</label>
                       <input
-                        className="border-[#c0a58e] border-2 p-2 rounded"
+                        className="border-[#c0a58e] border-2 p-2 rounded w-36 lg:w-48"
                         type="text"
                         value={billingAddress}
                         onChange={(e) => setBillingAddress(e.target.value)}
@@ -480,7 +500,7 @@ function Form() {
                     <div className="flex flex-row justify-between mb-2">
                       <label>City:</label>
                       <input
-                        className="border-[#c0a58e] border-2 p-2 rounded"
+                        className="border-[#c0a58e] border-2 p-2 rounded w-36 lg:w-48"
                         type="text"
                         value={billingCity}
                         onChange={(e) => setBillingCity(e.target.value)}
@@ -489,7 +509,7 @@ function Form() {
                     <div className="flex flex-row justify-between mb-2">
                       <label>State:</label>
                       <input
-                        className="border-[#c0a58e] border-2 p-2 rounded"
+                        className="border-[#c0a58e] border-2 p-2 rounded w-36 lg:w-48"
                         type="text"
                         value={billingState}
                         onChange={(e) => setBillingState(e.target.value)}
@@ -498,7 +518,7 @@ function Form() {
                     <div className="flex flex-row justify-between mb-2">
                       <label>Zip:</label>
                       <input
-                        className="border-[#c0a58e] border-2 p-2 rounded"
+                        className="border-[#c0a58e] border-2 p-2 rounded w-36 lg:w-48"
                         type="text"
                         value={billingZip}
                         onChange={(e) => setBillingZip(e.target.value)}
@@ -523,7 +543,14 @@ function Form() {
                   <div></div>
                 </div>
               </div>
-              <div class=""></div>
+              <div class="">
+                <div class="mt-12">
+                  <Title level={5}>
+                    Questions? Call or text us at{" "}
+                    <a href="tel:+1234567890">707-238-1111</a>
+                  </Title>
+                </div>
+              </div>
               <div class="mt-12"></div>
             </div>
           </div>

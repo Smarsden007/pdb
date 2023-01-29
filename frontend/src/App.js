@@ -22,6 +22,9 @@ import { Rentals } from "./clientPages/Rentals";
 import { Partners } from "./clientPages/Partners";
 import { OrderConfirmation } from "./clientComps/Form/OrderConfirmation";
 import { SubNav } from "./clientComps/SubNav";
+import { PopUps } from "./clientPages/PopUps";
+import { Background } from "./clientComps/Background";
+import { Extras } from "./clientPages/Extras";
 
 function App() {
   const PrivateRoutes = () => {
@@ -62,6 +65,26 @@ function App() {
               </div>
             }
           />
+          <Route
+            path="/pop-ups"
+            element={
+              <div>
+                <NavBar />
+                <PopUps />
+                <Footer />
+              </div>
+            }
+          />
+          <Route
+            path="/extras"
+            element={
+              <div>
+                <NavBar />
+                <Extras/>
+                <Footer />
+              </div>
+            }
+          />
           <Route path="/login" element={<LoginPage />} />
           <Route
             path="/"
@@ -91,20 +114,27 @@ function App() {
           <Route
             path="/partners"
             element={
-              <div>
+              <div className="bg-[#f8f5f2]">
+                <Background>
                 <NavBar />
 
                 <Partners />
                 <Footer />
+                </Background>
               </div>
             }
           />
-          <Route path="/success/:orderNumber" element={<div>
+          <Route
+            path="/success/:orderNumber"
+            element={
+              <div>
                 <NavBar />
 
                 <OrderConfirmation />
                 <Footer />
-              </div>} />
+              </div>
+            }
+          />
         </Route>
       </Routes>
     </BrowserRouter>
