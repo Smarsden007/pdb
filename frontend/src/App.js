@@ -22,7 +22,7 @@ import { Rentals } from "./clientPages/Rentals";
 import { Partners } from "./clientPages/Partners";
 import { OrderConfirmation } from "./clientComps/Form/OrderConfirmation";
 import { SubNav } from "./clientComps/SubNav";
-import { ComingSoon } from "./clientComps/ComingSoon";
+import { PopUps } from "./clientPages/PopUps";
 
 function App() {
   const PrivateRoutes = () => {
@@ -68,7 +68,7 @@ function App() {
             element={
               <div>
                 <NavBar />
-                <ComingSoon />
+                <PopUps />
                 <Footer />
               </div>
             }
@@ -99,7 +99,6 @@ function App() {
               </div>
             }
           />
-          
           <Route
             path="/partners"
             element={
@@ -111,14 +110,18 @@ function App() {
               </div>
             }
           />
-          <Route path="/success/:orderNumber" element={<div>
+          <Route
+            path="/success/:orderNumber"
+            element={
+              <div>
                 <NavBar />
 
                 <OrderConfirmation />
                 <Footer />
-              </div>} />
+              </div>
+            }
+          />
         </Route>
-        
       </Routes>
     </BrowserRouter>
   );
