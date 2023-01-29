@@ -31,7 +31,7 @@ export const BookingSelection = () => {
                 $100 4-HOURS | $200 6-HOURS
               </p>
               <p className="text-bold text-center font-mono font-bold">
-                $300 6-HOURS
+                $300 8-HOURS
               </p>
               <p className="text-bold text-center">
                 Requires 12' X 12' clearance
@@ -71,10 +71,10 @@ export const BookingSelection = () => {
               
             </div>
             <p className="text-bold text-center font-mono font-bold">
-                $100 4-HOURS | $200 6-HOURS
+                $300 4-HOURS | $400 6-HOURS
               </p>
               <p className="text-bold text-center font-mono font-bold">
-                $300 6-HOURS
+                $500 8-HOURS
               </p>
               <p className="text-bold text-center">
                 Requires 12' X 12' clearance
@@ -83,9 +83,9 @@ export const BookingSelection = () => {
                 includes: shoe rack, 50-foot extesion cord, entrance turf
               </p>
               <p className="text-bold text-center font-mono font-bold">
-                *FOR AGES 10 AND UNDER*
+              *FOR ALL AGES*
               </p>
-            <Link to='/toddler-checkout'>
+            <Link to='/castle-checkout'>
                 <button className="bg-[#c0a58e] text-white rounded-lg w-36 h-12 hover:bg-white hover:border-[#c0a58e] hover:border-solid hover:border-4 hover:text-[#c0a58e] text-2xl">
                   Continue
                 </button>
@@ -114,10 +114,10 @@ export const BookingSelection = () => {
               
             </div>
             <p className="text-bold text-center font-mono font-bold">
-                $100 4-HOURS | $200 6-HOURS
+                $300 4-HOURS | $400 6-HOURS
               </p>
               <p className="text-bold text-center font-mono font-bold">
-                $300 6-HOURS
+                $500 8-HOURS
               </p>
               <p className="text-bold text-center">
                 Requires 12' X 12' clearance
@@ -126,9 +126,9 @@ export const BookingSelection = () => {
                 includes: shoe rack, 50-foot extesion cord, entrance turf
               </p>
               <p className="text-bold text-center font-mono font-bold">
-                *FOR AGES 10 AND UNDER*
+                *FOR ALL AGES*
               </p>
-            <Link to='/toddler-checkout'>
+            <Link to='/bastille-checkout'>
                 <button className="bg-[#c0a58e] text-white rounded-lg w-36 h-12 hover:bg-white hover:border-[#c0a58e] hover:border-solid hover:border-4 hover:text-[#c0a58e] text-2xl">
                   Continue
                 </button>

@@ -362,7 +362,7 @@ exports.selectionBouncer1 = async (req, res) => {
 };
 exports.selectionBouncer2 = async (req, res) => {
   try {
-      const bookedDates = await db.query('SELECT rent_date FROM bookings WHERE bouncer = $1', ['bouncer2']);
+      const bookedDates = await db.query('SELECT selected_date FROM booking WHERE bouncer = $1', ['bouncer2']);
       res.json(bookedDates.rows);
   } catch (err) {
       console.error(err.message);
@@ -371,7 +371,7 @@ exports.selectionBouncer2 = async (req, res) => {
 };
 exports.selectionBouncer3 = async (req, res) => {
   try {
-      const bookedDates = await db.query('SELECT rent_date FROM bookings WHERE bouncer = $1', ['bouncer2']);
+      const bookedDates = await db.query('SELECT selected_date FROM booking WHERE bouncer = $1', ['bouncer3']);
       res.json(bookedDates.rows);
   } catch (err) {
       console.error(err.message);
