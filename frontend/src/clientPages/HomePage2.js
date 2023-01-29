@@ -59,7 +59,7 @@ export const HomePage = () => {
         {/* Center Text Top Image */}
         <div className="flex-1 flex p-5 mt-28 w-48 flex-col lg:justify-center md:justify-end  md:-mt-4  col-start-3 row-start-1 col-span-1 md:ml-20 lg:col-start-5 lg:ml-0 lg:row-start-1 lg:mt-48  sm:w-48 md:w-3/4 lg:w-80 lg:p-5 visible md:invisible lg:visible sm:visible">
           <div className="md:bg-opacity-70 md:bg-white  md:rounded-xl lg:bg-opacity-0">
-            <h1 className="text-[.75rem] w-52 lg:text-lg p-2 md:p-4">
+            <h1 className="text-[.75rem] w-42 lg:text-lg p-2 md:p-4">
               All the Lorem Ipsum generators on the Internet tend to repeat
               predefined chunks as necessary, making this the first true
               generator on the Internet. It uses a dictionary of over 200 Latin

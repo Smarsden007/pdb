@@ -1,13 +1,24 @@
-import React from "react";
+import {useState, React} from "react";
 import { LogoutButton } from "./LogoutButton";
 import { Outlet } from "react-router-dom";
 import logo from "./../Media/logo.png";
 import { Link } from "react-router-dom";
 
 export const Navbar = () => {
+  const [isNavbarVisible, setIsNavbarVisible] = useState(true);
+
   return (
-    <aside className="w-64" aria-label="Sidebar">
-      <div className="overflow-y-auto py-5 px-3 bg-gray-50 h-screen dark:bg-gray-800 drop-shadow-[15px_15px_15px_rgba(0,0,0,0.35)] ">
+    <>
+    <button onClick={() => setIsNavbarVisible(!isNavbarVisible)}>
+      {isNavbarVisible ? "Hide" : "Show"} Navbar
+    </button>
+    <aside
+      className={`w-64 ${
+        isNavbarVisible ? "" : "hidden"
+      } overflow-y-auto py-5 px-3 bg-gray-50 h-screen dark:bg-gray-800 drop-shadow-[15px_15px_15px_rgba(0,0,0,0.35)]`}
+      aria-label="Sidebar"
+    >
+      
          
         <div>
           <a href="https://flowbite.com/" class="flex items-center">
@@ -177,8 +188,9 @@ export const Navbar = () => {
             </div>
           </li>
         </ul>
-      </div>
+     
       <Outlet />
     </aside>
+    </>
   );
 };
