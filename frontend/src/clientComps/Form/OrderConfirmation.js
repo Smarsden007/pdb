@@ -10,7 +10,7 @@ export const OrderConfirmation = () => {
   return (
     <div className="flex flex-col justify-center items-center align-middle">
       <Title level={2}>Confirmation</Title>
-        <Card style={{width: 600, border:'#c0a58e', borderStyle:'solid'}}>
+        <Card style={{width: "auto", border:'#c0a58e', borderStyle:'solid'}}>
       <div className="flex flex-row justify-center align-center items-center">
         <img alt='test' src={left} className="w-24" />
         <h1 className="text-3xl font-mono mt-10">Thank You!</h1>
