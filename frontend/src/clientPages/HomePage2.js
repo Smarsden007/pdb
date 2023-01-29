@@ -29,11 +29,11 @@ export const HomePage = () => {
       <div className="grid grid-cols-4 grid-rows-1 lg:grid-cols-9 lg:grid-rows-1 h-8/12">
         {/* Left Image */}
         <div className="object-top h-7/12 col-span-2  row-span-1  lg:col-span-4 lg:row-span-3 lg:h-6/12">
-          <img alt="hero" class="lg:h-[100vh] w-12/12" src={ripHero}></img>
+          <img alt="hero" class="lg:h-[100vh] h-[60vh] w-auto" src={ripHero}></img>
         </div>
 
         {/* Middle Overlap Slogan */}
-        <div class="absolute lg:top-56 lg:w-auto lg:left-96 w-30 z-40  top-16 left-56 md ">
+        <div class="absolute lg:top-56 lg:w-auto lg:left-96 w-52 z-40  top-16 left-40 md ">
           <img
             alt="gravity"
             class="h-auto w-8/12 visible md:visible lg:visible sm:visible"
