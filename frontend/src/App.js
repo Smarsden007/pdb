@@ -24,6 +24,7 @@ import { OrderConfirmation } from "./clientComps/Form/OrderConfirmation";
 import { SubNav } from "./clientComps/SubNav";
 import { PopUps } from "./clientPages/PopUps";
 import { Background } from "./clientComps/Background";
+import { Extras } from "./clientPages/Extras";
 
 function App() {
   const PrivateRoutes = () => {
@@ -70,6 +71,16 @@ function App() {
               <div>
                 <NavBar />
                 <PopUps />
+                <Footer />
+              </div>
+            }
+          />
+          <Route
+            path="/extras"
+            element={
+              <div>
+                <NavBar />
+                <Extras/>
                 <Footer />
               </div>
             }
