@@ -80,6 +80,7 @@ function BastilleForm() {
   const [orderNumber, setOrderNumber] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
   const [billingEmail, setBillingEmail] = useState("");
+  const [billingPhone, setBillingPhone] = useState("");
 
   const navigate = useNavigate();
 
@@ -172,7 +173,8 @@ function BastilleForm() {
           billingState: billingState,
           orderNumber: orderNumber,
           bouncerName: selectedBouncer,
-          totalCost: total,
+          total_cost: total,
+          phone:billingPhone
         };
         await axios.post("http://localhost:5000/api/booking", bookingData);
         setOrderPlaced(true);
@@ -486,6 +488,15 @@ function BastilleForm() {
                         type="email"
                         value={billingEmail}
                         onChange={(e) => setBillingEmail(e.target.value)}
+                      />
+                    </div>
+                    <div className="flex flex-row justify-between mb-2">
+                      <label>Phone:</label>
+                      <input
+                        className="border-[#c0a58e] border-2 p-2 rounded w-36 lg:w-48"
+                        type="text"
+                        value={billingPhone}
+                        onChange={(e) => setBillingPhone(e.target.value)}
                       />
                     </div>
                     <div className="flex flex-row justify-between mb-2">

@@ -14,11 +14,11 @@ export const BookingsTable = () => {
     try {
       // Make a PATCH request to the server to update the booking
       await axios.patch(
-        `http://localhost:5000/api/bookings/${selectedBooking.id}`,
+        `http://localhost:5000/api/bookings2/${selectedBooking.id}`,
         {
           // include the updated booking data in the request body
-          fulll_name: event.target.fulll_name.value,
-          paid: event.target.paid.value,
+          billing_name: event.target.billing_name.value,
+          total: event.target.total.value,
 
           // other updated fields go here when needed
         }
@@ -41,7 +41,7 @@ export const BookingsTable = () => {
 
       // Close the modal and update the search term
       setSelectedBooking(null);
-      setSearchTerm(event.target.fulll_name.value);
+      setSearchTerm(event.target.billing_name.value);
     } catch (err) {
       console.error(err);
       alert("An error occurred while updating the booking");
@@ -73,7 +73,7 @@ export const BookingsTable = () => {
       // Filter the bookings based on the search term
       const filteredBookings = data.bookings.filter((booking) => {
         return (
-          booking.fulll_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          booking.billing_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
           booking.email.toLowerCase().includes(searchTerm.toLowerCase())
         );
       });
@@ -105,8 +105,8 @@ export const BookingsTable = () => {
 
   const columns = [
     {
-      dataIndex: "fulll_name",
-      key: "fulll_name",
+      dataIndex: "billing_name",
+      key: "billing_name",
       render: (text) => <span style={{ fontSize: "x-small" }}>{text}</span>,
       title: <span style={{ fontSize: ".65rem" }}>Full Name</span>,
     },
@@ -117,8 +117,8 @@ export const BookingsTable = () => {
       title: <span style={{ fontSize: ".65rem" }}>Phone</span>,
     },
     {
-      dataIndex: "delivery_ad",
-      key: "delivery_ad",
+      dataIndex: "billing_address",
+      key: "billing_address",
       render: (text) => (
         <span style={{ fontSize: "x-small" }}>{text}</span>
       ),
@@ -134,18 +134,18 @@ export const BookingsTable = () => {
       title: <span style={{ fontSize: ".65rem" }}>Bouncer</span>,
     },
     {
-      dataIndex: "rent_date",
-      key: "rent_date",
+      dataIndex: "selected_date",
+      key: "selected_date",
       render: (rent_date) => (
         <span style={{ fontSize: "x-small" }}>{rent_date}</span>
       ),
       title: <span style={{ fontSize: ".65rem" }}>Date</span>,
     },
     {
-      dataIndex: "rental_time",
-      key: "rental_time",
-      render: (rental_time) => (
-        <span style={{ fontSize: "x-small" }}>{rental_time}</span>
+      dataIndex: "selected_time",
+      key: "selected_time",
+      render: (selected_time) => (
+        <span style={{ fontSize: "x-small" }}>{selected_time}</span>
       ),
       title: (
         <span style={{ whiteSpace: "nowrap", fontSize: ".65rem" }}>
@@ -154,53 +154,26 @@ export const BookingsTable = () => {
       ),
     },
     {
-      dataIndex: "generator",
-      key: "generator",
+      dataIndex: "selected_generator",
+      key: "selected_generator",
       render: (generator) => (
         <span style={{ fontSize: "x-small" }}>{generator}</span>
       ),
       title: <span style={{ fontSize: ".65rem" }}>Generator</span>,
     },
     {
-      dataIndex: "balloons",
-      key: "balloons",
+      dataIndex: "selected_balloons",
+      key: "selected_balloons",
       render: (balloons) => (
         <span style={{ fontSize: "x-small" }}>{balloons}</span>
       ),
       title: <span style={{ fontSize: ".65rem" }}>Balloons</span>,
     },
-    {
-      dataIndex: "half_arch",
-      key: "half_arch",
-      render: (half_arch) => (
-        <span style={{ fontSize: "x-small" }}>{half_arch}</span>
-      ),
-      title: <span style={{ fontSize: ".65rem" }}>Full Arch</span>,
-    },
-    {
-      dataIndex: "full_arch",
-      key: "full_arch",
-      render: (full_arch) => (
-        <span style={{ fontSize: "x-small" }}>{full_arch}</span>
-      ),
-      title: <span style={{ fontSize: ".65rem" }}>Full Arch</span>,
-    },
+  
 
     {
-      dataIndex: "vinyl",
-      key: "vinyl",
-      render: (vinyl) =>
-        vinyl ? (
-          <span style={{ fontSize: "x-small" }}>Yes</span>
-        ) : (
-          <span style={{ fontSize: "x-small" }}>No</span>
-        ),
-      title: <span style={{ fontSize: ".65rem" }}>Vinyl</span>,
-    },
-
-    {
-      dataIndex: "paid",
-      key: "paid",
+      dataIndex: "total",
+      key: "total",
       render: (paid) =>
         paid ? (
           <span style={{ fontSize: "x-small" }}>Yes</span>
@@ -229,7 +202,7 @@ export const BookingsTable = () => {
             <input
               type="text"
               class="block p-4 px-0 w-full text-sm  bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-pink-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer text-black"              id="fulll_name"
-              defaultValue={selectedBooking ? selectedBooking.fulll_name : ""}
+              defaultValue={selectedBooking ? selectedBooking.billing : ""}
             />
             <label htmlFor="paid" for="" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 t">
               Paid
@@ -237,7 +210,7 @@ export const BookingsTable = () => {
             <input
               type="text"
               class="block p-4 px-0 w-full text-sm  bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-pink-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer text-black"              id="paid"
-              defaultValue={selectedBooking ? selectedBooking.paid : ""}
+              defaultValue={selectedBooking ? selectedBooking.total : ""}
             />
           </div>
           {/* other form fields go here */}

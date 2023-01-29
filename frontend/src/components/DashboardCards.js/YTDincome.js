@@ -8,7 +8,7 @@ export const YTDincome = () => {
   const getTotalCost = async () => {
     try {
       const res = await axios.get("http://localhost:5000/api/ytd-income");
-      setTotalCost(res.data.total_cost);
+      setTotalCost(res.data.total);
     } catch (err) {
       console.error(err.response.data);
     }
@@ -44,7 +44,7 @@ export const MTDincome = () => {
   const getTotalCostForCurrentMonth = async () => {
     try {
       const res = await axios.get("http://localhost:5000/api/mtd-income");
-      setTotalCost(res.data.totalCost);
+      setTotalCost(res.data.total);
     } catch (err) {
       console.error(err.response.data);
     }

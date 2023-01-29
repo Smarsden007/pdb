@@ -6,7 +6,6 @@ import "./RentalCards.css";
 export const RentalCards = () => {
   return (
     <div>
-       
       <div className="grid grid-cols-1 grid-rows-3 md:grid-cols-2 md:grid-rows-2 lg:grid-cols-3 lg:grid-rows-1 gap-1 ">
         {/* Col1 */}
         <div className="flex flex-col justify-center items-center align-center">
@@ -14,10 +13,10 @@ export const RentalCards = () => {
             <div className="text-center">
               <img alt="stars" src={castle} />{" "}
               <p className="text-bold text-center font-mono font-bold">
-                $300 4-HOURS | $400 6-HOURS
+                $100 4-HOURS | $200 6-HOURS
               </p>
               <p className="text-bold text-center font-mono font-bold">
-                $500 6-HOURS
+                $300 8-HOURS
               </p>
               <p className="text-bold text-center">
                 Requires 14' X 14' clearance
@@ -26,7 +25,7 @@ export const RentalCards = () => {
                 includes: shoe rack, 50-foot extesion cord, entrance turf
               </p>
               <p className="text-bold text-center font-mono font-bold">
-                *FOR ALL AGES*
+                *FOR AGES 10 AND UNDER*
               </p>
               <Link>
                 <button className="bg-[#c0a58e] text-white rounded-lg w-36 h-12 hover:bg-white hover:border-[#c0a58e] hover:border-solid hover:border-4 hover:text-[#c0a58e]">
@@ -51,7 +50,7 @@ export const RentalCards = () => {
                 $500 6-HOURS
               </p>
               <p className="text-bold text-center">
-                Requires 14' X 14' clearance
+                Requires 10' X 10' clearance
               </p>
               <p className="text-bold text-center">
                 includes: shoe rack, 50-foot extesion cord, entrance turf
