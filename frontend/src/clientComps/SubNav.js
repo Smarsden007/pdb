@@ -78,7 +78,7 @@ export const SubNav = () => {
                   </Link>
                 </li>
                 <li class="m-4 hover:text-stone-400 ">
-                  <Link to="/" onClick={() => setIsOpen(false)}>
+                  <Link to="/checkout" onClick={() => setIsOpen(false)}>
                     {" "}
                     <a href="book">BOOK</a>
                   </Link>
