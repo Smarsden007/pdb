@@ -6,9 +6,9 @@ export const PartnersHeader = () => {
   return (
 <div>
          <div className="flex flex-row">
-          <img alt='stars' src={starLeft} className="w-14 h-14 mt-5" />
-          <h1 className="text-6xl p-4 font-mono font-semibold text-black">PARTNERS</h1>
-          <img alt='stars' src={starRight} className="w-14 h-14 mt-5" />
+          <img alt='stars' src={starLeft} className="w-6 h-6 backdrop:lg:w-14 lg:h-14 mt-5" />
+          <h1 className="text-2xl lg:text-6xl p-4 font-mono font-semibold text-black">PARTNERS</h1>
+          <img alt='stars' src={starRight} className="w-6 h-6 backdrop:lg:w-14 lg:h-14 mt-5" />
 
         </div>
     </div>  )
