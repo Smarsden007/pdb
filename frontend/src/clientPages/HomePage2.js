@@ -20,8 +20,7 @@ export const HomePage = () => {
       <div className="grid grid-cols-4 grid-rows-1 lg:grid-cols-9 lg:grid-rows-1 h-8/12">
         {/* Left Image */}
         <div className="object-top h-7/12 col-span-2  row-span-1  lg:col-span-4 lg:row-span-3 lg:h-6/12">
-          <img           alt='hero'
- class="lg:h-6/12 w-12/12" src={ripHero}></img>
+          <img alt="hero" class="lg:h-6/12 w-12/12" src={ripHero}></img>
         </div>
 
         {/* Middle Overlap Slogan */}
