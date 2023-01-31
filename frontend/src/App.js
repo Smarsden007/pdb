@@ -83,7 +83,7 @@ function App() {
             element={
               <div>
                 <NavBar />
-                <CastleMasterCheckout />
+                <CastleMasterCheckout className=''/>
                 <Footer className=""/>
               </div>
             }
@@ -93,7 +93,7 @@ function App() {
             element={
               <div>
                 <NavBar />
-                <BastilleMasterCheckout />
+                <BastilleMasterCheckout className='mt-[40rem'/>
                 <Footer className=""/>
               </div>
             }

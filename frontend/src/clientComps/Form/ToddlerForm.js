@@ -218,7 +218,7 @@ function ToddlerForm() {
 
   return (
     <div class="p-2 flex flex-col justify-center items-center align-center">
-      <form class="m-10" type="submit" onSubmit={handleSubmit}>
+      <form class="m-10 mt-32" type="submit" onSubmit={handleSubmit}>
         <div>
           <div class="grid grid-cols-1 grid-rows-3 gap-2 lg:grid-cols-3 lg:grid-rows-1 ">
             {/* Left */}

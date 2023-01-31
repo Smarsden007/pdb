@@ -5,7 +5,7 @@ import { RentalsHeader } from "../clientComps/clientStyles/RentalsHeader";
 
 export const Rentals = () => {
   return (
-    <div>
+    <div className="">
       <div className="flex flex-col text-center p-24 w-full align-center justify-center items-center">
         <RentalsHeader />
       </div>

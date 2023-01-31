@@ -9,7 +9,7 @@ export const SubNav = () => {
   return (
     <div
       class={`${
-        isOpen ? "fixed top-0 left-0 w-full h-full bg-[#c0a58e] z-50" : ""
+        isOpen ? "fixed top-0 left-0 w-full h-full bg-white z-50" : ""
       }`}
     >
       <div class="fixed top-0 z-10 bg-transparent w-full">

@@ -1,5 +1,6 @@
-import { Divider } from "antd";
+import { Divider,Typography } from "antd";
 import React from "react";
+const { Title } = Typography;
 
 function SelectedOptionsList({
   selectedDuration,
@@ -13,7 +14,7 @@ function SelectedOptionsList({
 }) {
   return (
     <div>
-      <h3>Selected Options</h3>
+      <Title level={3}>Selected Options</Title>
       <ul>
         <Divider className="m-0 border-[#c0a58e]" />
         {selectedDuration.value !== "No Thank You" && (
