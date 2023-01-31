@@ -27,14 +27,14 @@ export const RentalCards = () => {
               <p className="text-bold text-center font-mono font-bold">
                 *FOR AGES 10 AND UNDER*
               </p>
-              <Link to="castle-checkout">
+              <Link to="/castle-checkout">
                 <button className="bg-[#c0a58e] text-white rounded-lg w-36 h-12 hover:bg-white hover:border-[#c0a58e] hover:border-solid hover:border-4 hover:text-[#c0a58e]">
                   Book Now
                 </button>
               </Link>
             </div>
           </div>
-          <h1 className="cursive-text text-4xl text-center">The Castle</h1>
+          <h1 className="cursive-text text-4xl text-center">The Toddler</h1>
         </div>
 
         {/* Col2 */}
@@ -50,7 +50,7 @@ export const RentalCards = () => {
                 $500 6-HOURS
               </p>
               <p className="text-bold text-center">
-                Requires 10' X 10' clearance
+                Requires 14' X 14' clearance
               </p>
               <p className="text-bold text-center">
                 includes: shoe rack, 50-foot extesion cord, entrance turf
@@ -58,7 +58,7 @@ export const RentalCards = () => {
               <p className="text-bold text-center font-mono font-bold">
                 *FOR ALL AGES*
               </p>
-              <Link to="bastille-checkout">
+              <Link to="/bastille-checkout">
                 <button className="bg-[#c0a58e] text-white rounded-lg w-36 h-12 hover:bg-white hover:border-[#c0a58e] hover:border-solid hover:border-4 hover:text-[#c0a58e]">
                   Book Now
                 </button>
@@ -88,14 +88,14 @@ export const RentalCards = () => {
               <p className="text-bold text-center font-mono font-bold">
                 *FOR ALL AGES*
               </p>
-              <Link to="toddler-checkout">
+              <Link to="/toddler-checkout">
                 <button className="bg-[#c0a58e] text-white rounded-lg w-36 h-12 hover:bg-white hover:border-[#c0a58e] hover:border-solid hover:border-4 hover:text-[#c0a58e]">
                   Book Now
                 </button>
               </Link>
             </div>
           </div>
-          <h1 className="cursive-text text-4xl text-center">The Toddler</h1>
+          <h1 className="cursive-text text-4xl text-center">The Classic Castle</h1>
         </div>
       </div>
     </div>

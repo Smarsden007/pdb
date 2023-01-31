@@ -40,7 +40,7 @@ export const SubHero = () => {
           src={SubRight}
         />
       </div>
-      <div className="col-start-2 row-start-2 flex flex-row align-center justify-center items-center m-16 ">
+      <div className="col-start-2 row-start-2 flex flex-row align-center justify-center items-center m-14 ">
         <Circles />
       </div>
     </div>
