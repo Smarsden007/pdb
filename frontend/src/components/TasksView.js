@@ -6,7 +6,7 @@ export const TaskView = () => {
   const getIncompleteTasks = async () => {
     try {
       const res = await axios.get(
-        "pdb-backend-production.up.railway.app/api/task?completed=false"
+        "https://pdb-backend-production.up.railway.app/api/task?completed=false"
       );
       setTasks(res.data);
     } catch (err) {
@@ -18,7 +18,7 @@ export const TaskView = () => {
   }, []);
   const updateTask = async (taskId) => {
     try {
-      await axios.put(`pdb-backend-production.up.railway.app/api/update-task/${taskId}`, {
+      await axios.put(`https://pdb-backend-production.up.railway.app/api/update-task/${taskId}`, {
         completed: true,
       });
       // After the task is updated, fetch the updated list of tasks

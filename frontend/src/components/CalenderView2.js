@@ -8,7 +8,7 @@ export const CalendarView2 = () => {
 
   useEffect(() => {
     // Fetch the bookings data from the back-end server
-    fetch("pdb-backend-production.up.railway.app/api/bookings")
+    fetch("https://pdb-backend-production.up.railway.app/api/bookings")
       .then((response) => response.json())
       .then(({ bookings }) => {
         setBookings(bookings);
