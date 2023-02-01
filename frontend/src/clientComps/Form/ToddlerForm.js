@@ -148,8 +148,7 @@ function ToddlerForm() {
           amount: total * 100, //convert to cents
           paymentMethodId: id,
           orderNumber,
-          option1: selectedBalloons.value,
-          option2: selectedBalloons.value,
+          selectedBalloons,
         });
         console.log(data, "test");
         const time = new Date(selectedTime).toLocaleTimeString();

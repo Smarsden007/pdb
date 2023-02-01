@@ -6,7 +6,7 @@ exports.paymentPost = async (req, res) => {
     const paymentMethodId = req.body.paymentMethodId;
     const amount = req.body.amount;
     const orderNumber = req.body.orderNumber;
-    const selectedOption1 = req.body.selectedOption1;
+    const selectedBalloons = req.body.selectedBalloons;
     const selectedOption2 = req.body.selectedOption2;
     const selectedOption3 = req.body.selectedOption3;
     const selectedOption4 = req.body.selectedOption4;
@@ -20,10 +20,10 @@ exports.paymentPost = async (req, res) => {
       payment_method: paymentMethodId,
       confirmation_method: 'manual',
       confirm: true,
-      description: `Order Number: ${orderNumber}`,
+      description: `Order Number: ${orderNumber},${selectedBalloons}`,
       metadata: {
         order_number: orderNumber,
-       
+        selectedBalloons: selectedBalloons,
       },
     });
 
