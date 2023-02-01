@@ -6,7 +6,7 @@ export const useFetchData = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios('http://localhost:5000/api/bookings');
+      const result = await axios('pdb-backend-production.up.railway.app/api/bookings');
       setData(result.data);
     };
 

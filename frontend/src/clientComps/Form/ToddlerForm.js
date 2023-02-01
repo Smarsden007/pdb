@@ -144,7 +144,7 @@ function ToddlerForm() {
     if (!error) {
       const { id } = paymentMethod;
       try {
-        const { data } = await axios.post("http://localhost:5000/api/charge", {
+        const { data } = await axios.post("pdb-backend-production.up.railway.app/api/charge", {
           amount: total * 100, //convert to cents
           paymentMethodId: id,
           orderNumber,
@@ -174,7 +174,7 @@ function ToddlerForm() {
           bouncerName: selectedBouncer,
           total_cost: total,
         };
-        await axios.post("http://localhost:5000/api/booking", bookingData);
+        await axios.post("pdb-backend-production.up.railway.app/api/booking", bookingData);
         setOrderPlaced(true);
         console.log(orderPlaced);
         navigate(`/success/${orderNumber}`);
