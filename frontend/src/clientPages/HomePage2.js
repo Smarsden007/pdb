@@ -33,10 +33,10 @@ export const HomePage = () => {
         </div>
 
         {/* Middle Overlap Slogan */}
-        <div class="absolute lg:top-56 lg:w-auto lg:left-96 w-52 z-40  top-16 left-40 md ">
+        <div class="absolute lg:top-56 lg:w-auto lg:left-96  z-40  top-8 left-28 md ">
           <img
             alt="gravity"
-            class="h-auto w-8/12 visible md:visible lg:visible sm:visible"
+            class="h-auto lg:w-8/12 w-80 visible md:visible lg:visible sm:visible"
             src={gravity}
           ></img>
         </div>
@@ -63,7 +63,7 @@ export const HomePage = () => {
              The All-White Luxury Bounce House Company! Our mission is to bring joy and excitement to every event, big or small, with our top-of-the-line, all-white bounce houses.
             </h1>
             <Link to='/rentals'>
-            <button className="bg-[#c0a58e] text-white rounded-lg w-36 h-12 hover:bg-white hover:border-[#c0a58e] hover:border-solid hover:border-4 hover:text-[#c0a58e]">
+            <button className="bg-[#c0a58e] text-white rounded-lg lg:w-36 lg:h-12 w-28 h-8 hover:bg-white hover:border-[#c0a58e] hover:border-solid hover:border-4 hover:text-[#c0a58e]">
               View Rentals
             </button>
             </Link>
