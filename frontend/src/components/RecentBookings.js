@@ -8,7 +8,7 @@ export const RecentBookings = () => {
   const [bookings, setBookings] = useState();
   const { error, isLoading } = useQuery("bookings", async () => {
     const response = await axios.get(
-      "pdb-backend-production.up.railway.app/api/recent-bookings"
+      "https://pdb-backend-production.up.railway.app/api/recent-bookings"
     );
     // convert the data from an object to an array
     const bookingsArray = Object.values(response.data.bookings);

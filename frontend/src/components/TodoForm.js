@@ -8,7 +8,7 @@ const TodoForm = () => {
     event.preventDefault();
 
     try {
-      await axios.post('pdb-backend-production.up.railway.app/api/create-task', {
+      await axios.post('https://pdb-backend-production.up.railway.app/api/create-task', {
         description,
       });
 

@@ -23,7 +23,7 @@ const Registration = () => {
             }
           };
           const body = JSON.stringify(newUser);
-          const res = await axios.post('pdb-backend-production.up.railway.app/api/register', body, config);
+          const res = await axios.post('https://pdb-backend-production.up.railway.app/api/register', body, config);
           console.log(res.data);
         } catch (err) {
           console.error(err.response.data);

@@ -14,7 +14,7 @@ function DateChecker({ handleSelect1, selectedDate1, handleOptionSelect }) {
   useEffect(() => {
     async function fetchBookedDates() {
       const response = await fetch(
-        `pdb-backend-production.up.railway.app/api/check-availability/${selectedBouncer}`
+        `https://pdb-backend-production.up.railway.app/api/check-availability/${selectedBouncer}`
       );
       const bookedDates = await response.json();
       const dates = bookedDates.map((date) => date.rent_date.slice(0, 10));
