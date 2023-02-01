@@ -14,7 +14,7 @@ import { Radio } from "antd";
 const { Title } = Typography;
 
 const options0 = [
-  { value: "4-Hours", price: 100 },
+  { value: "4-Hours", price: 1 },
   { value: "6-Hours", price: 200 },
   { value: "8-Hours", price: 300 },
   { value: "Photo-Shoot", price: 300 },
