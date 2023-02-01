@@ -9,13 +9,13 @@ export async function onRegistration(registrationData) {
 }
 
 export async function onLogin(loginData) {
-  return await axios.post('http://localhost:5000/api/login', loginData)
+  return await axios.post('pdb-backend-production.up.railway.app/api/login', loginData)
 }
 
 export async function onLogout() {
-  return await axios.get('http://localhost:5000/api/logout')
+  return await axios.get('pdb-backend-production.up.railway.app/api/logout')
 }
 
 export async function fetchProtectedInfo() {
-  return await axios.get('http://localhost:5000/api/protected')
+  return await axios.get('pdb-backend-production.up.railway.app/api/protected')
 }
