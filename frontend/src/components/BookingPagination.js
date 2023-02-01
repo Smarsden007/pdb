@@ -14,7 +14,7 @@ export const BookingsTable = () => {
     try {
       // Make a PATCH request to the server to update the booking
       await axios.patch(
-        `http://localhost:5000/api/bookings2/${selectedBooking.id}`,
+        `pdb-backend-production.up.railway.app/api/bookings2/${selectedBooking.id}`,
         {
           // include the updated booking data in the request body
           billing_name: event.target.billing_name.value,
@@ -26,7 +26,7 @@ export const BookingsTable = () => {
 
       // Fetch the updated bookings data from the server
       const { data } = await axios.get(
-        "http://localhost:5000/api/bookings-table",
+        "pdb-backend-production.up.railway.app/api/bookings-table",
         {
           params: {
             pageSize: limit,
@@ -60,7 +60,7 @@ export const BookingsTable = () => {
     const fetchData = async () => { // eslint-disable-next-line
       const offset = (page - 1) * limit;
       const { data } = await axios.get(
-        "http://localhost:5000/api/bookings-table",
+        "pdb-backend-production.up.railway.app/api/bookings-table",
         {
           params: {
             pageSize: limit,

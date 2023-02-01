@@ -7,7 +7,7 @@ export const YTDincome = () => {
 
   const getTotalCost = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/ytd-income");
+      const res = await axios.get("pdb-backend-production.up.railway.app/api/ytd-income");
       setTotalCost(res.data.total);
     } catch (err) {
       console.error(err.response.data);
@@ -43,7 +43,7 @@ export const MTDincome = () => {
 
   const getTotalCostForCurrentMonth = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/mtd-income");
+      const res = await axios.get("pdb-backend-production.up.railway.app/api/mtd-income");
       setTotalCost(res.data.total);
     } catch (err) {
       console.error(err.response.data);
@@ -79,7 +79,7 @@ export const SevenDayBooking = () => {
 
   const countBookingsWithin7Days = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/weekly-bookings');
+      const res = await axios.get('pdb-backend-production.up.railway.app/api/weekly-bookings');
       setCount(res.data.count);
     } catch (err) {
       console.error(err.response.data);
@@ -110,7 +110,7 @@ export const FourteenDayBooking = () => {
 
   const countBookingsWithin14Days = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/biweekly-bookings');
+      const res = await axios.get('pdb-backend-production.up.railway.app/api/biweekly-bookings');
       setCount(res.data.count);
     } catch (err) {
       console.error(err.response.data);
@@ -143,7 +143,7 @@ export const UnPaid = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get('http://localhost:5000/api/unpaid');
+      const result = await axios.get('pdb-backend-production.up.railway.app/api/unpaid');
       setCount(result.data.count);
     };
     fetchData();

@@ -162,7 +162,7 @@ export const CalendarView = () => {
   const [currentBookingId, setCurrentBookingId] = useState(null);
   useEffect(() => {
     // Fetch the bookings data from the back-end server
-    fetch("http://localhost:5000/api/bookings2")
+    fetch("pdb-backend-production.up.railway.app/api/bookings2")
       .then((response) => response.json())
       .then(({ bookings }) => {
         console.log(bookings);

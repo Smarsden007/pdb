@@ -20,7 +20,7 @@ export const EditBookings = (props) => {
     event.preventDefault();
 
     axios
-      .put("http://localhost:5000/api/bookings/:id", booking)
+      .put("pdb-backend-production.up.railway.app/api/bookings/:id", booking)
       .then((res) => {
         console.log(res.data);
       })

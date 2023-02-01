@@ -3,7 +3,7 @@ axios.defaults.withCredentials = true
 
 export async function onRegistration(registrationData) {
   return await axios.post(
-    'http://localhost:5000/api/register',
+    'pdb-backend-production.up.railway.app/api/register',
     registrationData
   )
 }
