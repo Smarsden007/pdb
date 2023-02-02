@@ -59,11 +59,11 @@ export const HomePage = () => {
         {/* Center Text Top Image */}
         <div className="flex-1 flex p-5 mt-20 w-48 flex-col lg:justify-center md:justify-end  md:-mt-4  col-start-3 row-start-1 col-span-1 md:ml-20 lg:col-start-5 lg:ml-0 lg:row-start-1 lg:mt-48  sm:w-48 md:w-3/4 lg:w-80 lg:p-5 visible md:invisible lg:visible sm:visible">
           <div className="md:bg-opacity-70 md:bg-white  md:rounded-xl lg:bg-opacity-0">
-            <h1 className="text-[.5rem] w-42 lg:text-lg p-2 md:p-4">
+            <h1 className="text-[.5rem] w-42 lg:text-2xl p-2 md:p-4">
              The All-White Luxury Bounce House Company! Our mission is to bring joy and excitement to every event, big or small, with our top-of-the-line, all-white bounce houses.
             </h1>
             <Link to='/rentals'>
-            <button className="bg-[#c0a58e] text-white rounded-lg lg:w-36 lg:h-12 w-28 h-8 hover:bg-white hover:border-[#c0a58e] hover:border-solid hover:border-4 hover:text-[#c0a58e]">
+            <button className="bg-[#c0a58e] text-white rounded-lg lg:w-36 lg:h-12 lg:ml-4 w-28 h-8 hover:bg-white hover:border-[#c0a58e] hover:border-solid hover:border-4 hover:text-[#c0a58e]">
               View Rentals
             </button>
             </Link>

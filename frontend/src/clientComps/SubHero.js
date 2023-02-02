@@ -20,15 +20,11 @@ export const SubHero = () => {
           <img alt="cleaning" class="w-full m-2" src={RightSide} />
         </div>
         <div className="ml-10">
-          <h1 className="text-[.5rem] md:text-lg lg:text-lg p-2 md:p-4">
-            All the Lorem Ipsum generators on the Internet tend to repeat
-            predefined chunks as necessary, making this the first true generator
-            on the Internet.
+          <h1 className="text-[.5rem] md:text-lg lg:text-xl p-2 md:p-4">
+          Elevate your next event with our chic and sophisticated white bounce houses. Create a complete and unforgettable experience with our in-house balloons and backdrops, perfectly coordinated to match your theme and enhance the ambiance.
           </h1>
-          <h1 className="text-[.5rem] md:text-lg lg:text-lg p-2 md:p-4">
-            All the Lorem Ipsum generators on the Internet tend to repeat
-            predefined chunks as necessary, making this the first true generator
-            on the Internet.
+          <h1 className="text-[.5rem] md:text-lg lg:text-xl p-2 md:p-4">
+          At <span className="text-[#c0a58e]">Pouncy</span>,       cleanliness is always a top priority. We understand that the safety and health of your guests is paramount, which is why we take extra care to thoroughly sanitize every bounce house before delivery.
           </h1>
         </div>
       </div>
@@ -36,11 +32,11 @@ export const SubHero = () => {
       <div class="col-start-2 row-start-1 lg:col-start-3 lg:col-span-1 lg:row-span-3 ">
         <img
           alt="paul"
-          class="w-full lg:h-full h-auto lg:mt-10 p-2"
+          class="w-full lg:h-auto h-auto lg:mt-10 p-2"
           src={SubRight}
         />
       </div>
-      <div className="col-start-2 row-start-2 flex flex-row align-center justify-center items-center m-14 ">
+      <div className="col-start-2 row-start-2 flex flex-row align-center justify-center items-center m-14 lg:-mt-10 ">
         <Circles />
       </div>
     </div>

@@ -13,13 +13,13 @@ const Footer = () => {
         <div className="flex justify-center my-6">
           <SocialsRow />
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col lg:mr-12">
           <div className="flex flex-row">
-            <nav className="flex flex-col lg:mr-10 ">
+            <nav className="flex flex-col lg:mr-20 ">
               <Link to="/">
                 <a
                   href="home"
-                  className="px-2 text-white hover:text-white lg:text-xl"
+                  className="px-2 text-white lg:text-xl transform hover:scale-125 hover:text-black"
                 >
                   HOME
                 </a>
@@ -27,7 +27,7 @@ const Footer = () => {
               <Link to="/rentals">
                 <a
                   href="#rentals"
-                  className="px-2 text-white hover:text-white lg:text-xl"
+                  className="px-2 text-white lg:text-xl transform hover:scale-125 hover:text-black"
                 >
                   RENTALS
                 </a>
@@ -35,7 +35,7 @@ const Footer = () => {
               <Link to="/extras">
                 <a
                   href="extras"
-                  className="px-2 text-white hover:text-white lg:text-xl"
+                  className="px-2 text-white lg:text-xl transform hover:scale-125 hover:text-black"
                 >
                   EXTRAS
                 </a>

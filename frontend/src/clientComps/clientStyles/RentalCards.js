@@ -13,13 +13,13 @@ export const RentalCards = () => {
             <div className="text-center">
               <img alt="stars" src={castle} />{" "}
               <p className="text-bold text-center font-mono font-bold">
-                $100 4-HOURS | $200 6-HOURS
+                $150 4-HOURS | $250 6-HOURS
               </p>
               <p className="text-bold text-center font-mono font-bold">
-                $300 8-HOURS
+                $350 8-HOURS
               </p>
               <p className="text-bold text-center">
-                Requires 14' X 14' clearance
+                Requires 10' X 10' clearance
               </p>
               <p className="text-bold text-center">
                 includes: shoe rack, 50-foot extesion cord, entrance turf
