@@ -57,6 +57,8 @@ const options6 = [
 function CastleForm() {
   //Date Selection
   const [selectedDate, setSelectedDate] = useState(null);
+  const [errors, setErrors] = useState({});
+
   const [selectedBouncer, setSelectedBouncer] = useState("bouncer2");
   //Master State for Total
   const [selectedOptionDelivery, setDeliveryOption] = useState("");
@@ -124,6 +126,17 @@ function CastleForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let newErrors = {};
+
+    if (!selectedDate) {
+      newErrors.selectedDate = "Reservation date is required";
+    }
+
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length === 0) {
+      // Submit the form to the API here
+      console.log("Form is valid!", selectedDate);
+    }
     const orderNumber = generateOrderNumber();
     setOrderNumber(orderNumber);
     const { error, paymentMethod } = await stripe.createPaymentMethod({
@@ -144,13 +157,16 @@ function CastleForm() {
     if (!error) {
       const { id } = paymentMethod;
       try {
-        const { data } = await axios.post("https://pdb-backend-production.up.railway.app/api/charge", {
-          amount: total * 100, //convert to cents
-          paymentMethodId: id,
-          orderNumber,
-          option1: selectedBalloons.value,
-          option2: selectedBalloons.value,
-        });
+        const { data } = await axios.post(
+          "https://pdb-backend-production.up.railway.app/api/charge",
+          {
+            amount: total * 100, //convert to cents
+            paymentMethodId: id,
+            orderNumber,
+            option1: selectedBalloons.value,
+            option2: selectedBalloons.value,
+          }
+        );
         console.log(data, "test");
         const time = new Date(selectedTime).toLocaleTimeString();
 
@@ -174,7 +190,10 @@ function CastleForm() {
           bouncerName: selectedBouncer,
           total_cost: total,
         };
-        await axios.post("https://pdb-backend-production.up.railway.app/api/booking", bookingData);
+        await axios.post(
+          "https://pdb-backend-production.up.railway.app/api/booking",
+          bookingData
+        );
         setOrderPlaced(true);
         console.log(orderPlaced);
         navigate(`/success/${orderNumber}`);
@@ -232,6 +251,7 @@ function CastleForm() {
                   Reservation Date: {moment(selectedDate).format("MM/DD/YYYY")}
                 </p>
               )}
+              {errors.selectedDate && <p>{errors.selectedDate}</p>}
             </div>
 
             {/* Middle I need to see if this works or not */}
@@ -533,6 +553,17 @@ function CastleForm() {
                         borderRadius: ".25rem",
                       }}
                       type="submit"
+                      disabled={
+                        !selectedDate ||
+                        !selectedTime ||
+                        !selectedOptionDelivery ||
+                        !billingName ||
+                        !billingAddress ||
+                        !billingEmail ||
+                        !billingCity ||
+                        !billingState ||
+                        !billingZip
+                      }
                     >
                       Pay
                     </button>
