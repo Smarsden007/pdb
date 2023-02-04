@@ -5,7 +5,7 @@ import "./DateSelection.css";
 import { Divider, Typography } from "antd";
 const { Title } = Typography;
 
-function DateSelection2({ handleSelect1, selectedDate1, handleOptionSelect }) {
+function DateSelection1({ handleSelect1, selectedDate1, handleOptionSelect }) {
   const [bookedDates, setBookedDates] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedBouncer, setSelectedBouncer] = useState("bouncer1");
@@ -43,12 +43,12 @@ function DateSelection2({ handleSelect1, selectedDate1, handleOptionSelect }) {
       <>
         <div class="flex flex-start	mt-3 ml-3">
           <Title style={{ marginBottom: "-1rem" }} level={3}>
-            The Classic Castle
+            The Toddler
           </Title>
         </div>
         <Divider style={{ marginBottom: "-.25rem" }} />
         <div className="ml-3">
-          <p className="text-bold text-left">Requires 14' X 14' clearance</p>
+          <p className="text-bold text-left">Requires 10' X 10' clearance</p>
           <p className="text-bold text-left">
             includes: shoe rack, 50-foot extesion cord, entrance turf
           </p>
@@ -99,4 +99,4 @@ function DateSelection2({ handleSelect1, selectedDate1, handleOptionSelect }) {
   );
 }
 
-export default DateSelection2;
+export default DateSelection1;
