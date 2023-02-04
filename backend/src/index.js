@@ -12,8 +12,8 @@ require('./middlewares/passport-middleware')
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://pdb-production.up.railway.app', 'https://www.pouncyparties.com/'],
-  credentials: false
+  origin: 'https://www.pouncyparties.com',
+  credentials: true
 }))
 
 //{ origin: CLIENT_URL, credentials: true }
