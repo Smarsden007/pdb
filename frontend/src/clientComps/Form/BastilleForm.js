@@ -17,19 +17,18 @@ const options0 = [
   { value: "4-Hours", price: 300 },
   { value: "6-Hours", price: 400 },
   { value: "8-Hours", price: 500 },
-  { value: "Photo-Shoot", price: 300 },
+
 ];
 const options1 = [
   { value: "No Thank You", price: 0 },
   { value: "Half Arch", price: 150 },
-  { value: "Full Arch", price: 200 },
+  { value: "Full Arch", price: 250 },
 ];
 
 const options2 = [
   { value: "No Thank You", price: 0 },
-  { value: "Safari", price: 75 },
-  { value: "Princess", price: 75 },
-  { value: "Custom Design", price: 100 },
+  { value: "Large Text", price: 40 },
+  { value: "Custom Theme", price: 75 },
 ];
 
 const options3 = [
@@ -39,9 +38,8 @@ const options3 = [
 
 const options4 = [
   { value: "No Thank You", price: 0 },
-  { value: "Green Ambre", price: 30 },
-  { value: "Pink and Silver", price: 40 },
-  { value: "Rainbow", price: 50 },
+  { value: "Custom", price: 50 },
+  { value: "In-house Garland", price: 40 },
 ];
 const options5 = [
   { value: "No Thank You", price: 0 },
@@ -51,11 +49,14 @@ const options5 = [
 ];
 const options6 = [
   { value: "No Thank You", price: 0 },
-  { value: "Double Pannel", price: 150 },
-  { value: "3 Pannels", price: 200 },
+  { value: "Solid-Double", price: 150 },
+  { value: "Solid-Trio", price: 200 },
+  { value: "Complex-Double", price: 250 },
+  { value: "Complex-Trio", price: 300 },
 ];
 function BastilleForm() {
   //Date Selection
+  const [errors, setErrors] = useState({});
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedBouncer, setSelectedBouncer] = useState("bouncer3");
   //Master State for Total
@@ -125,6 +126,17 @@ function BastilleForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let newErrors = {};
+
+    if (!selectedDate) {
+      newErrors.selectedDate = "Reservation date is required";
+    }
+
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length === 0) {
+      // Submit the form to the API here
+      console.log("Form is valid!", selectedDate);
+    }
     const orderNumber = generateOrderNumber();
     setOrderNumber(orderNumber);
     const { error, paymentMethod } = await stripe.createPaymentMethod({
@@ -234,6 +246,8 @@ function BastilleForm() {
                   Reservation Date: {moment(selectedDate).format("MM/DD/YYYY")}
                 </p>
               )}
+                            {errors.selectedDate && <p>{errors.selectedDate}</p>}
+
             </div>
 
             {/* Middle I need to see if this works or not */}
@@ -455,8 +469,8 @@ function BastilleForm() {
                         </p>
                       )}
 
-                      {selectedBalloons.price === 125 ||
-                      selectedBalloons.price === 175 ? (
+                      {selectedBalloons.price === 150 ||
+                      selectedBalloons.price === 250 ? (
                         <div className="flex flex-row">
                           <p>Balloon Colors:</p>
                           {selectedColors.map((color) => (
@@ -544,6 +558,17 @@ function BastilleForm() {
                         borderRadius: ".25rem",
                       }}
                       type="submit"
+                      disabled={
+                        !selectedDate ||
+                        !selectedTime ||
+                        !selectedOptionDelivery ||
+                        !billingName ||
+                        !billingAddress ||
+                        !billingEmail ||
+                        !billingCity ||
+                        !billingState ||
+                        !billingZip
+                      }
                     >
                       Pay
                     </button>

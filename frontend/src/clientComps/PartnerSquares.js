@@ -1,6 +1,8 @@
 import React from "react";
 import SLeftTop from "./../Media/SquareLeftTop.png";
 import SRightBottom from "./../Media/SquareRightBottom.png";
+import SLeftTopr from "./../Media/local1.png";
+import SRightBottomr from "./../Media/local2.png";
 import { VscLocation } from "react-icons/vsc";
 export const PartnerSquares = () => {
   return (
@@ -96,7 +98,7 @@ export const PartnerSquares = () => {
               <div
                 className="col-start-2 row-start-1 "
                 style={{
-                  backgroundImage: `url(${SLeftTop})`,
+                  backgroundImage: `url(${SLeftTopr})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                 }}
@@ -104,7 +106,7 @@ export const PartnerSquares = () => {
               <div
                 className="col-start-1 row-start-2 "
                 style={{
-                  backgroundImage: `url(${SRightBottom})`,
+                  backgroundImage: `url(${SRightBottomr})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                 }}

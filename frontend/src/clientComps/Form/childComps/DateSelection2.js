@@ -56,10 +56,15 @@ function DateSelection2({ handleSelect1, selectedDate1, handleOptionSelect }) {
             *FOR ALL AGES*
           </p>
         </div>
+        <div class="flex flex-start	mt-3 ml-3">
+          <Title style={{ marginBottom: "-1rem" }} level={3}>
+            Select a Date{" "}
+          </Title>
+        </div>
         <Divider style={{ marginBottom: "-.25rem" }} />
         <div class="flex flex-start	m-3">
           <input
-            value="bouncer1"
+            value="bouncer2"
             type="hidden"
             onChange={handleBouncerChange}
           />
@@ -76,10 +81,9 @@ function DateSelection2({ handleSelect1, selectedDate1, handleOptionSelect }) {
             }}
             value={selectedDate}
             tileDisabled={({ date }) => {
-              return bookedDates.includes(
-                date.toISOString().slice(0, 10)
-              );
+              return (date < new Date().setHours(0, 0, 0, 0) || bookedDates.includes(date.toISOString().slice(0, 10)));
             }}
+            
             
             
           
