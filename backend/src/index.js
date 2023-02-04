@@ -12,7 +12,7 @@ require('./middlewares/passport-middleware')
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-  origin: ['https://www.pouncyparties.com', 'https://pdb-backend-production.up.railway.app'],
+  origin: ['https://www.pouncyparties.com', 'https://pdb-backend-production.up.railway.app/*'],
   credentials: true
 }))
 
