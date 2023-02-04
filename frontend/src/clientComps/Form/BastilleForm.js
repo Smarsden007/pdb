@@ -469,8 +469,8 @@ function BastilleForm() {
                         </p>
                       )}
 
-                      {selectedBalloons.price === 125 ||
-                      selectedBalloons.price === 175 ? (
+                      {selectedBalloons.price === 150 ||
+                      selectedBalloons.price === 250 ? (
                         <div className="flex flex-row">
                           <p>Balloon Colors:</p>
                           {selectedColors.map((color) => (

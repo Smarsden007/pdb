@@ -22,7 +22,7 @@ const {
   searchBookings,
   calendarDates,
   availCalender,
-  selectionBouncer1,
+  selectiontoddler,
   selectionBouncer2,
   selectionBouncer3,
   createBooking2,
@@ -66,7 +66,7 @@ router.get("/bookings-table", getBookingsPagination);
 router.get("/search-bookings", searchBookings);
 router.get("/rental_dates", calendarDates);
 router.post("/check-availability", availCalender);
-router.get("/check-availability/bouncer1", selectionBouncer1);
+router.get("/check-availability/toddler", selectiontoddler);
 router.get("/check-availability/bouncer2",selectionBouncer2);
 router.get("/check-availability/bouncer3",selectionBouncer3);
 //Finance Routes

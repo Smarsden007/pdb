@@ -8,13 +8,13 @@ const { Title } = Typography;
 function DateSelection({ handleSelect1, selectedDate1, handleOptionSelect }) {
   const [bookedDates, setBookedDates] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [selectedBouncer, setSelectedBouncer] = useState("bouncer1");
+  const [selectedBouncer, setSelectedBouncer] = useState("boucner1");
 
   const [isCalendarDisabled, setIsCalendarDisabled] = useState(true);
   useEffect(() => {
     async function fetchBookedDates() {
       const response = await fetch(
-        `https://pdb-backend-production.up.railway.app/api/check-availability/bouncer1`
+        `https://pdb-backend-production.up.railway.app/api/check-availability/boucner1`
       );
       const bookedDates = await response.json();
       const dates = bookedDates.map((date) => date.selected_date.slice(0, 10));
@@ -27,7 +27,7 @@ function DateSelection({ handleSelect1, selectedDate1, handleOptionSelect }) {
     setSelectedDate(date);
   };
 
-  console.log(isCalendarDisabled)
+  console.log(isCalendarDisabled);
 
   const handleBouncerChange = (value) => {
     if (value !== "") {
@@ -37,7 +37,6 @@ function DateSelection({ handleSelect1, selectedDate1, handleOptionSelect }) {
     }
   };
 
- 
   return (
     <div class="flex flex-col">
       <>
@@ -48,13 +47,18 @@ function DateSelection({ handleSelect1, selectedDate1, handleOptionSelect }) {
         </div>
         <Divider style={{ marginBottom: "-.25rem" }} />
         <div className="ml-3">
-          <p className="text-bold text-left">Requires 14' X 14' clearance</p>
+          <p className="text-bold text-left">Requires 10' X 10' clearance</p>
           <p className="text-bold text-left">
             includes: shoe rack, 50-foot extesion cord, entrance turf
           </p>
           <p className="text-bold text-left font-mono font-bold">
-            *FOR ALL AGES*
+            *FOR AGES 10 AND UNDER*
           </p>
+        </div>
+        <div class="flex flex-start	mt-3 ml-3">
+          <Title style={{ marginBottom: "-1rem" }} level={3}>
+            Select a Date{" "}
+          </Title>
         </div>
         <Divider style={{ marginBottom: "-.25rem" }} />
         <div class="flex flex-start	m-3">
@@ -64,9 +68,9 @@ function DateSelection({ handleSelect1, selectedDate1, handleOptionSelect }) {
             onChange={handleBouncerChange}
           />
         </div>
-  <div className="flex flex-row justify-start ml-3">
-            <div className="w-6 h-6 mr-2 bg-[#c0a58e]"/> = <p>Booked</p>
-          </div>
+        <div className="flex flex-row justify-start ml-3">
+          <div className="w-6 h-6 mr-2 bg-[#c0a58e]" /> = <p>Booked</p>
+        </div>
         <div class="flex flex-col	align-center justify-center items-center">
           <Calendar
             className="custom-cal w-full"
@@ -76,17 +80,10 @@ function DateSelection({ handleSelect1, selectedDate1, handleOptionSelect }) {
             }}
             value={selectedDate}
             tileDisabled={({ date }) => {
-              return bookedDates.includes(
-                date.toISOString().slice(0, 10)
-              );
+              return (date < new Date().setHours(0, 0, 0, 0) || bookedDates.includes(date.toISOString().slice(0, 10)));
             }}
-            
-            
-          
           />
-          
         </div>
-      
       </>
     </div>
   );

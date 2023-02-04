@@ -14,22 +14,21 @@ import { Radio } from "antd";
 const { Title } = Typography;
 
 const options0 = [
-  { value: "4-Hours", price: 1 },
-  { value: "6-Hours", price: 200 },
-  { value: "8-Hours", price: 300 },
-  { value: "Photo-Shoot", price: 300 },
+  { value: "4-Hours", price: 150 },
+  { value: "6-Hours", price: 250 },
+  { value: "8-Hours", price: 350 },
+
 ];
 const options1 = [
   { value: "No Thank You", price: 0 },
-  { value: "Half Arch", price: 125 },
-  { value: "Full Arch", price: 175 },
+  { value: "Half Arch", price: 100 },
+  { value: "Full Arch", price: 150 },
 ];
 
 const options2 = [
   { value: "No Thank You", price: 0 },
-  { value: "Safari", price: 75 },
-  { value: "Princess", price: 75 },
-  { value: "Custom Design", price: 100 },
+  { value: "Large Text", price: 20 },
+  { value: "Custom Theme", price: 55 },
 ];
 
 const options3 = [
@@ -39,9 +38,8 @@ const options3 = [
 
 const options4 = [
   { value: "No Thank You", price: 0 },
-  { value: "Green Ambre", price: 30 },
-  { value: "Pink and Silver", price: 40 },
-  { value: "Rainbow", price: 50 },
+  { value: "Custom", price: 35 },
+  { value: "In-house Garland", price: 25 },
 ];
 const options5 = [
   { value: "No Thank You", price: 0 },
@@ -51,8 +49,10 @@ const options5 = [
 ];
 const options6 = [
   { value: "No Thank You", price: 0 },
-  { value: "Double Pannel", price: 100 },
-  { value: "3 Pannels", price: 125 },
+  { value: "Solid-Double", price: 150 },
+  { value: "Solid-Trio", price: 200 },
+  { value: "Complex-Double", price: 250 },
+  { value: "Complex-Trio", price: 300 },
 ];
 function ToddlerForm() {
   //Date Selection
@@ -340,8 +340,8 @@ function ToddlerForm() {
                   ))}
                 </select>
               </div>
-              {selectedBalloons.price === 125 ||
-              selectedBalloons.price === 175 ? (
+              {selectedBalloons.price === 100 ||
+              selectedBalloons.price === 150 ? (
                 <div>
                   <label>Select up to 3 colors:</label>
                   {options.map((option) => (
