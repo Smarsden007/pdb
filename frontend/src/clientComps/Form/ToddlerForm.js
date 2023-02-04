@@ -56,6 +56,8 @@ const options6 = [
 ];
 function ToddlerForm() {
   //Date Selection
+  const [errors, setErrors] = useState({});
+
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedBouncer, setSelectedBouncer] = useState("bouncer1");
   //Master State for Total
@@ -124,6 +126,17 @@ function ToddlerForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let newErrors = {};
+
+    if (!selectedDate) {
+      newErrors.selectedDate = "Reservation date is required";
+    }
+
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length === 0) {
+      // Submit the form to the API here
+      console.log("Form is valid!", selectedDate);
+    }
     const orderNumber = generateOrderNumber();
     setOrderNumber(orderNumber);
     const { error, paymentMethod } = await stripe.createPaymentMethod({
@@ -231,6 +244,8 @@ function ToddlerForm() {
                   Reservation Date: {moment(selectedDate).format("MM/DD/YYYY")}
                 </p>
               )}
+                            {errors.selectedDate && <p>{errors.selectedDate}</p>}
+
             </div>
 
             {/* Middle I need to see if this works or not */}
@@ -532,6 +547,17 @@ function ToddlerForm() {
                         borderRadius: ".25rem",
                       }}
                       type="submit"
+                      disabled={
+                        !selectedDate ||
+                        !selectedTime ||
+                        !selectedOptionDelivery ||
+                        !billingName ||
+                        !billingAddress ||
+                        !billingEmail ||
+                        !billingCity ||
+                        !billingState ||
+                        !billingZip
+                      }
                     >
                       Pay
                     </button>
