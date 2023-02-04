@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./../Form/childComps/DateSelection.css";
 import moment from "moment";
+import { useForm } from '@formspree/react';
 
 // import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import { Divider, TimePicker, Typography } from "antd";
@@ -161,7 +162,7 @@ function ToddlerForm() {
           amount: total * 100, //convert to cents
           paymentMethodId: id,
           orderNumber,
-          selectedBalloons,
+          
         });
         console.log(data, "test");
         const time = new Date(selectedTime).toLocaleTimeString();

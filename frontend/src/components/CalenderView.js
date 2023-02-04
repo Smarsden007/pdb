@@ -206,7 +206,7 @@ export const CalendarView = () => {
                           >
                             <div class="inline-flex">
                               {firstWord}/
-                              {booking.bouncer === "boucner1"
+                              {booking.bouncer === "bouncer1"
                                 ? "👶"
                                 : booking.bouncer === "bouncer2"
                                 ? "🏯"
