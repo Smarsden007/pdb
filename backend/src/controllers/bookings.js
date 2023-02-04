@@ -355,7 +355,7 @@ exports.availCalender = async (req, res) => {
 
 exports.selectionBouncer1 = async (req, res) => {
   try {
-      const bookedDates = await db.query('SELECT selected_date FROM booking WHERE bouncer = $1', ['boucner1']);
+      const bookedDates = await db.query('SELECT selected_date FROM booking WHERE bouncer = $1', ['bouncer1']);
       res.json(bookedDates.rows);
   } catch (err) {
       console.error(err.message);

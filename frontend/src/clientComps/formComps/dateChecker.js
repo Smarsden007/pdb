@@ -66,7 +66,7 @@ function DateChecker({ handleSelect1, selectedDate1, handleOptionSelect }) {
             <option value="default" default disabled>
               Please Make a Selection
             </option>
-            <option value="boucner1">Toddler</option>
+            <option value="bouncer1">Toddler</option>
             <option value="bouncer2">Classic Castle</option>
             <option value="bouncer3">Bastille</option>
           </Select>

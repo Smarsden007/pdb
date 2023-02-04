@@ -81,7 +81,10 @@ function DateSelection2({ handleSelect1, selectedDate1, handleOptionSelect }) {
             }}
             value={selectedDate}
             tileDisabled={({ date }) => {
-              return (date < new Date().setHours(0, 0, 0, 0) || bookedDates.includes(date.toISOString().slice(0, 10)));
+              return bookedDates.includes(
+                date.toISOString().slice(0, 10)
+              );
+              
             }}
             
             
