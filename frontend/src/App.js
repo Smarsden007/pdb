@@ -28,6 +28,7 @@ import { Extras } from "./clientPages/Extras";
 import { ToddlerMasterCheckout } from "./clientComps/ToddlerMasterCheckout";
 import { CastleMasterCheckout } from "./clientComps/CastleMasterCheckout";
 import { BastilleMasterCheckout } from "./clientComps/BastilleMasterCheckout";
+import ScrollToTop from './ScrollToTop';
 
 function App() {
   const PrivateRoutes = () => {
@@ -50,6 +51,7 @@ function App() {
   };
   return (
     <BrowserRouter>
+        <ScrollToTop />
       <Routes>
         <Route element={<PrivateRoutes />}>
           <Route path="/dashboard" element={<Dashboard />} />
