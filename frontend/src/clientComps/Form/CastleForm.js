@@ -578,7 +578,7 @@ function CastleForm() {
                 <div class="mt-12">
                   <Title level={5}>
                     Questions? Call or text us at{" "}
-                    <a href="tel:+1234567890">707-238-1111</a>
+                    <a href="tel:+17072382741">707-238-2741</a>
                   </Title>
                 </div>
               </div>
