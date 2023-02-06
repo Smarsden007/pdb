@@ -36,7 +36,7 @@ export const RentalCards = () => {
               </Link>
             </div>
           </div>
-          <h1 className="cursive-text text-4xl text-center">The Toddler</h1>
+          <h2 className="cursive-text text-4xl text-center">The Toddler</h2>
         </div>
 
         {/* Col2 */}
@@ -67,7 +67,7 @@ export const RentalCards = () => {
               </Link>
             </div>
           </div>
-          <h1 className="cursive-text text-4xl text-center">The Bastille</h1>
+          <h2 className="cursive-text text-4xl text-center">The Bastille</h2>
         </div>
         {/* Col3 */}
 
@@ -97,7 +97,7 @@ export const RentalCards = () => {
               </Link>
             </div>
           </div>
-          <h1 className="cursive-text text-4xl text-center">The Classic Castle</h1>
+          <h2 className="cursive-text text-4xl text-center">The Classic Castle</h2>
         </div>
       </div>
     </div>
