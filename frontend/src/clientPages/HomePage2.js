@@ -39,7 +39,7 @@ export const HomePage = () => {
         </div>
 
         {/* Middle Overlap Slogan */}
-        <div class="absolute lg:top-56 lg:w-auto lg:left-96  z-40  top-8 left-28 md ">
+        <div class="absolute lg:top-56 lg:w-auto lg:left-96  z-0  top-4 left-28 md ">
           <img
             alt="gravity"
             class="h-auto lg:w-8/12 w-80 visible md:visible lg:visible sm:visible"
@@ -57,7 +57,7 @@ export const HomePage = () => {
         {/* Book now Tablet View */}
         <div className="absolute mb-28 bottom-0 left-[45vw] flex justify-center items-center invisible md:visible lg:invisible sm:invisible">
           <Link to="/rentals">
-            <button className="bg-[#c0a58e] text-white rounded-lg w-36 h-12 hover:bg-white hover:border-[#c0a58e] hover:border-solid hover:border-4 hover:text-[#c0a58e]">
+            <button className="bg-[#c0a58e] text-white rounded-2xl w-48 h-12 hover:bg-white hover:border-[#c0a58e] hover:border-solid hover:border-4 hover:text-[#c0a58e]">
               View Rentals
             </button>
           </Link>

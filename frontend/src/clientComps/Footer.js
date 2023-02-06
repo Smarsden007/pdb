@@ -5,7 +5,7 @@ import logo from "./../Media/logo.png";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#c0a58e] text-white p-1 mt-14  w-full">
+    <footer className="bg-[#c0a58e] text-white p-1 lg:mt-14 mt-4  w-full">
       <div className="flex justify-between items-center">
         <div className="flex items-center lg:p-4">
           <img alt="logo" src={logo} />

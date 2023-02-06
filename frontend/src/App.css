@@ -40,7 +40,7 @@
 
 @font-face {
   font-family: 'MyCustomFont';
-  src: url('./Media/Magic\ Retro.ttf') format('truetype');
+  src: url('./fonts/BrittanySignature.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -57,8 +57,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&family=Fascinate&family=Permanent+Marker&family=Rouge+Script&family=Satisfy&family=Shrikhand&display=swap');
 
 .test-font-1{
-  font-family: 'Permanent Marker', cursive;
-  font-size: 2.5rem;
+  font-family: 'MyCustomFont';
   padding: .5rem;
 }
 .test-font-2{

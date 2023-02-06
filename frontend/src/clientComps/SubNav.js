@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { SocialsRow } from "./SocialsRow";
 import { Divider } from "antd";
+import Logo from './../Media/logo.png'
 
 export const SubNav = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,6 +14,7 @@ export const SubNav = () => {
       }`}
     >
       <div class="fixed top-0 z-10 bg-transparent w-full">
+      <img src={Logo} alt='pouncylogo' className={`absolute top-0 left-0 z-50 overlap-y-auto m-4 w-28 logo lg:hidden ${isOpen ? 'hide' : ''}`}/>
         <nav class="container mx-auto flex justify-end">
           <div class="block lg:hidden mt-2 mr-2">
             <button
