@@ -12,7 +12,13 @@ export const HomePage = () => {
   // Get the body element
 
   return (
+    
     <div class="relative">
+      <Helmet>
+              <title>Pouncy Parties</title>
+              <meta name="description" content="Bring the excitement to your next event in Sonoma, Marin, or Napa County with our selection of luxury bouncers, backdrops, balloons and more. Shop now at Pouncy Parties."/>
+              <link rel="canonical" href='/' />
+            </Helmet>
       <div class=" absolute top-20 right-[16rem] z-10 w-[30rem] invisible md:invisible lg:visible sm:invisible">
         <div class="flex gap-4">
           <Link to="/rentals">
@@ -59,11 +65,7 @@ export const HomePage = () => {
         {/* Center Text Top Image */}
         <div className="flex-1 flex p-5 mt-20 w-48 flex-col lg:justify-center md:justify-end  md:-mt-4  col-start-3 row-start-1 col-span-1 md:ml-20 lg:col-start-5 lg:ml-0 lg:row-start-1 lg:mt-48  sm:w-48 md:w-3/4 lg:w-80 lg:p-5 visible md:invisible lg:visible sm:visible">
           <div className="md:bg-opacity-70 md:bg-white  md:rounded-xl lg:bg-opacity-0">
-            <Helmet>
-              <title>Pouncy Parties</title>
-              <meta name="description" content="Bring the excitement to your next event in Sonoma, Marin, or Napa County with our selection of luxury bouncers, backdrops, balloons and more. Shop now at Pouncy Parties."/>
-              <link rel="canonical" href='/' />
-            </Helmet>
+            
             <h1 className="text-[.5rem] w-42 lg:text-2xl p-2 md:p-4">
               The All-White Luxury Bounce House Company! Our mission is to bring
               joy and excitement to every event, big or small, with our
