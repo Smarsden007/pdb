@@ -20,12 +20,18 @@ export const SubHero = () => {
           <img alt="cleaning" class="w-full m-2" src={RightSide} />
         </div>
         <div className="ml-10">
-          <h1 className="text-[.5rem] md:text-lg lg:text-xl p-2 md:p-4">
-          Elevate your next event with our chic and sophisticated white bounce houses. Create a complete and unforgettable experience with our in-house balloons and backdrops, perfectly coordinated to match your theme and enhance the ambiance.
-          </h1>
-          <h1 className="text-[.5rem] md:text-lg lg:text-xl p-2 md:p-4">
-          At <span className="text-[#c0a58e]">Pouncy</span>,       cleanliness is always a top priority. We understand that the safety and health of your guests is paramount, which is why we take extra care to thoroughly sanitize every bounce house before delivery.
-          </h1>
+          <h2 className="text-[.5rem] md:text-lg lg:text-xl p-2 md:p-4">
+            Elevate your next event with our chic and sophisticated white bounce
+            houses. Create a complete and unforgettable experience with our
+            in-house balloons and backdrops, perfectly coordinated to match your
+            theme and enhance the ambiance.
+          </h2>
+          <h2 className="text-[.5rem] md:text-lg lg:text-xl p-2 md:p-4 hidden lg:block">
+            At <span className="text-[#c0a58e]">Pouncy</span>, cleanliness is
+            always a top priority. We understand that the safety and health of
+            your guests is paramount, which is why we take extra care to
+            thoroughly sanitize every bounce house before delivery.
+          </h2>
         </div>
       </div>
       {/* right */}
@@ -36,8 +42,16 @@ export const SubHero = () => {
           src={SubRight}
         />
       </div>
-      <div className="col-start-2 row-start-2 flex flex-row align-center justify-center items-center m-14 lg:-mt-10 ">
-        <Circles />
+      <div className="col-start-2 row-start-2  flex flex-row align-center justify-center items-center lg;m-14 p-4 lg:w-11/12 lg:-mt-10">
+        <h2 className="md:block lg:hidden text-[.5rem] md:text-lg lg:text-xl p-2 md:p-4 w-48">
+          At <span className="text-custom">Pouncy</span>, cleanliness is always
+          a top priority. We understand that the safety and health of your
+          guests is paramount, which is why we take extra care to thoroughly
+          sanitize every bounce house before delivery.
+        </h2>
+        <div className="lg:ml-20">
+          <Circles className="hidden lg:block lg:p-10" />
+        </div>
       </div>
     </div>
   );

@@ -3,11 +3,14 @@ module.exports = {
   content: ["./src/**/*.{html,js}"],
     theme: {
       extend: {
+        fontFamily: {
+          'custom': ['"MyCustomFont"', 'sans-serif'],
+        },
         backgroundColor: {
           'custom': '#c0a58e',
         },
       },
-    },
+    },  
     // ...
   
   

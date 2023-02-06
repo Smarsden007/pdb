@@ -7,7 +7,7 @@ export const DeskNavBar = () => {
     <div className="fixed top-0 left-0 m-4 z-50">
       <img src={logo} alt="Logo" className="w-auto h-auto" />
     </div>
-    <nav class="fixed top-0 right-0 w-1/2 h-12 text-1.25rem bg-f8f5f2 py-1 z-50">
+    <nav class="fixed top-0 right-0 w-1/2 h-12 text-1.25rem bg-f8f5f2 py-1 z-50 text-2xl font-light">
       <ul class="flex items-center">
         <Link to="/">
           <li class="m-3 hover:text-slate-400">

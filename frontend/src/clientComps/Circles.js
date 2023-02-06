@@ -6,10 +6,10 @@ export const Circles = () => {
     
   return (
     <div>
-    <div className="lg:hidden flex flex-row justify-center">
+    <div className="hidden flex-row justify-center">
     <img src={Col} alt="Small" className="block w-28 md:w-48 md:mt-8 custom" />
   </div>
-  <div className="hidden mb-8 lg:block">
+  <div className="hidden mb-8 lg:block items-center align-center">
     <img src={Row} alt="Large" className="block custom" />
   </div>
   </div>
