@@ -13,7 +13,7 @@ import { Radio } from "antd";
 const { Title } = Typography;
 
 const options0 = [
-  { value: "4-Hours", price: 1 },
+  { value: "4-Hours", price: 150 },
   { value: "6-Hours", price: 250 },
   { value: "8-Hours", price: 350 },
 
