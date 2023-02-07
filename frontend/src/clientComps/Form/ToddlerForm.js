@@ -128,14 +128,16 @@ function ToddlerForm() {
   const handlePayLaterSubmit = async (event) => {
     event.preventDefault();
     const time = new Date(selectedTime).toLocaleTimeString();
+    const orderNumber = generateOrderNumber();
+    setOrderNumber(orderNumber);
     const bookingData = {
       billingEmail: billingEmail,
-      selectedDuration: selectedDuration.value,
-      selectedBalloons: selectedBalloons.value,
-      selectedVinyl: selectedVinyl.value,
-      selectedGenerator: selectedGenerator.value,
-      selectedGarland: selectedGarland.value,
-      selectedDelivery: selectedDelivery.value,
+      selectedDuration: selectedDuration,
+      selectedBalloons: selectedBalloons,
+      selectedVinyl: selectedVinyl,
+      selectedGenerator: selectedGenerator,
+      selectedGarland: selectedGarland,
+      selectedDelivery: selectedDelivery,
       selectedDate: selectedDate,
       selectedTime: time,
       selectedColors: selectedColors,
@@ -154,6 +156,9 @@ function ToddlerForm() {
         bookingData
       );
       console.log(response.data);
+      setOrderPlaced(true);
+      console.log(orderPlaced);
+      navigate(`/success/${orderNumber}`);
     } catch (error) {
       console.error(error);
     }
