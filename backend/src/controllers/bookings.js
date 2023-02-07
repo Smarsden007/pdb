@@ -1,4 +1,6 @@
 const db = require("../db");
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 exports.createBooking = async (req, res) => {
   const { fulll_name, delivery_ad, bouncer, rent_date, generator, balloons, vinyl, vinyl_theme, paid,email,phone } = req.body;
@@ -79,7 +81,32 @@ exports.createBooking2 = async (req, res) => {
 
       ]
     );
-
+    const msg = {
+      to: 'hello@pouncyparties.com',
+      from: 'no-reply@pouncyparties.com',
+      subject: 'New Booking Created',
+      text: `A new booking has been created with the following details: 
+      selectedDuration: ${selectedDuration}
+      selectedBalloons: ${selectedBalloons}
+      selectedVinyl: ${selectedVinyl}
+      selectedGenerator: ${selectedGenerator}
+      selectedGarland: ${selectedGarland}
+      selectedDelivery: ${selectedDelivery}
+      selectedDate: ${selectedDate}
+      selectedTime: ${selectedTime}
+      selectedColors: ${selectedColors}
+      selectedOptionDelivery: ${selectedOptionDelivery}
+      billingName: ${billingName}
+      billingAddress: ${billingAddress}
+      billingCity: ${billingCity}
+      billingState: ${billingState}
+      orderNumber: ${orderNumber}
+      bouncerName: ${bouncerName}
+      billingEmail: ${billingEmail}
+      total_cost: ${total_cost}
+      phone: ${phone}`,
+    };
+    await sgMail.send(msg);
     return res.status(201).json({
       success: true,
       message: "The creation was successful",

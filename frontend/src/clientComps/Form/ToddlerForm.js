@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./../Form/childComps/DateSelection.css";
 import moment from "moment";
+import { useForm } from '@formspree/react';
 
 import { Divider, TimePicker, Typography } from "antd";
 import DateSelection from "./childComps/DateSelection";
@@ -16,7 +17,6 @@ const options0 = [
   { value: "4-Hours", price: 150 },
   { value: "6-Hours", price: 250 },
   { value: "8-Hours", price: 350 },
-
 ];
 const options1 = [
   { value: "No Thank You", price: 0 },
@@ -81,7 +81,11 @@ function ToddlerForm() {
   const [orderNumber, setOrderNumber] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
   const [billingEmail, setBillingEmail] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("stripe");
 
+  const handlePaymentMethodChange = (event) => {
+    setPaymentMethod(event.target.value);
+  };
   const navigate = useNavigate();
 
   const stripe = useStripe();
@@ -122,7 +126,40 @@ function ToddlerForm() {
     selectedDelivery,
     selectedBackdrop,
   ]);
-
+  const handlePayLaterSubmit = async (event) => {
+    event.preventDefault();
+    const time = new Date(selectedTime).toLocaleTimeString();
+    const bookingData = {
+      billingEmail: billingEmail,
+      selectedDuration: selectedDuration.value,
+      selectedBalloons: selectedBalloons.value,
+      selectedVinyl: selectedVinyl.value,
+      selectedGenerator: selectedGenerator.value,
+      selectedGarland: selectedGarland.value,
+      selectedDelivery: selectedDelivery.value,
+      selectedDate: selectedDate,
+      selectedTime: time,
+      selectedColors: selectedColors,
+      selectedOptionDelivery: selectedOptionDelivery,
+      billingName: billingName,
+      billingAddress: billingAddress,
+      billingCity: billingCity,
+      billingState: billingState,
+      orderNumber: orderNumber,
+      bouncerName: selectedBouncer,
+      total_cost: total,
+    };
+    try {
+      const response = await axios.post(
+        "https://pdb-backend-production.up.railway.app/api/booking",
+        bookingData
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     let newErrors = {};
@@ -156,12 +193,14 @@ function ToddlerForm() {
     if (!error) {
       const { id } = paymentMethod;
       try {
-        const { data } = await axios.post("https://pdb-backend-production.up.railway.app/api/charge", {
-          amount: total * 100, //convert to cents
-          paymentMethodId: id,
-          orderNumber,
-          
-        });
+        const { data } = await axios.post(
+          "https://pdb-backend-production.up.railway.app/api/charge",
+          {
+            amount: total * 100, //convert to cents
+            paymentMethodId: id,
+            orderNumber,
+          }
+        );
         console.log(data, "test");
         const time = new Date(selectedTime).toLocaleTimeString();
 
@@ -185,7 +224,10 @@ function ToddlerForm() {
           bouncerName: selectedBouncer,
           total_cost: total,
         };
-        await axios.post("https://pdb-backend-production.up.railway.app/api/booking", bookingData);
+        await axios.post(
+          "https://pdb-backend-production.up.railway.app/api/booking",
+          bookingData
+        );
         setOrderPlaced(true);
         console.log(orderPlaced);
         navigate(`/success/${orderNumber}`);
@@ -229,7 +271,13 @@ function ToddlerForm() {
 
   return (
     <div class="p-2 flex flex-col justify-center items-center align-center">
-      <form class="m-10 mt-32" type="submit" onSubmit={handleSubmit}>
+      <form
+        class="m-10 mt-32"
+        type="submit"
+        onSubmit={
+          paymentMethod === "stripe" ? handleSubmit : handlePayLaterSubmit
+        }
+      >
         <div>
           <div class="grid grid-cols-1 grid-rows-3 gap-2 lg:grid-cols-3 lg:grid-rows-1 ">
             {/* Left */}
@@ -237,14 +285,15 @@ function ToddlerForm() {
               <DateSelection
                 handleSelect1={setSelectedDate}
                 handleOptionSelect={handleOptionSelect}
+                onChange={(e) => setSelectedDate(e.target.value)}
+
               />
               {selectedDate && (
                 <p>
                   Reservation Date: {moment(selectedDate).format("MM/DD/YYYY")}
                 </p>
               )}
-                            {errors.selectedDate && <p>{errors.selectedDate}</p>}
-
+              {errors.selectedDate && <p>{errors.selectedDate}</p>}
             </div>
 
             {/* Middle I need to see if this works or not */}
@@ -537,7 +586,29 @@ function ToddlerForm() {
                         onChange={(e) => setBillingZip(e.target.value)}
                       />
                     </div>
-                    <CardElement className="mt-10" />
+                    <div>
+                      <input
+                        type="radio"
+                        value="stripe"
+                        checked={paymentMethod === "stripe"}
+                        onChange={handlePaymentMethodChange}
+                      />
+                      Pay with Stripe
+                    </div>
+                    <div>
+                      <input
+                        type="radio"
+                        value="payLater"
+                        checked={paymentMethod === "payLater"}
+                        onChange={handlePaymentMethodChange}
+                      />
+                      Pay Later
+                    </div>
+                    {paymentMethod === "stripe" && (
+                      <div>
+                        <CardElement className="mt-10" />
+                      </div>
+                    )}
                     <button
                       style={{
                         backgroundColor: "#c0a58e",

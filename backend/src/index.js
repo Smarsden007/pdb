@@ -16,7 +16,7 @@ app.use(
     origin: [
       "https://pdb-backend-production.up.railway.app",
       "https://pdb-backend-production.up.railway.app/api/login",
-      "https://pouncyparties.com",
+      "https://pouncyparties.com","http://localhost:3000"
     ],
     credentials: true,
   })
