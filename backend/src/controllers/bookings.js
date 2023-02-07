@@ -108,34 +108,49 @@ exports.createBooking2 = async (req, res) => {
     };
     await sgMail.send(adminMsg);
     const customerMsg = {
-      to: 'hello@pouncyparties.com',
+      to: billingEmail,
       from: 'hello@pouncyparties.com',
-      subject: 'Pouncy Parties- Reservation Details',
+      subject: 'Pouncy Parties - Reservation Details',
       html: `
-      <h1 style="color: #00FF00;">Reservation Confirmation</h1>
-      <p style="font-size: 16px;">Your reservatiom has been confirmed.</p>
-      <p style="font-size: 14px;">Reservation Number: ${orderNumber}</p>
-    `,
-      text: `A new booking has been created with the following details: 
-      selectedDuration: ${selectedDuration}
-      selectedBalloons: ${selectedBalloons}
-      selectedVinyl: ${selectedVinyl}
-      selectedGenerator: ${selectedGenerator}
-      selectedGarland: ${selectedGarland}
-      selectedDelivery: ${selectedDelivery}
-      selectedDate: ${selectedDate}
-      selectedTime: ${selectedTime}
-      selectedColors: ${selectedColors}
-      selectedOptionDelivery: ${selectedOptionDelivery}
-      billingName: ${billingName}
-      billingAddress: ${billingAddress}
-      billingCity: ${billingCity}
-      billingState: ${billingState}
-      bouncerName: ${bouncerName}
-      billingEmail: ${billingEmail}
-      total_cost: ${total_cost}
-      phone: ${phone}`,
+      <html>
+        <head>
+          <style>
+            h1 {
+              color: #c0a58e;
+            }
+            p {
+              font-size: 16px;
+            }
+          </style>
+        </head>
+        <body>
+          <h1>Reservation Confirmation</h1>
+          <p>Your reservation has been confirmed.</p>
+          <p>Reservation Number: ${orderNumber}</p>
+          <p>Details:</p>
+          <p>Selected Duration: ${selectedDuration}</p>
+          <p>Selected Balloons: ${selectedBalloons}</p>
+          <p>Selected Vinyl: ${selectedVinyl}</p>
+          <p>Selected Generator: ${selectedGenerator}</p>
+          <p>Selected Garland: ${selectedGarland}</p>
+          <p>Selected Delivery: ${selectedDelivery}</p>
+          <p>Selected Date: ${selectedDate}</p>
+          <p>Selected Time: ${selectedTime}</p>
+          <p>Selected Colors: ${selectedColors}</p>
+          <p>Selected Option Delivery: ${selectedOptionDelivery}</p>
+          <p>Billing Name: ${billingName}</p>
+          <p>Billing Address: ${billingAddress}</p>
+          <p>Billing City: ${billingCity}</p>
+          <p>Billing State: ${billingState}</p>
+          <p>Bouncer Name: ${bouncerName}</p>
+          <p>Billing Email: ${billingEmail}</p>
+          <p>Total Cost: ${total_cost}</p>
+          <p>Phone: ${phone}</p>
+        </body>
+      </html>
+      `
     };
+  
     await sgMail.send(customerMsg);
     return res.status(201).json({
       success: true,

@@ -71,6 +71,7 @@ function ToddlerForm() {
   const [total, setTotal] = useState(0);
   const [selectedColors, setSelectedColors] = useState([]);
   //billing Details
+  const [phone, setPhone] = useState("");
   const [billingName, setBillingName] = useState("");
   const [billingAddress, setBillingAddress] = useState("");
   const [billingCity, setBillingCity] = useState("");
@@ -149,6 +150,8 @@ function ToddlerForm() {
       orderNumber: orderNumber,
       bouncerName: selectedBouncer,
       total_cost: total,
+      phone: phone,
+
     };
     try {
       const response = await axios.post(
@@ -227,6 +230,8 @@ function ToddlerForm() {
           orderNumber: orderNumber,
           bouncerName: selectedBouncer,
           total_cost: total,
+          phone: phone,
+
         };
         await axios.post(
           "https://pdb-backend-production.up.railway.app/api/booking",
@@ -542,6 +547,15 @@ function ToddlerForm() {
                         type="text"
                         value={billingName}
                         onChange={(e) => setBillingName(e.target.value)}
+                      />
+                    </div>
+                    <div className="flex flex-row justify-between mb-2 ">
+                      <label>Phone: </label>
+                      <input
+                        className="border-[#c0a58e] border-2 p-2 rounded w-36 lg:w-48"
+                        type="text"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
                       />
                     </div>
                     <div className="flex flex-row justify-between mb-2">
