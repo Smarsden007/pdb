@@ -81,7 +81,7 @@ exports.createBooking2 = async (req, res) => {
 
       ]
     );
-    const msg = {
+    const adminMsg = {
       to: 'hello@pouncyparties.com',
       from: 'hello@pouncyparties.com',
       subject: 'New Booking Created',
@@ -106,7 +106,37 @@ exports.createBooking2 = async (req, res) => {
       total_cost: ${total_cost}
       phone: ${phone}`,
     };
-    await sgMail.send(msg);
+    await sgMail.send(adminMsg);
+    const customerMsg = {
+      to: 'hello@pouncyparties.com',
+      from: 'hello@pouncyparties.com',
+      subject: 'Pouncy Parties- Reservation Details',
+      html: `
+      <h1 style="color: #00FF00;">Reservation Confirmation</h1>
+      <p style="font-size: 16px;">Your reservatiom has been confirmed.</p>
+      <p style="font-size: 14px;">Reservation Number: ${orderNumber}</p>
+    `,
+      text: `A new booking has been created with the following details: 
+      selectedDuration: ${selectedDuration}
+      selectedBalloons: ${selectedBalloons}
+      selectedVinyl: ${selectedVinyl}
+      selectedGenerator: ${selectedGenerator}
+      selectedGarland: ${selectedGarland}
+      selectedDelivery: ${selectedDelivery}
+      selectedDate: ${selectedDate}
+      selectedTime: ${selectedTime}
+      selectedColors: ${selectedColors}
+      selectedOptionDelivery: ${selectedOptionDelivery}
+      billingName: ${billingName}
+      billingAddress: ${billingAddress}
+      billingCity: ${billingCity}
+      billingState: ${billingState}
+      bouncerName: ${bouncerName}
+      billingEmail: ${billingEmail}
+      total_cost: ${total_cost}
+      phone: ${phone}`,
+    };
+    await sgMail.send(customerMsg);
     return res.status(201).json({
       success: true,
       message: "The creation was successful",
