@@ -1,7 +1,7 @@
 const db = require("../db");
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey('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');
-
+import logo from './media/header.png'
 exports.createBooking = async (req, res) => {
   const { fulll_name, delivery_ad, bouncer, rent_date, generator, balloons, vinyl, vinyl_theme, paid,email,phone } = req.body;
   try {
@@ -124,6 +124,7 @@ exports.createBooking2 = async (req, res) => {
           </style>
         </head>
         <body>
+        <img src='https://ibb.co/LhJxTj0' height="200" width="500" alt='header image'>
           <h1>Reservation Confirmation</h1>
           <p>Your reservation has been confirmed.</p>
           <p>Reservation Number: ${orderNumber}</p>
