@@ -78,7 +78,6 @@ function BastilleForm() {
   const [orderNumber, setOrderNumber] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
   const [billingEmail, setBillingEmail] = useState("");
-  const [billingPhone, setBillingPhone] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("stripe");
   const [phone, setPhone] = useState("");
 
