@@ -83,7 +83,7 @@ exports.createBooking2 = async (req, res) => {
     );
     const msg = {
       to: 'hello@pouncyparties.com',
-      from: 'no-reply@pouncyparties.com',
+      from: 'hello@pouncyparties.com',
       subject: 'New Booking Created',
       text: `A new booking has been created with the following details: 
       selectedDuration: ${selectedDuration}
