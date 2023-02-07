@@ -132,12 +132,12 @@ function ToddlerForm() {
     setOrderNumber(orderNumber);
     const bookingData = {
       billingEmail: billingEmail,
-      selectedDuration: selectedDuration,
-      selectedBalloons: selectedBalloons,
-      selectedVinyl: selectedVinyl,
-      selectedGenerator: selectedGenerator,
-      selectedGarland: selectedGarland,
-      selectedDelivery: selectedDelivery,
+      selectedDuration: selectedDuration.value,
+      selectedBalloons: selectedBalloons.value,
+      selectedVinyl: selectedVinyl.value,
+      selectedGenerator: selectedGenerator.value,
+      selectedGarland: selectedGarland.value,
+      selectedDelivery: selectedDelivery.value,
       selectedDate: selectedDate,
       selectedTime: time,
       selectedColors: selectedColors,
@@ -163,7 +163,7 @@ function ToddlerForm() {
       console.error(error);
     }
   };
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     let newErrors = {};
@@ -290,7 +290,6 @@ function ToddlerForm() {
                 handleSelect1={setSelectedDate}
                 handleOptionSelect={handleOptionSelect}
                 onChange={(e) => setSelectedDate(e.target.value)}
-
               />
               {selectedDate && (
                 <p>
