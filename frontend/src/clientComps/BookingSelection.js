@@ -3,6 +3,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import starLeft from "./../Media/StarLeft.png";
 import starRight from "./../Media/StarRight.png";
+import './../App.css'
+ 
 export const BookingSelection = () => {
   return (
     <div>
@@ -14,16 +16,16 @@ export const BookingSelection = () => {
               <img
                 alt="stars"
                 src={starLeft}
-                className="w-14 h-6 backdrop:lg:w-14 lg:h-14"
+                className="w-14 h-14 backdrop:lg:w-14 lg:h-14"
               />
-              <h1 className="text-2xl lg:text-2xl p-4 font-mono font-semibold text-black">
+              <h1 className="text-2xl lg:text-2xl mt-2 text-black test-font-1">
                 The Toddler
               </h1>
 
               <img
                 alt="stars"
                 src={starRight}
-                className="w-14 h-6 backdrop:lg:w-14 lg:h-14"
+                className="w-14 h-14 backdrop:lg:w-14 lg:h-14"
               />
               
             </div>
@@ -57,16 +59,16 @@ export const BookingSelection = () => {
               <img
                 alt="stars"
                 src={starLeft}
-                className="w-14 h-6 backdrop:lg:w-14 lg:h-14"
+                className="w-14 h-14 backdrop:lg:w-14 lg:h-14"
               />
-              <h1 className="text-2xl lg:text-2xl p-2 font-mono font-semibold text-black">
-                Classic Castle
+              <h1 className="text-2xl lg:text-2xl mt-2 text-black test-font-1">
+                The Castle
               </h1>
 
               <img
                 alt="stars"
                 src={starRight}
-                className="w-14 h-6 backdrop:lg:w-14 lg:h-14"
+                className="w-14 h-14 backdrop:lg:w-14 lg:h-14"
               />
               
             </div>
@@ -100,16 +102,16 @@ export const BookingSelection = () => {
               <img
                 alt="stars"
                 src={starLeft}
-                className="w-14 h-6 backdrop:lg:w-14 lg:h-14"
+                className="w-14 h-14 backdrop:lg:w-14 lg:h-14"
               />
-              <h1 className="text-2xl lg:text-2xl p-2 font-mono font-semibold text-black">
+              <h1 className="text-2xl lg:text-2xl mt-2 text-black test-font-1">
                 The Bastille
               </h1>
 
               <img
                 alt="stars"
                 src={starRight}
-                className="w-14 h-6 backdrop:lg:w-14 lg:h-14"
+                className="w-14 h-14 backdrop:lg:w-14 lg:h-14"
               />
               
             </div>

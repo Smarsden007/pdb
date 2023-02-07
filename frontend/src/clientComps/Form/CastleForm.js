@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./../Form/childComps/DateSelection.css";
 import moment from "moment";
-
-// import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import { Divider, TimePicker, Typography } from "antd";
 import DateSelection2 from "./childComps/DateSelection2";
 import SelectedOptionsList from "./childComps/SelectedOptions";
@@ -17,7 +15,6 @@ const options0 = [
   { value: "4-Hours", price: 300 },
   { value: "6-Hours", price: 400 },
   { value: "8-Hours", price: 500 },
-
 ];
 const options1 = [
   { value: "No Thank You", price: 0 },
@@ -69,7 +66,11 @@ function CastleForm() {
   const [selectedGarland, setSelectedOption4] = useState(options1[0]);
   const [selectedDelivery, setSelectedOption5] = useState(options5[0]);
   const [selectedBackdrop, setSelectedOption6] = useState(options6[0]);
+  const [phone, setPhone] = useState("");
 
+  const handlePaymentMethodChange = (event) => {
+    setPaymentMethod(event.target.value);
+  };
   const [total, setTotal] = useState(0);
   const [selectedColors, setSelectedColors] = useState([]);
   //billing Details
@@ -82,7 +83,7 @@ function CastleForm() {
   const [orderNumber, setOrderNumber] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
   const [billingEmail, setBillingEmail] = useState("");
-
+  const [paymentMethod, setPaymentMethod] = useState("stripe");
   const navigate = useNavigate();
 
   const stripe = useStripe();
@@ -123,6 +124,46 @@ function CastleForm() {
     selectedDelivery,
     selectedBackdrop,
   ]);
+
+  const handlePayLaterSubmit = async (event) => {
+    event.preventDefault();
+    const time = new Date(selectedTime).toLocaleTimeString();
+    const orderNumber = generateOrderNumber();
+    setOrderNumber(orderNumber);
+    const bookingData = {
+      billingEmail: billingEmail,
+      selectedDuration: selectedDuration.value,
+      selectedBalloons: selectedBalloons.value,
+      selectedVinyl: selectedVinyl.value,
+      selectedGenerator: selectedGenerator.value,
+      selectedGarland: selectedGarland.value,
+      selectedDelivery: selectedDelivery.value,
+      selectedDate: selectedDate,
+      selectedTime: time,
+      selectedColors: selectedColors,
+      selectedOptionDelivery: selectedOptionDelivery,
+      billingName: billingName,
+      billingAddress: billingAddress,
+      billingCity: billingCity,
+      billingState: billingState,
+      orderNumber: orderNumber,
+      bouncerName: selectedBouncer,
+      total_cost: total,
+      phone: phone,
+    };
+    try {
+      const response = await axios.post(
+        "https://pdb-backend-production.up.railway.app/api/booking",
+        bookingData
+      );
+      console.log(response.data);
+      setOrderPlaced(true);
+      console.log(orderPlaced);
+      navigate(`/success/${orderNumber}`);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -189,6 +230,7 @@ function CastleForm() {
           orderNumber: orderNumber,
           bouncerName: selectedBouncer,
           total_cost: total,
+          phone: phone,
         };
         await axios.post(
           "https://pdb-backend-production.up.railway.app/api/booking",
@@ -237,7 +279,13 @@ function CastleForm() {
 
   return (
     <div class="p-2 flex flex-col justify-center items-center align-center">
-      <form class="m-10 mt-32" type="submit" onSubmit={handleSubmit}>
+      <form
+        class="m-10 mt-32"
+        type="submit"
+        onSubmit={
+          paymentMethod === "stripe" ? handleSubmit : handlePayLaterSubmit
+        }
+      >
         <div>
           <div class="grid grid-cols-1 grid-rows-3 gap-2 lg:grid-cols-3 lg:grid-rows-1 ">
             {/* Left */}
@@ -499,6 +547,15 @@ function CastleForm() {
                         onChange={(e) => setBillingName(e.target.value)}
                       />
                     </div>
+                    <div className="flex flex-row justify-between mb-2 ">
+                      <label>Phone: </label>
+                      <input
+                        className="border-[#c0a58e] border-2 p-2 rounded w-36 lg:w-48"
+                        type="text"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                      />
+                    </div>
                     <div className="flex flex-row justify-between mb-2">
                       <label>Email: </label>
                       <input
@@ -544,7 +601,29 @@ function CastleForm() {
                         onChange={(e) => setBillingZip(e.target.value)}
                       />
                     </div>
-                    <CardElement className="mt-10" />
+                    <div>
+                      <input
+                        type="radio"
+                        value="stripe"
+                        checked={paymentMethod === "stripe"}
+                        onChange={handlePaymentMethodChange}
+                      />
+                      Pay with Stripe
+                    </div>
+                    <div>
+                      <input
+                        type="radio"
+                        value="payLater"
+                        checked={paymentMethod === "payLater"}
+                        onChange={handlePaymentMethodChange}
+                      />
+                      Pay Later
+                    </div>
+                    {paymentMethod === "stripe" && (
+                      <div>
+                        <CardElement className="mt-10" />
+                      </div>
+                    )}
                     <button
                       style={{
                         backgroundColor: "#c0a58e",
@@ -565,7 +644,7 @@ function CastleForm() {
                         !billingZip
                       }
                     >
-                      Pay
+                      {paymentMethod === "stripe" ? "Pay" : "Submit"}
                     </button>
                   </div>
                 </div>

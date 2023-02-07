@@ -44,6 +44,12 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'MyCustomFont2';
+  src: url('./fonts/Moonrising.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
   color: #fbf8f8 !important; 
   font-weight: 500;
@@ -61,7 +67,7 @@
   padding: .5rem;
 }
 .test-font-2{
-  font-family: 'Fascinate', cursive;
+  font-family: 'MyCustomFont2';
   font-size: 2.5rem;
   padding: .5rem;
 }

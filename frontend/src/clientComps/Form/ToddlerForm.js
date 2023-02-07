@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./../Form/childComps/DateSelection.css";
 import moment from "moment";
-
 import { Divider, TimePicker, Typography } from "antd";
 import DateSelection from "./childComps/DateSelection";
 import SelectedOptionsList from "./childComps/SelectedOptions";
@@ -151,7 +150,6 @@ function ToddlerForm() {
       bouncerName: selectedBouncer,
       total_cost: total,
       phone: phone,
-
     };
     try {
       const response = await axios.post(
@@ -231,7 +229,6 @@ function ToddlerForm() {
           bouncerName: selectedBouncer,
           total_cost: total,
           phone: phone,
-
         };
         await axios.post(
           "https://pdb-backend-production.up.railway.app/api/booking",
@@ -646,7 +643,7 @@ function ToddlerForm() {
                         !billingZip
                       }
                     >
-                      Pay
+                      {paymentMethod === "stripe" ? "Pay" : "Submit"}
                     </button>
                   </div>
                 </div>
