@@ -1,6 +1,6 @@
 const db = require("../db");
 const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+sgMail.setApiKey('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');
 
 exports.createBooking = async (req, res) => {
   const { fulll_name, delivery_ad, bouncer, rent_date, generator, balloons, vinyl, vinyl_theme, paid,email,phone } = req.body;
