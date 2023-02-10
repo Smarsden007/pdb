@@ -347,22 +347,22 @@ exports.getBookingsPagination = async (req, res) => {
     if (search) {
       // If a search query is provided, filter the results based on the search query
       result = await db.query(
-        `SELECT * FROM bookings WHERE full_name ILIKE $1 OR email ILIKE $1 ORDER BY created_at DESC LIMIT $2 OFFSET $3`,
+        `SELECT * FROM booking WHERE billingName ILIKE $1 OR billingEmail ILIKE $1 ORDER BY selectedDate DESC LIMIT $2 OFFSET $3`,
         [`%${search}%`, pageSize, offset]
       );
     } else {
       // If no search query is provided, fetch all bookings
       result = await db.query(
-        `SELECT * FROM bookings ORDER BY created_at DESC LIMIT $1 OFFSET $2`,
+        `SELECT * FROM booking ORDER BY selectedDate DESC LIMIT $1 OFFSET $2`,
         [pageSize, offset]
       );
     }
     // Get the total count of bookings
-    const countResult = await db.query(`SELECT count(*) FROM bookings`);
+    const countResult = await db.query(`SELECT count(*) FROM booking`);
     const count = parseInt(countResult.rows[0].count);
 
     // Send the bookings and total count back to the client
-    res.json({ bookings: result.rows, count });
+    res.json({ booking: result.rows, count });
   } catch (err) {
     console.error(err);
     res.sendStatus(500);
@@ -376,7 +376,7 @@ exports.searchBookings = async (req, res) => {
     const { searchQuery } = req.body;
 
     // construct the search query
-    const searchQueryString = `SELECT * FROM bookings WHERE full_name ILIKE '%${searchQuery}%' OR email ILIKE '%${searchQuery}%' OR phone ILIKE '%${searchQuery}%' OR delivery_ad ILIKE '%${searchQuery}%' OR bouncer ILIKE '%${searchQuery}%' OR half_arch ILIKE '%${searchQuery}%' OR full_arch ILIKE '%${searchQuery}%' OR vinyl_theme ILIKE '%${searchQuery}%' OR cust_nt ILIKE '%${searchQuery}%' OR int_nt ILIKE '%${searchQuery}%'`;
+    const searchQueryString = `SELECT * FROM booking WHERE billingName ILIKE '%${searchQuery}%' OR billingEmail ILIKE '%${searchQuery}%' OR phone ILIKE '%${searchQuery}%' OR billingAddress ILIKE '%${searchQuery}%' OR bouncer ILIKE '%${searchQuery}%' OR selectedBalloons ILIKE '%${searchQuery}%' OR selectedBackdrop ILIKE '%${searchQuery}%' OR selectedVinyl ILIKE '%${searchQuery}%' OR selectedTime ILIKE '%${searchQuery}%' OR selectedColor ILIKE '%${searchQuery}%'`;
 
     // execute the search query
     const { rows } = await db.query(searchQueryString);
