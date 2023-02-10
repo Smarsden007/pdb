@@ -41,7 +41,7 @@ export const BookingsTable = () => {
 
       // Close the modal and update the search term
       setSelectedBooking(null);
-      setSearchTerm(event.target.billing_name.value);
+      setSearchTerm(event.target.billingName.value);
     } catch (err) {
       console.error(err);
       alert("An error occurred while updating the booking");
