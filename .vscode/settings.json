@@ -19,5 +19,8 @@
         "titleBar.inactiveBackground": "#38a7a799",
         "titleBar.inactiveForeground": "#33333399"
     },
-    "peacock.color": "38a7a7"
+    "peacock.color": "38a7a7",
+    "vscode-pets.petType": "snake",
+    "vscode-pets.petSize": "nano",
+    "vscode-pets.petColor": "gray"
 }
