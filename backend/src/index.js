@@ -14,7 +14,7 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: [
-      "https://pdb-backend-production.up.railway.app",
+     "https://pdb-backend-production.up.railway.app", "https://pdb-backend-production.up.railway.app/api/booking",
       "https://pdb-backend-production.up.railway.app/api/login",
       "https://pouncyparties.com","http://localhost:3000"
     ],
