@@ -30,10 +30,10 @@ export const BookingSelection = () => {
               
             </div>
             <p className="text-bold text-center font-mono font-bold">
-                $100 4-HOURS | $200 6-HOURS
+                $150 4-HOURS | $250 6-HOURS
               </p>
               <p className="text-bold text-center font-mono font-bold">
-                $300 8-HOURS
+                $350 8-HOURS
               </p>
               <p className="text-bold text-center">
                 Requires 12' X 12' clearance
