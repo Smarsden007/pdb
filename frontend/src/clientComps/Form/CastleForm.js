@@ -337,7 +337,32 @@ function CastleForm() {
                   ))}
                 </select>
               </div>
-
+              <div>
+                <Title level={3}>Outside of Marin,Napa or Sonoma County?</Title>
+                <Divider className="m-0" />
+                <Radio.Group
+                  onChange={handleDeliveryChange}
+                  value={selectedOptionDelivery}
+                  className='mb-6'
+                >
+                  <Radio value={"yes"}>Yes</Radio>
+                  <Radio value={"no"}>No</Radio>
+                </Radio.Group>
+                {selectedOptionDelivery === "yes" ? (
+                  <select
+                    className="w-48 border border-[#c0a58e] rounded"
+                    onChange={(e) =>
+                      setSelectedOption5(options5[e.target.selectedIndex])
+                    }
+                  >
+                    {options5.map((option) => (
+                      <option key={option.value} value={option}>
+                        {option.value}
+                      </option>
+                    ))}
+                  </select>
+                ) : null}
+              </div>
               <div>
                 <Title className="m-0 p-0" level={3}>
                   Vinyl
@@ -472,31 +497,7 @@ function CastleForm() {
                   ))}
                 </select>
               </div>
-              <div>
-                <Title level={5}>Outside of Marin,Napa or Sonoma County?</Title>
-                <Divider className="m-0" />
-                <Radio.Group
-                  onChange={handleDeliveryChange}
-                  value={selectedOptionDelivery}
-                >
-                  <Radio value={"yes"}>Yes</Radio>
-                  <Radio value={"no"}>No</Radio>
-                </Radio.Group>
-                {selectedOptionDelivery === "yes" ? (
-                  <select
-                    className="w-48 border border-[#c0a58e] rounded"
-                    onChange={(e) =>
-                      setSelectedOption5(options5[e.target.selectedIndex])
-                    }
-                  >
-                    {options5.map((option) => (
-                      <option key={option.value} value={option}>
-                        {option.value}
-                      </option>
-                    ))}
-                  </select>
-                ) : null}
-              </div>
+             
             </div>
 
             {/* Right */}
