@@ -40,9 +40,12 @@ const options4 = [
 ];
 const options5 = [
   { value: "No Thank You", price: 0 },
-  { value: "East Bay", price: 30 },
-  { value: "South Bay", price: 40 },
-  { value: "Test Bay", price: 50 },
+  { value: "East Bay", price: 75 },
+  { value: "North Peninsula", price: 50 },
+  { value: "San Jose", price: 100 },
+  { value: "San Pablo Bay", price: 75 },
+  { value: "South Bay", price: 80 },
+  { value: "Stanislaus", price: 100 },
 ];
 const options6 = [
   { value: "No Thank You", price: 0 },
