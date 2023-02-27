@@ -1,7 +1,7 @@
 import React from "react";
 import "./../../../App.css";
 import "./../../../clientComps/clientStyles/Caro.css";
-import 'react-multi-carousel/lib/styles.css'
+import "react-multi-carousel/lib/styles.css";
 
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -151,7 +151,9 @@ export const BalloonSelector = () => {
   return (
     <div className=" flex flex-col justify-center items-center">
       <div className="w-11/12">
-        <h3 className="text-center test-font-2">Swipe to view our balloon library</h3>
+        <h3 className="text-center test-font-2 p-8">
+          Swipe to view our balloon library
+        </h3>
         <Carousel
           responsive={responsive}
           id="Caro"
