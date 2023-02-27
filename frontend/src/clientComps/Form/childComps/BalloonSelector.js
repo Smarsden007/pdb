@@ -151,7 +151,7 @@ export const BalloonSelector = () => {
   return (
     <div className=" flex flex-col justify-center items-center">
       <div className="w-11/12">
-        <h3 className="text-center test-font-2 p-8">
+        <h3 className="text-center test-font-2 p-8 text-2xl lg:text-4xl">
           Swipe to view our balloon library
         </h3>
         <Carousel
