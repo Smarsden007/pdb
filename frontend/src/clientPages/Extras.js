@@ -5,16 +5,16 @@ import { Helmet } from "react-helmet-async";
 import { BalloonSelector } from "../clientComps/Form/childComps/BalloonSelector";
 import BalloonList from "../clientComps/Balloon/BalloonList";
 import shim from './../Media/Balloon PNG/Shimpink.png'
+import pink from './../Media/Balloon PNG/Pink.png'
+import red from './../Media/Balloon PNG/Red.png'
+import black from './../Media/Balloon PNG/Black.png'
 
 const balloons = [
   { name: "Cameo", color: shim },
-  { name: "Babypink", color: shim },
-  { name: "Shimpink", color: shim }, 
-  { name: "Cameo", color: shim },
-  { name: "Babypink", color: shim },
-  { name: "Shimpink", color: shim }, { name: "Cameo", color: shim },
-  { name: "Babypink", color: shim },
-  { name: "Shimpink", color: shim },  
+  { name: "Babypink", color: pink },
+  { name: "Shimpink", color: red }, 
+  { name: "Cameo", color: black },
+ 
 ];
 
 export const Extras = () => {
