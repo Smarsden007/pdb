@@ -6,7 +6,6 @@ import right from "./../Media/StarRight.png";
 import { BookingSelection } from "../clientComps/BookingSelection";
 import { Helmet } from "react-helmet-async";
 import './../App.css'
-import { BalloonSelector } from "../clientComps/Form/childComps/BalloonSelector";
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
 
 export const Checkout = () => {
@@ -31,8 +30,6 @@ export const Checkout = () => {
         <Elements stripe={stripePromise}>
           <BookingSelection/>
         </Elements>
-        <BalloonSelector />
-
       </div>
     </div>
   );
