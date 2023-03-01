@@ -24,7 +24,7 @@ function BalloonList(props) {
   };
 
   return (
-    <div className="overflow-y-scroll max-h-48">
+    <div className="overflow-y-scroll max-h-48 w-48">
       {balloons.map((balloon) => (
         <Balloon
           key={balloon.color}
