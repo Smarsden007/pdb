@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./../Form/childComps/DateSelection.css";
 import moment from "moment";
-import { Divider, TimePicker, Typography } from "antd";
+import { Button, Divider, TimePicker, Typography } from "antd";
 import DateSelection from "./childComps/DateSelection";
 import SelectedOptionsList from "./childComps/SelectedOptions";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
@@ -279,8 +279,7 @@ function ToddlerForm() {
         );
         console.log(data, "test");
         const time = new Date(selectedTime).toLocaleTimeString();
-        const selectedColorNames = selectedColors.map(color => color.name);
-
+        const selectedColorNames = selectedColors.map((color) => color.name);
 
         const bookingData = {
           billingEmail: billingEmail,
@@ -450,6 +449,7 @@ function ToddlerForm() {
                   onChange={(time) => setSelectedTime(time)}
                   value={selectedTime}
                   okButtonProps={{ style: { background: "red" } }}
+                  required
                 />
               </div>
 
@@ -557,19 +557,19 @@ function ToddlerForm() {
               {selectedBalloons.price === 100 ||
               selectedBalloons.price === 150 ? (
                 <div>
+                  <p>Select 3 Options</p>
                   <BalloonList
                     balloons={balloons}
                     selectedColors={selectedColors}
                     onSelectionChange={handleSelectionChange}
                   />
-                   {selectedColors.length > 0 && (
-                            <p>
-                              You selected:{" "}
-                              {selectedColors
-                                .map((balloon) => balloon.name)
-                                .join(", ")}
-                            </p>
-                          )}
+                  {selectedColors.length > 0 && (
+                    <p>
+                      You selected:{" "}
+                      {selectedColors.map((balloon) => balloon.name).join(", ")}
+                    </p>
+                  )}
+                  <Button onClick={() => setSelectedColors([])}>Reset</Button>
                 </div>
               ) : null}
               <div>
@@ -634,9 +634,7 @@ function ToddlerForm() {
 
                       {selectedBalloons.price === 125 ||
                       selectedBalloons.price === 175 ? (
-                        <div className="flex flex-row">
-                         
-                        </div>
+                        <div className="flex flex-row"></div>
                       ) : null}
                     </div>
                   </div>
@@ -728,28 +726,31 @@ function ToddlerForm() {
                         <CardElement className="mt-10" />
                       </div>
                     )}
-                    <button
-                      style={{
-                        backgroundColor: "#c0a58e",
-                        marginTop: "2rem",
-                        marginLeft: ".5rem",
-                        borderRadius: ".25rem",
-                      }}
-                      type="submit"
-                      disabled={
-                        !selectedDate ||
-                        !selectedTime ||
-                        !selectedOptionDelivery ||
-                        !billingName ||
-                        !billingAddress ||
-                        !billingEmail ||
-                        !billingCity ||
-                        !billingState ||
-                        !billingZip
-                      }
-                    >
-                      {paymentMethod === "stripe" ? "Pay" : "Submit"}
-                    </button>
+                    {!selectedDate ||
+                    !selectedTime ||
+                    !selectedOptionDelivery ||
+                    !billingName ||
+                    !billingAddress ||
+                    !billingEmail ||
+                    !billingCity ||
+                    !billingState ||
+                    !billingZip ? (
+                      <p>
+                        Please fill out all required fields before submitting.
+                      </p>
+                    ) : (
+                      <button
+                        style={{
+                          backgroundColor: "#c0a58e",
+                          marginTop: "2rem",
+                          marginLeft: ".5rem",
+                          borderRadius: ".25rem",
+                        }}
+                        type="submit"
+                      >
+                        {paymentMethod === "stripe" ? "Pay" : "Submit"}
+                      </button>
+                    )}
                   </div>
                 </div>
 

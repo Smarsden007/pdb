@@ -57,9 +57,12 @@ function DateSelection2({ handleSelect1, selectedDate1, handleOptionSelect }) {
           </p>
         </div>
         <div class="flex flex-start	mt-3 ml-3">
+          <div className="flex flex-col">
           <Title style={{ marginBottom: "-1rem" }} level={3}>
             Select a Date{" "}
           </Title>
+          <p className="mt-2">*Required Field*</p>
+          </div>
         </div>
         <Divider style={{ marginBottom: "-.25rem" }} />
         <div class="flex flex-start	m-3">
