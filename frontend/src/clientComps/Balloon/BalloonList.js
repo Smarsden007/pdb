@@ -7,16 +7,17 @@ function BalloonList(props) {
   const [selectedBalloons, setSelectedBalloons] = useState([]);
 
   const handleBalloonSelect = (color) => {
-    const index = selectedBalloons.indexOf(color);
+    const selectedBalloon = balloons.find((balloon) => balloon.color === color);
+    const index = selectedBalloons.indexOf(selectedBalloon);
     if (index === -1) {
-      // color not already selected, add it to the list
-      const newSelectedBalloons = [...selectedBalloons, color];
+      // balloon not already selected, add it to the list
+      const newSelectedBalloons = [...selectedBalloons, selectedBalloon];
       setSelectedBalloons(newSelectedBalloons);
       onSelectionChange(newSelectedBalloons);
     } else {
-      // color already selected, remove it from the list
+      // balloon already selected, remove it from the list
       const newSelectedBalloons = selectedBalloons.filter(
-        (c) => c !== color
+        (balloon) => balloon !== selectedBalloon
       );
       setSelectedBalloons(newSelectedBalloons);
       onSelectionChange(newSelectedBalloons);

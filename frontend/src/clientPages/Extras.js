@@ -1,26 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { ExtrasCards } from "../clientComps/ExtrasCards";
 import { ExtrasHeader } from "../clientComps/ExtrasHeader";
 import { Helmet } from "react-helmet-async";
 import { BalloonSelector } from "../clientComps/Form/childComps/BalloonSelector";
-import BalloonList from "../clientComps/Balloon/BalloonList";
-import shim from './../Media/Balloon PNG/Shimpink.png'
-import pink from './../Media/Balloon PNG/Pink.png'
-import red from './../Media/Balloon PNG/Red.png'
-import black from './../Media/Balloon PNG/Black.png'
 
-const balloons = [
-  { name: "Cameo", color: shim },
-  { name: "Babypink", color: pink },
-  { name: "Shimpink", color: red }, 
-  { name: "Cameo", color: black },
- 
-];
 
 export const Extras = () => {
-  const handleSelectionChange = (selectedBalloons) => {
-    console.log("Selected balloons:", selectedBalloons);
-  };
+
   return (
     <div>
       <Helmet>
@@ -32,15 +18,14 @@ export const Extras = () => {
         <link rel="canonical" href="/extras" />
       </Helmet>
       <div className="flex flex-col text-center pt-20 w-full align-center justify-center items-center">
+        œ
         <ExtrasHeader />
       </div>
       <div>
         <BalloonSelector />
         <ExtrasCards />
-        <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Choose 3 Balloons</h1>
-      <BalloonList balloons={balloons} onSelectionChange={handleSelectionChange} />
-    </div>      </div>
+        
+      </div>
     </div>
   );
 };
