@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./../Form/childComps/DateSelection.css";
 import moment from "moment";
-import { Button, Divider, TimePicker, Typography } from "antd";
+import {  Divider, TimePicker, Typography } from "antd";
 import DateSelection from "./childComps/DateSelection";
 import SelectedOptionsList from "./childComps/SelectedOptions";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
@@ -97,7 +97,7 @@ function ToddlerForm() {
     const randomNumber = Math.floor(Math.random() * 100);
     return `${timestamp}-${randomNumber}`;
   };
-
+console.log(orderNumber)
   useEffect(() => {
     let newTotal = 0;
 

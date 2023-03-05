@@ -8,7 +8,6 @@ import DateSelection2 from "./childComps/DateSelection2";
 import SelectedOptionsList from "./childComps/SelectedOptions";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import { Radio } from "antd";
-import BalloonSelector from "./childComps/BalloonDropdown";
 import BalloonDropdown from "./childComps/BalloonDropdown";
 const { Title } = Typography;
 
@@ -96,7 +95,7 @@ function CastleForm() {
     const randomNumber = Math.floor(Math.random() * 100);
     return `${timestamp}-${randomNumber}`;
   };
-
+console.log(orderNumber)
   useEffect(() => {
     let newTotal = 0;
 

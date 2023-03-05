@@ -8,6 +8,7 @@ import DateSelection2 from "./childComps/DateSelection3";
 import SelectedOptionsList from "./childComps/SelectedOptions";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import { Radio } from "antd";
+import BalloonDropdown from "./childComps/BalloonDropdown";
 
 const { Title } = Typography;
 
@@ -93,17 +94,12 @@ function BastilleForm() {
     const randomNumber = Math.floor(Math.random() * 100);
     return `${timestamp}-${randomNumber}`;
   };
-  const options = [
-    { value: "red", label: "Red" },
-    { value: "green", label: "Green" },
-    { value: "blue", label: "Blue" },
-    { value: "yellow", label: "Yellow" },
-    { value: "purple", label: "Purple" },
-  ];
 
   const handlePaymentMethodChange = (event) => {
     setPaymentMethod(event.target.value);
   };
+  console.log(orderNumber);
+
   useEffect(() => {
     let newTotal = 0;
 
@@ -166,6 +162,10 @@ function BastilleForm() {
     } catch (error) {
       console.error(error);
     }
+  };
+  const handleColorsSelected = (colors) => {
+    console.log(colors); // log the selected colors
+    setSelectedColors(colors);
   };
 
   const handleSubmit = async (e) => {
@@ -259,34 +259,16 @@ function BastilleForm() {
   };
 
   //Master State Console- Delete before DEPLOY!!
-  console.log(
-    selectedDuration,
-    selectedBalloons,
-    selectedVinyl,
-    selectedGenerator,
-    selectedGarland,
-    selectedDelivery,
-    selectedDate,
-    selectedTime,
-    selectedColors,
-    selectedOptionDelivery,
-    selectedTime,
-    billingName,
-    billingAddress,
-    billingCity,
-    billingState,
-    orderNumber,
-    billingEmail,
-    selectedBouncer
-  );
 
   return (
     <div class="p-2 flex flex-col justify-center items-center align-center ">
-      <form  class="m-10 mt-32"
+      <form
+        class="m-10 mt-32"
         type="submit"
         onSubmit={
           paymentMethod === "stripe" ? handleSubmit : handlePayLaterSubmit
-        }>
+        }
+      >
         <div>
           <div class="grid grid-cols-1 grid-rows-3 gap-2 lg:grid-cols-3 lg:grid-rows-1 ">
             {/* Left */}
@@ -301,14 +283,11 @@ function BastilleForm() {
                 </p>
               )}
               {errors.selectedDate && <p>{errors.selectedDate}</p>}
-            </div>
-
-            {/* Middle I need to see if this works or not */}
-            <div class="row-start-2 lg:col-start-2 lg:row-start-1 max-w-sm p-6 bg-white border-4 border-[#c0a58e] rounded-lg shadow-md">
               <div>
                 <Title className="m-0 p-0" level={3}>
                   Start Time
                 </Title>
+                <p className="mt-2 mb-2 text-red-500">*Required Field*</p>
                 <Divider className="m-0" />
                 <TimePicker
                   use12Hours
@@ -338,13 +317,18 @@ function BastilleForm() {
                   ))}
                 </select>
               </div>
+            </div>
+
+            {/* Middle I need to see if this works or not */}
+            <div class="row-start-2 lg:col-start-2 lg:row-start-1 max-w-sm p-6 bg-white border-4 border-[#c0a58e] rounded-lg shadow-md">
               <div>
                 <Title level={3}>Outside of Marin,Napa or Sonoma County?</Title>
+                <p className="mt-2 mb-2 text-red-500">*Required Field*</p>
                 <Divider className="m-0" />
                 <Radio.Group
                   onChange={handleDeliveryChange}
                   value={selectedOptionDelivery}
-                  className='mb-6'
+                  className="mb-6"
                 >
                   <Radio value={"yes"}>Yes</Radio>
                   <Radio value={"no"}>No</Radio>
@@ -420,46 +404,10 @@ function BastilleForm() {
                   ))}
                 </select>
               </div>
-              {selectedBalloons.price === 125 ||
-              selectedBalloons.price === 175 ? (
+              {selectedBalloons.price === 150 ||
+              selectedBalloons.price === 250 ? (
                 <div>
-                  <label>Select up to 3 colors:</label>
-                  {options.map((option) => (
-                    <div key={option.value}>
-                      <input
-                        type="checkbox"
-                        value={option.value}
-                        checked={selectedColors.includes(option.value)}
-                        onChange={(e) => {
-                          if (!e.target.checked) {
-                            setSelectedColors((prevColors) =>
-                              prevColors.filter(
-                                (color) => color !== e.target.value
-                              )
-                            );
-                          } else {
-                            if (selectedColors.length < 3) {
-                              setSelectedColors([
-                                ...selectedColors,
-                                e.target.value,
-                              ]);
-                            }
-                          }
-                        }}
-                        disabled={selectedColors.length === 3}
-                      />
-                      <label>{option.label}</label>
-                    </div>
-                  ))}
-                  <button
-                    className="bg-[#c0a58e] text-white p-1 rounded"
-                    onClick={() => {
-                      setSelectedOption1(options1[0]);
-                      setSelectedColors([]);
-                    }}
-                  >
-                    Cancel
-                  </button>
+                  <BalloonDropdown onColorsSelected={handleColorsSelected} />
                 </div>
               ) : null}
               <div>
@@ -498,7 +446,6 @@ function BastilleForm() {
                   ))}
                 </select>
               </div>
-            
             </div>
 
             {/* Right */}
@@ -526,20 +473,16 @@ function BastilleForm() {
                       {selectedBalloons.price === 150 ||
                       selectedBalloons.price === 250 ? (
                         <div className="flex flex-row">
-                          <p>Balloon Colors:</p>
-                          {selectedColors.map((color) => (
-                            <div className="flex flex-row" key={color}>
-                              <p className="pr-1" style={{ color: color }}>
-                                {color},
-                              </p>
-                            </div>
-                          ))}
+                          <p>Selected Balloons: {selectedColors.join(", ")}</p>
                         </div>
                       ) : null}
                     </div>
                   </div>
                   <div class="flex flex-col m-1">
                     <p className="text-xl">Your Sub Total:$ {total}</p>
+                    <p className="mt-2 mb-2 text-red-500">
+                      *Please complete all text boxes*
+                    </p>
                     <div className="flex flex-row justify-between mb-2 ">
                       <label>Name: </label>
                       <input
@@ -626,28 +569,31 @@ function BastilleForm() {
                         <CardElement className="mt-10" />
                       </div>
                     )}
-                    <button
-                      style={{
-                        backgroundColor: "#c0a58e",
-                        marginTop: "2rem",
-                        marginLeft: ".5rem",
-                        borderRadius: ".25rem",
-                      }}
-                      type="submit"
-                      disabled={
-                        !selectedDate ||
-                        !selectedTime ||
-                        !selectedOptionDelivery ||
-                        !billingName ||
-                        !billingAddress ||
-                        !billingEmail ||
-                        !billingCity ||
-                        !billingState ||
-                        !billingZip
-                      }
-                    >
-                      {paymentMethod === "stripe" ? "Pay" : "Submit"}
-                    </button>
+                    {!selectedDate ||
+                    !selectedTime ||
+                    !selectedOptionDelivery ||
+                    !billingName ||
+                    !billingAddress ||
+                    !billingEmail ||
+                    !billingCity ||
+                    !billingState ||
+                    !billingZip ? (
+                      <p>
+                        Please fill out all required fields before continuing.
+                      </p>
+                    ) : (
+                      <button
+                        style={{
+                          backgroundColor: "#c0a58e",
+                          marginTop: "2rem",
+                          marginLeft: ".5rem",
+                          borderRadius: ".25rem",
+                        }}
+                        type="submit"
+                      >
+                        {paymentMethod === "stripe" ? "Pay" : "Submit"}
+                      </button>
+                    )}
                   </div>
                 </div>
 
