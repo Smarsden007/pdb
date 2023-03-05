@@ -71,6 +71,11 @@
   font-size: 2.5rem;
   padding: .5rem;
 }
+.test-font-3{
+  font-family: 'MyCustomFont2';
+  font-size: 1.5rem;
+  padding: .5rem;
+}
 .left-shadow {
   box-shadow: -2px 2px 8px rgba(0, 0, 0, 0.25);
 }

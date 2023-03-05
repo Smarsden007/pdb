@@ -125,7 +125,7 @@ exports.createBooking2 = async (req, res) => {
           </style>
         </head>
         <body>
-        <img src='./media/header.png' style="width: 100%;" alt='header image'>
+        <img src='https://flic.kr/p/2ok8gUe' style="width: 100%;" alt='header image'>
           <h1>Reservation Confirmation</h1>
           <p>Your reservation has been confirmed.</p>
           <p>Reservation Number: ${orderNumber}</p>

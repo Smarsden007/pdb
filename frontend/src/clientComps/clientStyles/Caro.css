@@ -1,0 +1,23 @@
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: #FFC0CB; /* Change the background color of the arrow */
+  border-radius: 50%; /* Make the arrow circular */
+  width: 30px; /* Set the width and height of the arrow */
+  height: 30px;
+  background-size: 100%, 100%; /* Set the size of the arrow */
+  border: none; /* Remove the border */
+}
+
+.carousel-control-prev-icon:before {
+  content: '<'; /* Set the content of the left arrow */
+  color: rgb(157, 8, 8) !important;; /* Change the color of the arrow */
+}
+
+.carousel-control-next-icon:before {
+  content: '>'; /* Set the content of the right arrow */
+  color: white; /* Change the color of the arrow */
+}
+.react-multiple-carousel__arrow {
+    color: red;
+  }
+  

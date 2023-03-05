@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { ExtrasCards } from "../clientComps/ExtrasCards";
 import { ExtrasHeader } from "../clientComps/ExtrasHeader";
 import { Helmet } from "react-helmet-async";
+import { BalloonSelector } from "../clientComps/Form/childComps/BalloonSelector";
+
 
 export const Extras = () => {
+
   return (
     <div>
       <Helmet>
@@ -15,10 +18,13 @@ export const Extras = () => {
         <link rel="canonical" href="/extras" />
       </Helmet>
       <div className="flex flex-col text-center pt-20 w-full align-center justify-center items-center">
+        œ
         <ExtrasHeader />
       </div>
       <div>
+        <BalloonSelector />
         <ExtrasCards />
+        
       </div>
     </div>
   );
