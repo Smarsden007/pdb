@@ -210,7 +210,7 @@ console.log(orderNumber)
         );
         console.log(data, "test");
         const time = new Date(selectedTime).toLocaleTimeString();
-
+        const selectedColorNames = selectedColors.map((color) => color.name);
         const bookingData = {
           billingEmail: billingEmail,
           selectedDuration: selectedDuration.value,
@@ -221,7 +221,7 @@ console.log(orderNumber)
           selectedDelivery: selectedDelivery.value,
           selectedDate: selectedDate,
           selectedTime: time,
-          selectedColors: selectedColors,
+          selectedColors: selectedColorNames,
           selectedOptionDelivery: selectedOptionDelivery,
           billingName: billingName,
           billingAddress: billingAddress,

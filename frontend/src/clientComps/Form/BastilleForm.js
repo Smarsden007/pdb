@@ -213,6 +213,7 @@ function BastilleForm() {
         );
         console.log(data, "test");
         const time = new Date(selectedTime).toLocaleTimeString();
+        const selectedColorNames = selectedColors.map((color) => color.name);
 
         const bookingData = {
           billingEmail: billingEmail,
@@ -224,7 +225,7 @@ function BastilleForm() {
           selectedDelivery: selectedDelivery.value,
           selectedDate: selectedDate,
           selectedTime: time,
-          selectedColors: selectedColors,
+          selectedColors: selectedColorNames,
           selectedOptionDelivery: selectedOptionDelivery,
           billingName: billingName,
           billingAddress: billingAddress,
