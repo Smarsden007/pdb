@@ -18,7 +18,6 @@ export const Extras = () => {
         <link rel="canonical" href="/extras" />
       </Helmet>
       <div className="flex flex-col text-center pt-20 w-full align-center justify-center items-center">
-        œ
         <ExtrasHeader />
       </div>
       <div>
