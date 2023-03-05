@@ -23,7 +23,7 @@ const BalloonDropdown = ({ onColorsSelected }) => {
 
   return (
     <div>
-      <div className="flex flex-row">
+      <div className="flex flex-row mt-4 mb-4">
         <select value={balloon1} onChange={handleSelect1}>
           <option value="">Select a balloon</option>
           {balloons.map((balloon) => (
@@ -38,7 +38,7 @@ const BalloonDropdown = ({ onColorsSelected }) => {
           alt=""
         />
       </div>
-      <div className="flex flex-row">
+      <div className="flex flex-row  mt-4 mb-4">
         <select value={balloon2} onChange={handleSelect2}>
           <option value="">Select a balloon</option>
           {balloons.map((balloon) => (
@@ -53,7 +53,7 @@ const BalloonDropdown = ({ onColorsSelected }) => {
           alt=""
         />
       </div>
-      <div className="flex flex-row">
+      <div className="flex flex-row  mt-4 mb-4">
         <select value={balloon3} onChange={handleSelect3}>
           <option value="">Select a balloon</option>
           {balloons.map((balloon) => (
