@@ -5,7 +5,7 @@ function Balloon(props) {
   return (
     <div
       className={`flex items-center p-2 cursor-pointer ${
-        isSelected ? "bg-gray-200" : ""
+        isSelected ? "bg-gray-700" : ""
       }`}
       onClick={() => onSelect(color)}
     >

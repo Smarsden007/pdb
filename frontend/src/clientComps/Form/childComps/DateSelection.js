@@ -61,7 +61,7 @@ function DateSelection1({ handleSelect1, selectedDate1, handleOptionSelect }) {
           <Title style={{ marginBottom: "-1rem" }} level={3}>
             Select a Date{" "}
           </Title>
-          <p className="mt-2">*Required Field*</p>
+          <p className="mt-2 text-red-500">*Required Field*</p>
           </div>
         </div>
         

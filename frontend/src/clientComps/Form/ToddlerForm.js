@@ -8,7 +8,6 @@ import DateSelection from "./childComps/DateSelection";
 import SelectedOptionsList from "./childComps/SelectedOptions";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import { Radio } from "antd";
-import BalloonList from "../Balloon/BalloonList";
 
 import Babyblue from "./../../Media/Balloon PNG/Babyblue.png";
 import Babypink from "./../../Media/Balloon PNG/Babypink.png";
@@ -70,6 +69,7 @@ import Turquoise from "./../../Media/Balloon PNG/Turquoise.png";
 import White from "./../../Media/Balloon PNG/White.png";
 import Willow from "./../../Media/Balloon PNG/Willow.png";
 import Yellow from "./../../Media/Balloon PNG/Yellow.png";
+import BalloonSelector from "./childComps/BalloonDropdown";
 const { Title } = Typography;
 
 const options0 = [
@@ -229,11 +229,10 @@ function ToddlerForm() {
       console.error(error);
     }
   };
-  const handleSelectionChange = (selectedColors) => {
-    if (selectedColors.length > 3) {
-      selectedColors = selectedColors.slice(0, 3);
-    }
-    setSelectedColors(selectedColors);
+
+  const handleColorsSelected = (colors) => {
+    console.log(colors); // log the selected colors
+    setSelectedColors(colors);
   };
 
   const handleSubmit = async (e) => {
@@ -386,7 +385,7 @@ function ToddlerForm() {
     { name: "Stone", color: Stone },
     { name: "Cocoa", color: Cocoa },
   ];
-  const selectedColorsNames = selectedColors.map((color) => color.name);
+
   //Master State Console- Delete before DEPLOY!!
   console.log(
     selectedDuration,
@@ -397,7 +396,6 @@ function ToddlerForm() {
     selectedDelivery,
     selectedDate,
     selectedTime,
-    selectedColorsNames,
     selectedOptionDelivery,
     selectedTime,
     billingName,
@@ -434,14 +432,11 @@ function ToddlerForm() {
                 </p>
               )}
               {errors.selectedDate && <p>{errors.selectedDate}</p>}
-            </div>
-
-            {/* Middle I need to see if this works or not */}
-            <div class="row-start-2 lg:col-start-2 lg:row-start-1 max-w-sm p-6 bg-white border-4 border-[#c0a58e] rounded-lg shadow-md">
               <div>
                 <Title className="m-0 p-0" level={3}>
                   Start Time
                 </Title>
+                <p className="mt-2 mb-2 text-red-500">*Required Field*</p>
                 <Divider className="m-0" />
                 <TimePicker
                   use12Hours
@@ -472,8 +467,13 @@ function ToddlerForm() {
                   ))}
                 </select>
               </div>
+            </div>
+
+            {/* Middle I need to see if this works or not */}
+            <div class="row-start-2 lg:col-start-2 lg:row-start-1 max-w-sm p-6 bg-white border-4 border-[#c0a58e] rounded-lg shadow-md">
               <div>
                 <Title level={3}>Outside of Marin,Napa or Sonoma County?</Title>
+                <p className="mt-2 mb-2 text-red-500">*Required Field*</p>
                 <Divider className="m-0" />
                 <Radio.Group
                   onChange={handleDeliveryChange}
@@ -557,19 +557,7 @@ function ToddlerForm() {
               {selectedBalloons.price === 100 ||
               selectedBalloons.price === 150 ? (
                 <div>
-                  <p>Select 3 Options</p>
-                  <BalloonList
-                    balloons={balloons}
-                    selectedColors={selectedColors}
-                    onSelectionChange={handleSelectionChange}
-                  />
-                  {selectedColors.length > 0 && (
-                    <p>
-                      You selected:{" "}
-                      {selectedColors.map((balloon) => balloon.name).join(", ")}
-                    </p>
-                  )}
-                  <Button onClick={() => setSelectedColors([])}>Reset</Button>
+                  <BalloonSelector onColorsSelected={handleColorsSelected} />
                 </div>
               ) : null}
               <div>
@@ -625,21 +613,21 @@ function ToddlerForm() {
                         selectedDelivery={selectedDelivery}
                         selectedBackdrop={selectedBackdrop}
                       />
-                      {selectedDate && (
-                        <p>
-                          Selected date:{" "}
-                          {moment(selectedDate).format("MM/DD/YYYY")}
-                        </p>
-                      )}
 
-                      {selectedBalloons.price === 125 ||
-                      selectedBalloons.price === 175 ? (
-                        <div className="flex flex-row"></div>
+                      {selectedBalloons.price === 100 ||
+                      selectedBalloons.price === 150 ? (
+                        <div className="flex flex-row">
+                          <p>Selected Balloons: {selectedColors.join(", ")}</p>
+                        </div>
                       ) : null}
                     </div>
                   </div>
                   <div class="flex flex-col m-1">
                     <p className="text-xl">Your Sub Total:$ {total}</p>
+                    <p className="mt-2 mb-2 text-red-500">
+                      *Please complete all text boxes*
+                    </p>
+
                     <div className="flex flex-row justify-between mb-2 ">
                       <label>Name: </label>
                       <input

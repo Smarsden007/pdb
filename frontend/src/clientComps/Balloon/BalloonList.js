@@ -9,12 +9,12 @@ function BalloonList(props) {
   const handleBalloonSelect = (color) => {
     const selectedBalloon = balloons.find((balloon) => balloon.color === color);
     const index = selectedBalloons.indexOf(selectedBalloon);
-    if (index === -1) {
-      // balloon not already selected, add it to the list
+    if (index === -1 && selectedBalloons.length < 3) {
+      // balloon not already selected and less than 3 selected, add it to the list
       const newSelectedBalloons = [...selectedBalloons, selectedBalloon];
       setSelectedBalloons(newSelectedBalloons);
       onSelectionChange(newSelectedBalloons);
-    } else {
+    } else if (index !== -1) {
       // balloon already selected, remove it from the list
       const newSelectedBalloons = selectedBalloons.filter(
         (balloon) => balloon !== selectedBalloon
@@ -39,5 +39,6 @@ function BalloonList(props) {
     </div>
   );
 }
+
 
 export default BalloonList;
