@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import fringe from "./../Media/fringe.png";
 import balloons from "./../Media/balloons.png";
 import vinyl from "./../Media/vinyl.png";
-import photo from "./../Media/photo1.png";
+// import photo from "./../Media/photo1.png";
 import backd from "./../Media/backd.png"
 import './../App.css'
 export const ExtrasCards = () => {
