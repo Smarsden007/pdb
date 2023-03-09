@@ -6,7 +6,7 @@ import moment from "moment";
 import { Divider, TimePicker, Typography } from "antd";
 import DateSelection2 from "./childComps/DateSelection3";
 import SelectedOptionsList from "./childComps/SelectedOptions";
-import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
+// import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import { Radio } from "antd";
 import BalloonDropdown from "./childComps/BalloonDropdown";
 
@@ -58,6 +58,7 @@ const options6 = [
 function BastilleForm() {
   //Date Selection
   const [errors, setErrors] = useState({});
+  console.log(setErrors)
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedBouncer, setSelectedBouncer] = useState("bouncer3");
   //Master State for Total
@@ -82,22 +83,22 @@ function BastilleForm() {
   const [orderNumber, setOrderNumber] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
   const [billingEmail, setBillingEmail] = useState("");
-  const [paymentMethod, setPaymentMethod] = useState("stripe");
+  // const [paymentMethod, setPaymentMethod] = useState("stripe");
   const [phone, setPhone] = useState("");
 
   const navigate = useNavigate();
 
-  const stripe = useStripe();
-  const elements = useElements();
+  // const stripe = useStripe();
+  // const elements = useElements();
   const generateOrderNumber = () => {
     const timestamp = Date.now();
     const randomNumber = Math.floor(Math.random() * 100);
     return `${timestamp}-${randomNumber}`;
   };
 
-  const handlePaymentMethodChange = (event) => {
-    setPaymentMethod(event.target.value);
-  };
+  // const handlePaymentMethodChange = (event) => {
+  //   setPaymentMethod(event.target.value);
+  // };
   console.log(orderNumber);
 
   useEffect(() => {
@@ -168,86 +169,86 @@ function BastilleForm() {
     setSelectedColors(colors);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    let newErrors = {};
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   let newErrors = {};
 
-    if (!selectedDate) {
-      newErrors.selectedDate = "Reservation date is required";
-    }
+  //   if (!selectedDate) {
+  //     newErrors.selectedDate = "Reservation date is required";
+  //   }
 
-    setErrors(newErrors);
-    if (Object.keys(newErrors).length === 0) {
-      // Submit the form to the API here
-      console.log("Form is valid!", selectedDate);
-    }
-    const orderNumber = generateOrderNumber();
-    setOrderNumber(orderNumber);
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: "card",
-      card: elements.getElement(CardElement),
-      billing_details: {
-        name: billingName,
-        email: billingEmail,
-        address: {
-          line1: billingAddress,
-          city: billingCity,
-          state: billingState,
-          postal_code: billingZip,
-        },
-      },
-    });
+  //   setErrors(newErrors);
+  //   if (Object.keys(newErrors).length === 0) {
+  //     // Submit the form to the API here
+  //     console.log("Form is valid!", selectedDate);
+  //   }
+  //   const orderNumber = generateOrderNumber();
+  //   setOrderNumber(orderNumber);
+  //   const { error, paymentMethod } = await stripe.createPaymentMethod({
+  //     type: "card",
+  //     card: elements.getElement(CardElement),
+  //     billing_details: {
+  //       name: billingName,
+  //       email: billingEmail,
+  //       address: {
+  //         line1: billingAddress,
+  //         city: billingCity,
+  //         state: billingState,
+  //         postal_code: billingZip,
+  //       },
+  //     },
+  //   });
 
-    if (!error) {
-      const { id } = paymentMethod;
-      try {
-        const { data } = await axios.post(
-          "https://pdb-backend-production.up.railway.app/api/charge",
-          {
-            amount: total * 100, //convert to cents
-            paymentMethodId: id,
-            orderNumber,
-            option1: selectedBalloons.value,
-            option2: selectedBalloons.value,
-          }
-        );
-        console.log(data, "test");
-        const time = new Date(selectedTime).toLocaleTimeString();
-        const selectedColorNames = selectedColors.map((color) => color.name);
+  //   if (!error) {
+  //     const { id } = paymentMethod;
+  //     try {
+  //       const { data } = await axios.post(
+  //         "https://pdb-backend-production.up.railway.app/api/charge",
+  //         {
+  //           amount: total * 100, //convert to cents
+  //           paymentMethodId: id,
+  //           orderNumber,
+  //           option1: selectedBalloons.value,
+  //           option2: selectedBalloons.value,
+  //         }
+  //       );
+  //       console.log(data, "test");
+  //       const time = new Date(selectedTime).toLocaleTimeString();
+  //       const selectedColorNames = selectedColors.map((color) => color.name);
 
-        const bookingData = {
-          billingEmail: billingEmail,
-          selectedDuration: selectedDuration.value,
-          selectedBalloons: selectedBalloons.value,
-          selectedVinyl: selectedVinyl.value,
-          selectedGenerator: selectedGenerator.value,
-          selectedGarland: selectedGarland.value,
-          selectedDelivery: selectedDelivery.value,
-          selectedDate: selectedDate,
-          selectedTime: time,
-          selectedColors: selectedColorNames,
-          selectedOptionDelivery: selectedOptionDelivery,
-          billingName: billingName,
-          billingAddress: billingAddress,
-          billingCity: billingCity,
-          billingState: billingState,
-          orderNumber: orderNumber,
-          bouncerName: selectedBouncer,
-          total_cost: total,
-          phone: phone,
-        };
-        await axios.post(
-          "https://pdb-backend-production.up.railway.app/api/booking",
-          bookingData
-        );
-        setOrderPlaced(true);
-        console.log(orderPlaced);
-        navigate(`/success/${orderNumber}`);
-      } catch (e) {
-        console.log(e);
-      }
-    }
-  };
+  //       const bookingData = {
+  //         billingEmail: billingEmail,
+  //         selectedDuration: selectedDuration.value,
+  //         selectedBalloons: selectedBalloons.value,
+  //         selectedVinyl: selectedVinyl.value,
+  //         selectedGenerator: selectedGenerator.value,
+  //         selectedGarland: selectedGarland.value,
+  //         selectedDelivery: selectedDelivery.value,
+  //         selectedDate: selectedDate,
+  //         selectedTime: time,
+  //         selectedColors: selectedColorNames,
+  //         selectedOptionDelivery: selectedOptionDelivery,
+  //         billingName: billingName,
+  //         billingAddress: billingAddress,
+  //         billingCity: billingCity,
+  //         billingState: billingState,
+  //         orderNumber: orderNumber,
+  //         bouncerName: selectedBouncer,
+  //         total_cost: total,
+  //         phone: phone,
+  //       };
+  //       await axios.post(
+  //         "https://pdb-backend-production.up.railway.app/api/booking",
+  //         bookingData
+  //       );
+  //       setOrderPlaced(true);
+  //       console.log(orderPlaced);
+  //       navigate(`/success/${orderNumber}`);
+  //     } catch (e) {
+  //       console.log(e);
+  //     }
+  //   }
+  // };
 
   const handleDeliveryChange = (e) => {
     setDeliveryOption(e.target.value);
@@ -263,13 +264,7 @@ function BastilleForm() {
 
   return (
     <div class="p-2 flex flex-col justify-center items-center align-center ">
-      <form
-        class="m-10 mt-32"
-        type="submit"
-        onSubmit={
-          paymentMethod === "stripe" ? handleSubmit : handlePayLaterSubmit
-        }
-      >
+      <form class="m-10 mt-32" type="submit" onSubmit={handlePayLaterSubmit}>
         <div>
           <div class="grid grid-cols-1 grid-rows-3 gap-2 lg:grid-cols-3 lg:grid-rows-1 ">
             {/* Left */}
@@ -547,29 +542,7 @@ function BastilleForm() {
                         onChange={(e) => setBillingZip(e.target.value)}
                       />
                     </div>
-                    <div>
-                      <input
-                        type="radio"
-                        value="stripe"
-                        checked={paymentMethod === "stripe"}
-                        onChange={handlePaymentMethodChange}
-                      />
-                      Pay with Stripe
-                    </div>
-                    <div>
-                      <input
-                        type="radio"
-                        value="payLater"
-                        checked={paymentMethod === "payLater"}
-                        onChange={handlePaymentMethodChange}
-                      />
-                      Pay Later
-                    </div>
-                    {paymentMethod === "stripe" && (
-                      <div>
-                        <CardElement className="mt-10" />
-                      </div>
-                    )}
+
                     {!selectedDate ||
                     !selectedTime ||
                     !selectedOptionDelivery ||
@@ -592,7 +565,7 @@ function BastilleForm() {
                         }}
                         type="submit"
                       >
-                        {paymentMethod === "stripe" ? "Pay" : "Submit"}
+                        Submit
                       </button>
                     )}
                   </div>
