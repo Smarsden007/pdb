@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import fringe from "./../Media/fringe.png";
 import balloons from "./../Media/balloons.png";
 import vinyl from "./../Media/vinyl.png";
-// import photo from "./../Media/photo1.png";
 import backd from "./../Media/backd.png"
 import './../App.css'
 export const ExtrasCards = () => {
@@ -104,7 +103,7 @@ export const ExtrasCards = () => {
               </div>
             </div>
           </div>
-
+{/* //Removed uneeded photography card// */}
           {/* <div className="flex flex-col justify-center items-center align-center">
             <div className=" flex flex-col justify-center align-center items-center border-solid border-4 rounded-[4rem] border-[#c0a58e]  w-72 lg:w-96 p-2 md:col-start-1 md:row-start-1 lg:col-start-1">
               <div className="text-center">
