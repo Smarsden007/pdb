@@ -103,39 +103,7 @@ export const ExtrasCards = () => {
               </div>
             </div>
           </div>
-{/* //Removed uneeded photography card// */}
-          {/* <div className="flex flex-col justify-center items-center align-center">
-            <div className=" flex flex-col justify-center align-center items-center border-solid border-4 rounded-[4rem] border-[#c0a58e]  w-72 lg:w-96 p-2 md:col-start-1 md:row-start-1 lg:col-start-1">
-              <div className="text-center">
-                <div className="flex flex-col p-4">
-                  <h1 className="test-font-1 text-4xl text-center">Photography</h1>
 
-                  <img alt="stars" src={photo} className="w-48 mx-auto" />
-                  <div className="p-2">
-                    <p className="text-bold text-center font-mono font-bold">
-                      Bastille & Castle:
-                    </p>
-                    <p>Large Text:$30</p>
-                    <p>Custom Theme Package:$80</p>
-                    <p>In-house Theme Package:$70</p>
-                  </div>
-                  <div>
-                    <p className="text-bold text-center font-mono font-bold">
-                      Toddler:
-                    </p>
-                    <p>Large Text:$20</p>
-                    <p>Custom Theme Package:$80</p>
-                    <p>In-house Theme Package:$70</p>
-                  </div>
-                </div>
-                <Link to='/checkout'>
-                  <button className="bg-[#c0a58e] text-white rounded-lg w-48 h-12 m-4 hover:bg-white hover:border-[#c0a58e] hover:border-solid hover:border-4 hover:text-[#c0a58e]">
-                    Continue to Booking
-                  </button>
-                </Link>
-              </div>
-            </div>
-          </div> */}
 
           <div className="flex flex-col justify-center items-center align-center">
             <div className=" flex flex-col justify-center align-center items-center border-solid border-4 rounded-[4rem] border-[#c0a58e]  w-72 lg:w-96 p-2 md:col-start-1 md:row-start-1 lg:col-start-1">
