@@ -50,10 +50,10 @@ const options5 = [
 ];
 const options6 = [
   { value: "No Thank You", price: 0 },
-  { value: "Solid-Double", price: 150 },
-  { value: "Solid-Trio", price: 200 },
-  { value: "Complex-Double", price: 250 },
-  { value: "Complex-Trio", price: 300 },
+  { value: "Solid-Double", price: 250 },
+  { value: "Solid-Trio", price: 300 },
+  { value: "Complex-Double", price: 350 },
+  { value: "Complex-Trio", price: 400 },
 ];
 function BastilleForm() {
   //Date Selection

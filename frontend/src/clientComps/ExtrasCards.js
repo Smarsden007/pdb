@@ -84,15 +84,16 @@ export const ExtrasCards = () => {
                     <p className="text-bold text-center font-mono font-bold">
                       Trio 
                     </p>
-                    <p>Solid Colors:$200 <br/>(Simple Message included)</p>
-                    <p>Complex Letters/Custom Design:Start at $300</p>
+                    <p>Solid Colors:$300 <br/>(Simple Message included)</p>
+                    <p>Complex Letters/Custom Design:Start at $400</p>
                   </div>
                   <div>
                     <p className="text-bold text-center font-mono font-bold">
                      Doubles
                     </p>
-                    <p>Solid Colors:$150 <br/>(Simple Message included)</p>
-                    <p>Complex Letters/Custom Design:Start at $250</p>
+                    <p>Solid Colors:$250 <br/>(Simple Message included)</p>
+                    <p>Complex Letters/Custom Design:Start at $350</p>
+                    <p>Delivery Fees Change Depending on Location and extras selected</p>
                   </div>
                 </div>
                 <Link to='/checkout'>
